@@ -1,0 +1,150 @@
+html {
+    font-size: 10px;
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    color: #545454;
+}
+
+body,
+p,
+ul,
+li,
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+li {
+    list-style: none;
+}
+
+.container {
+    box-sizing: border-box;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 3.125%;
+}
+
+.header {
+    /* background-color: #FFFFFF */
+    /*  height: 6.62vh; */
+}
+
+.header-elements {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-ul {
+    display: flex;
+    font-size: 1.5rem;
+}
+
+.li-item {
+    margin-right: 3.5rem;
+}
+
+.li-item:last-child {
+    margin-right: 0;
+}
+
+.logo {
+    padding: 30px 0 30px 0;
+
+    font-size: 1.3rem;
+    line-height: 15px;
+    color: #292929;
+}
+
+.nav-items {
+    padding: 46px 0 50px 0;
+}
+
+.logo-title {
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 3.2rem;
+    line-height: 110%;
+    margin-bottom: 10px;
+}
+
+
+/* section our-friends */
+
+.our-friends {
+    /* background-color: #F6F6F6; */
+    /* height: 74.06vh; */
+}
+
+.pet-card {
+    background-color: #FAFAFA;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pets-title {
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 3.5rem;
+    line-height: 4.5rem;
+
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 33.33% 0px 33.33%;
+    letter-spacing: 0.3rem;
+    margin-bottom: 60px;
+
+}
+
+.grid-pets {
+    display: grid;
+    height: 930px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    column-gap: 3.33%;
+    row-gap: 30px;
+    margin-bottom: 60px;
+}
+
+h3 {
+    font-family: 'Georgia';
+    font-size: 2rem;
+    line-height: 2.3rem;
+}
+
+.button-friend {
+    font-family: 'Georgia';
+    font-size: 1.7rem;
+    line-height: 2.2rem;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 100px;
+}
+
+.cycles {
+    width: 52px;
+    height: 52px;
+    border: 2px solid #CDCDCD;
+    border-radius: 100px;
+    margin-right: 20px;
+}
+.cycles:last-child{
+    margin-right: 0;
+}
+
+
+/* footer */
+
+.footer{
+}
