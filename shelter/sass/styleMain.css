@@ -44,6 +44,15 @@ a {
   background: radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%);
 }
 
+.layout-2-colums {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .not-only {
+    width: 100%;
+    background: $color-background-main;
+} */
 .logo-title {
   color: #F1CDB3;
   font-family: "Georgia";
@@ -83,4 +92,40 @@ a {
 
 .li-item:last-child {
   margin-right: 0;
-}/*# sourceMappingURL=styleMain.css.map */
+}
+
+h1 {
+  font-family: "Georgia";
+  color: #FFFFFF;
+  font-size: 4.4rem;
+  line-height: 5.7rem;
+}
+
+.text-only {
+  color: #CDCDCD;
+  font-size: 1.5rem;
+  line-height: 2.4rem;
+}
+
+.btn-make-friend {
+  font-family: "Georgia";
+  font-size: 1.7rem;
+  /* line-height: 2.2rem; */
+  letter-spacing: 0.0102rem;
+  background: #F1CDB3;
+  border: none;
+  border-radius: 100px;
+  color: #292929;
+  max-width: 207px;
+  height: 52px;
+  padding: 15px 45px 15px 45px;
+}
+
+.text-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 38.33%;
+}
+
+/*# sourceMappingURL=styleMain.css.map */
