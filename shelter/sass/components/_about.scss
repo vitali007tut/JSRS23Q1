@@ -1,0 +1,26 @@
+h3 {
+    font-family: 'Georgia';
+    font-weight: 400;
+    font-size: 3.5rem;
+    line-height: 4.5rem;
+    letter-spacing: 0.021rem;
+    width: 80%;
+    margin: 0 0 25px 0;
+}
+
+.about-colums {
+    display: flex;
+    justify-content: space-between;
+}
+
+.about-text {
+    width: 50.5%;
+    p {
+        color: $color-dark-xl;
+        font-size: 1.5rem;
+        line-height: 2.4rem;
+    }
+    p:nth-child(2) {
+        margin-bottom: 25px;
+    }
+}

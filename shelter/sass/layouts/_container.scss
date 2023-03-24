@@ -15,7 +15,14 @@
     justify-content: space-between;
 }
 
-/* .not-only {
+.about{
     width: 100%;
-    background: $color-background-main;
-} */
+    background: $color-light-s;
+}
+
+.container-about {
+    box-sizing: border-box;
+    max-width: $content-width;
+    margin: 0 auto;
+    padding: 80px 16.35% 100px 16.35%;
+}
