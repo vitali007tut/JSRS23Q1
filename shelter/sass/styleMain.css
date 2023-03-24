@@ -1,3 +1,13 @@
+.button-rest, .button-friend, .btn-make-friend {
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  letter-spacing: 0.0102rem;
+  color: #292929;
+}
+
 html {
   font-size: 10px;
   font-family: "Arial";
@@ -58,7 +68,19 @@ a {
   box-sizing: border-box;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 80px 16.35% 100px 16.35%;
+  padding: 80px 215px 100px 215px;
+}
+
+.our-friends {
+  width: 100%;
+  background: #F6F6F6;
+  padding: 80px 0 100px 0;
+}
+
+.elements-our-friends {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo-title {
@@ -122,14 +144,9 @@ h1 {
 }
 
 .btn-make-friend {
-  font-family: "Georgia";
-  font-size: 1.7rem;
-  /* line-height: 2.2rem; */
-  letter-spacing: 0.0102rem;
   background: #F1CDB3;
   border: none;
   border-radius: 100px;
-  color: #292929;
   max-width: 207px;
   height: 52px;
   padding: 15px 45px 15px 45px;
@@ -167,6 +184,70 @@ h3 {
 }
 .about-text p:nth-child(2) {
   margin-bottom: 25px;
+}
+
+.our-friends-cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.title-friends {
+  width: 400px;
+  height: 90px;
+  margin: 0 auto;
+  margin-bottom: 60px;
+}
+
+.pet-card {
+  background: #FAFAFA;
+  border-radius: 9px;
+  margin-bottom: 60px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pet-card img {
+  margin-bottom: 30px;
+}
+.pet-card h4 {
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.3rem;
+  letter-spacing: 0.102rem;
+  margin-bottom: 30px;
+}
+
+.cycle {
+  border: 2px solid #F1CDB3;
+  width: 52px;
+  height: 52px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-friend {
+  width: 187px;
+  height: 52px;
+  border-radius: 100px;
+  border: 2px solid #F1CDB3;
+  background: inherit;
+}
+
+.button-rest {
+  background: #F1CDB3;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 261px;
+  height: 52px;
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=styleMain.css.map */

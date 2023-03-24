@@ -1,0 +1,22 @@
+.button-friend {
+    @extend %font-button;
+
+    width: 187px;
+    height: 52px;
+    border-radius: 100px;
+    border: 2px solid $color-primary;
+    background: inherit;
+}
+
+.button-rest {
+    @extend %font-button;
+    background: $color-primary;
+    border-radius: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 261px;
+    height: 52px;
+    margin: 0 auto;
+}

@@ -16,21 +16,17 @@ h1 {
 }
 
 .btn-make-friend {
-    font-family: 'Georgia';
-    font-size: 1.7rem;
-    /* line-height: 2.2rem; */
-    letter-spacing: 0.0102rem;
+    @extend %font-button;
+
     background: $color-primary;
     border: none;
     border-radius: 100px;
-
-    color: $color-dark-3xl;
     max-width: 207px;
     height: 52px;
     padding: 15px 45px 15px 45px;
 }
 
-.text-section{
+.text-section {
     display: flex;
     flex-direction: column;
     justify-content: center;

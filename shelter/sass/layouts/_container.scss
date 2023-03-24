@@ -24,5 +24,17 @@
     box-sizing: border-box;
     max-width: $content-width;
     margin: 0 auto;
-    padding: 80px 16.35% 100px 16.35%;
+    padding: 80px 215px 100px 215px;
+}
+
+.our-friends{
+    width: 100%;
+    background: $color-back-main;
+    padding: 80px 0 100px 0;
+}
+
+.elements-our-friends{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
