@@ -1,0 +1,11 @@
+.container {
+    box-sizing: border-box;
+    max-width: $content-width;
+    margin: 0 auto;
+    padding: 0 3.125%;
+}
+
+.header{
+    width: 100%;
+    background: $color-background-main;
+}

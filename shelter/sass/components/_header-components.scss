@@ -1,0 +1,41 @@
+.logo-title {
+    color: $color-primary;
+    font-family: 'Georgia';
+    font-size: 3.2rem;
+    line-height: 3.5rem;
+    letter-spacing: 0.192rem;
+    margin-bottom: 10px;
+}
+
+.logo-text {
+    color: $color-light-xl;
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.13rem;
+}
+
+.header-elements {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-ul {
+    display: flex;
+    font-size: 1.5rem;
+    line-height: 2.4rem;
+    color: $color-dark-s;
+
+    & .lighting {
+        color: $color-light-s;
+        border-bottom: 3px solid $color-primary;
+    }
+}
+
+.li-item {
+    margin-right: 3.5rem;
+}
+
+.li-item:last-child {
+    margin-right: 0;
+}

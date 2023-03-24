@@ -15,8 +15,21 @@ h1 {
   padding: 0;
 }
 
+input,
+button,
+textarea,
+select,
+a {
+  font: inherit;
+}
+
 li {
   list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .container {
@@ -26,14 +39,42 @@ li {
   padding: 0 3.125%;
 }
 
+.header {
+  width: 100%;
+  background: radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%);
+}
+
+.logo-title {
+  color: #F1CDB3;
+  font-family: "Georgia";
+  font-size: 3.2rem;
+  line-height: 3.5rem;
+  letter-spacing: 0.192rem;
+  margin-bottom: 10px;
+}
+
+.logo-text {
+  color: #FFFFFF;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.13rem;
+}
+
 .header-elements {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .nav-ul {
   display: flex;
   font-size: 1.5rem;
+  line-height: 2.4rem;
+  color: #CDCDCD;
+}
+.nav-ul .lighting {
+  color: #FAFAFA;
+  border-bottom: 3px solid #F1CDB3;
 }
 
 .li-item {
@@ -42,28 +83,4 @@ li {
 
 .li-item:last-child {
   margin-right: 0;
-}
-
-.logo {
-  padding: 30px 0 30px 0;
-  font-size: 1.3rem;
-  line-height: 15px;
-  color: #292929;
-}
-
-.nav-items {
-  padding: 46px 0 50px 0;
-}
-
-.logo-title {
-  font-family: "Georgia";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 3.2rem;
-  line-height: 110%;
-  margin-bottom: 10px;
-}
-
-a {
-  text-decoration: none;
 }/*# sourceMappingURL=styleMain.css.map */
