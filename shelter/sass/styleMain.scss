@@ -1,25 +1,5 @@
-html {
-    font-size: 10px;
-    font-family: 'Arial';
-    font-style: normal;
-    font-weight: 400;
-    color: #545454;
-}
-
-body,
-p,
-ul,
-li,
-h1 {
-    margin: 0;
-    padding: 0;
-}
-
-
-
-li {
-    list-style: none;
-}
+@import 'base/base';
+@import 'abstract/constants';
 
 .container {
     box-sizing: border-box;
@@ -29,8 +9,6 @@ li {
 }
 
 .header {
-    /* background-color: #FFFFFF */
-    /*  height: 6.62vh; */
 }
 
 .header-elements {
