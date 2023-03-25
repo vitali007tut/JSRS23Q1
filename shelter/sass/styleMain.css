@@ -108,6 +108,7 @@ a {
 
 .flex-3-colums {
   display: flex;
+  justify-content: space-between;
 }
 
 .logo-title {
@@ -378,7 +379,23 @@ h3 {
 }
 
 .questions {
-  max-width: 325px;
+  max-width: 315px;
+}
+
+.adress {
+  max-width: 350px;
+}
+
+.questions > a,
+.adress > a {
+  display: flex;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+.questions > a > img,
+.adress > a > img {
+  margin-right: 20px;
 }
 
 /*# sourceMappingURL=styleMain.css.map */

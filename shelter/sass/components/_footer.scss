@@ -18,8 +18,19 @@
 }
 
 .questions{
-    max-width: 325px;
+    max-width: 315px;
 }
 .adress{
-    
+    max-width: 350px;
+}
+.questions > a,
+.adress > a {
+    display: flex;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.questions > a > img,
+.adress > a > img {
+    margin-right: 20px;
 }
