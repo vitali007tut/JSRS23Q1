@@ -1,0 +1,25 @@
+.questions>h3,
+.adress>h3 {
+    color: $color-light-xl;
+}
+
+.questions,
+.adress {
+    display: flex;
+    flex-direction: column;
+
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 2.3rem;
+    letter-spacing: 0.06em;
+    color: $color-primary;
+}
+
+.questions{
+    max-width: 325px;
+}
+.adress{
+    
+}

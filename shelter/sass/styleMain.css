@@ -100,6 +100,16 @@ a {
   justify-content: center;
 }
 
+.footer {
+  width: 100%;
+  background: radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
+  padding-top: 40px;
+}
+
+.flex-3-colums {
+  display: flex;
+}
+
 .logo-title {
   color: #F1CDB3;
   font-family: "Georgia";
@@ -225,6 +235,7 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 .pet-card img {
   margin-bottom: 30px;
@@ -346,6 +357,28 @@ h3 {
   font-style: italic;
   font-size: 1.2rem;
   line-height: 1.8rem;
+}
+
+.questions > h3,
+.adress > h3 {
+  color: #FFFFFF;
+}
+
+.questions,
+.adress {
+  display: flex;
+  flex-direction: column;
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.3rem;
+  letter-spacing: 0.06em;
+  color: #F1CDB3;
+}
+
+.questions {
+  max-width: 325px;
 }
 
 /*# sourceMappingURL=styleMain.css.map */
