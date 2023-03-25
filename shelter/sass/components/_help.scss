@@ -1,0 +1,40 @@
+.help-grid>li {
+    // display: flex;
+    // width: 60
+
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 2.3rem;
+    letter-spacing: 0.102rem;
+}
+
+.item-a {
+    grid-column: span 4;
+    display: grid;
+    grid-template-rows: auto 30px auto;
+    justify-items: center;
+}
+
+.item-b {
+    grid-column: span 5;
+    display: grid;
+    grid-template-rows: auto 30px auto;
+    justify-items: center;
+}
+
+.help-grid {
+    display: grid;
+    padding: 0 87px 0 87px;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: 113px 113px;
+    row-gap: 55px;
+}
+
+.help>.container>h3 {
+    max-width: 308px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    text-align: center;
+}

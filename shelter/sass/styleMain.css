@@ -83,6 +83,12 @@ a {
   align-items: center;
 }
 
+.help {
+  width: 100%;
+  background: #FFFFFF;
+  padding: 80px 0 100px 0;
+}
+
 .logo-title {
   color: #F1CDB3;
   font-family: "Georgia";
@@ -150,6 +156,7 @@ h1 {
   max-width: 207px;
   height: 52px;
   padding: 15px 45px 15px 45px;
+  cursor: pointer;
 }
 
 .text-section {
@@ -229,6 +236,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .button-friend {
@@ -237,6 +245,7 @@ h3 {
   border-radius: 100px;
   border: 2px solid #F1CDB3;
   background: inherit;
+  cursor: pointer;
 }
 
 .button-rest {
@@ -248,6 +257,44 @@ h3 {
   width: 261px;
   height: 52px;
   margin: 0 auto;
+}
+
+.help-grid > li {
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.3rem;
+  letter-spacing: 0.102rem;
+}
+
+.item-a {
+  grid-column: span 4;
+  display: grid;
+  grid-template-rows: auto 30px auto;
+  justify-items: center;
+}
+
+.item-b {
+  grid-column: span 5;
+  display: grid;
+  grid-template-rows: auto 30px auto;
+  justify-items: center;
+}
+
+.help-grid {
+  display: grid;
+  padding: 0 87px 0 87px;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: 113px 113px;
+  row-gap: 55px;
+}
+
+.help > .container > h3 {
+  max-width: 308px;
+  margin: 0 auto;
+  margin-bottom: 60px;
+  text-align: center;
 }
 
 /*# sourceMappingURL=styleMain.css.map */
