@@ -1,0 +1,41 @@
+.donation-text {
+    max-width: 380px;
+    margin-left: 30px;
+}
+
+.donation-title {
+    width: 75%;
+    margin-bottom: 20px;
+}
+
+.donation-text>p:nth-child(2) {
+    font-family: 'Georgia';
+    font-size: 1.5rem;
+    line-height: 1.7rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 20px;
+}
+
+.credit-cart {
+    width: 349px;
+    height: 43px;
+    background-color: $color-primary;
+    border-radius: 9px;
+
+    font-family: 'Georgia';
+    font-size: 2rem;
+    line-height: 2.3rem;
+    letter-spacing: 0.06em;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.donation-text>p:nth-child(4) {
+    color: $color-dark-m;
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+}
