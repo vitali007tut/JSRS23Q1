@@ -4,7 +4,9 @@ h1 {
     line-height: 4.5rem;
     font-weight: 400;
     letter-spacing: 0.06em;
-    margin-bottom: 60px;
+    text-align: center;
+    width: 44%;
+    margin: 0 auto 60px;
 }
 
 .grid-pets {
@@ -12,7 +14,7 @@ h1 {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
     column-gap: 3.33%;
-    row-gap: 30px;
+    row-gap: 25px;
     margin-bottom: 60px;
 }
 
@@ -60,8 +62,8 @@ h3 {
     letter-spacing: 0.06em;
     color: $color-dark-s;
 
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     border: 2px solid $color-dark-s;
     border-radius: 100px;
     margin-right: 20px;

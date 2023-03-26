@@ -38,13 +38,13 @@ li {
         color: $color-dark-3xl;
         border-bottom: 3px solid $color-primary;
     }
-    &:hover{
-        color: $color-dark-3xl;
-    }
 }
 
 .li-item {
     margin-right: 3.5rem;
+    &:hover{
+        color: $color-dark-3xl;
+    }
 }
 
 .li-item:last-child {
