@@ -5,6 +5,10 @@
     line-height: 3.5rem;
     letter-spacing: 0.192rem;
     margin-bottom: 10px;
+    transition: color 1s;
+    &:hover{
+        color: $color-light-s;
+    }
 }
 
 .logo-text {
@@ -36,6 +40,10 @@
 
 .li-item {
     margin-right: 3.5rem;
+    transition: color 1s;
+    &:hover{
+        color: $color-light-s;
+    }
 }
 
 .li-item:last-child {

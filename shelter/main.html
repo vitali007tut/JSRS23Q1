@@ -16,24 +16,16 @@
             <div class="container">
                 <div class="header-elements">
                     <div>
-                        <p class="logo-title">Cozy House</p>
+                        <a href="#"><p class="logo-title">Cozy House</p></a>
                         <p class="logo-text">Shelter for pets in Boston</p>
                     </div>
                     <nav class="nav-items">
-                        <ul class="nav-ul">
-                            <a class="li-item lighting" href="#">
-                                <li>About the shelter</li>
-                            </a>
-                            <a class="li-item" href="our-pets.html">
-                                <li>Our pets</li>
-                            </a>
-                            <a class="li-item" href="#help">
-                                <li>Help the shelter</li>
-                            </a>
-                            <a class="li-item" href="#contacts">
-                                <li>Contacts</li>
-                            </a>
-                        </ul>
+                        <div class="nav-ul">
+                            <a class="li-item lighting" href="#">About the shelter</a>
+                            <a class="li-item" href="our-pets.html">Our pets</a>
+                            <a class="li-item" href="#help">Help the shelter</a>
+                            <a class="li-item" href="#contacts">Contacts</a>
+                        </div>
                     </nav>
                 </div>
             </div>
@@ -47,7 +39,7 @@
                         <p class="text-only">We offer to give a chance to a little and nice puppy with an extremely wide
                             and open heart. He or
                             she will love you more than anybody else in the world, you will see!</p>
-                        <button class="btn-make-friend">Make a friend</button>
+                            <form action="#our-friends"><button class="btn-make-friend">Make a friend</button></form>
                     </div>
                     <img class="start-dog" src="./img/start-screen-puppy.png" alt="">
                 </div>
@@ -77,9 +69,9 @@
         </div>
     </section>
 
-    <section class="our-friends">
+    <section id='our-friends' class="our-friends">
         <div class="container">
-            <h3 class="title-friends">Our friends who
+            <h3 class="title-friends">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Our friends who &nbsp;&nbsp;&nbsp;
                 are looking for a house</h3>
             <div class="our-friends-cards">
                 <span class="cycle"><img src="./img/Arrow-left.png" alt=""></span>
@@ -105,7 +97,7 @@
         <div class="container">
             <h3>How you can help
                 our shelter</h3>
-            <div class="help-grid">
+            <ul class="help-grid">
                 <li class="item-a"><img src="./img/icon-pet-food.png" alt="">
                     <div></div>Pet food
                 </li>
@@ -121,7 +113,7 @@
                 <li class="item-a"><img src="./img/icon-shampoos.svg" alt="">
                     <div></div>Shampoos
                 </li>
-                <li class="item-b"><img src="./img/icon-vitamins.svg" alt="">
+                <li class="item-b1"><img src="./img/icon-vitamins.svg" alt="">
                     <div></div>Vitamins
                 </li>
                 <li class="item-b"><img src="./img/icon-medicines.svg" alt="">
@@ -133,7 +125,7 @@
                 <li class="item-b"><img src="./img/icon-sleeping-area.svg" alt="">
                     <div></div>Sleeping areas
                 </li>
-            </div>
+            </ul>
         </div>
     </section>
 
@@ -143,11 +135,13 @@
             <div class="donation-text">
                 <h3 class="donation-title">You can also make a donation</h3>
                 <p>Name of the bank / Type of bank account</p>
-                <div class="credit-cart">
+                <a href="#!" class="credit-cart">
                     <img src="./img/credit-card.svg" alt="">
                     <span>8380 2880 8028 8791 7435</span>
-                </div>
-                <p>Legal information and lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a ipsum at libero sagittis dignissim sed ac diam. Praesent ultrices maximus tortor et vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                </a>
+                <p>Legal information and lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a ipsum at
+                    libero sagittis dignissim sed ac diam. Praesent ultrices maximus tortor et vulputate. Interdum et
+                    malesuada fames ac ante ipsum primis in faucibus.</p>
             </div>
         </div>
     </section>
@@ -157,13 +151,25 @@
             <div class="flex-3-colums">
                 <div class="questions">
                     <h3>For questions and suggestions</h3>
-                    <a href="mailto:email@shelter.com"><img src="./img/icon-email.svg" alt=""><div>email@shelter.com</div></a>
-                    <a href="tel:+136745677554"><img src="./img/icon-phone.svg" alt=""><div>+13 674 567 75 54</div></a>
+                    <a href="mailto:email@shelter.com"><img src="./img/icon-email.svg" alt="">
+                        <div>email@shelter.com</div>
+                    </a>
+                    <a href="tel:+136745677554"><img src="./img/icon-phone.svg" alt="">
+                        <div>+13 674 567 75 54</div>
+                    </a>
                 </div>
                 <div class="adress">
                     <h3>We are waiting for your visit</h3>
-                    <a href="https://www.google.com/maps/place/1+Centre+St,+Boston,+MA+02119,+USA/@42.3300628,-71.0941915,618m/data=!3m1!1e3!4m6!3m5!1s0x89e37a260516d22d:0x67663c18c6a54ce9!8m2!3d42.3300628!4d-71.0920028!16s%2Fg%2F11td12jd0m"><img src="./img/icon-marker.svg" alt=""><div>1 Central Street, Boston (entrance from the store)</div></a>
-                    <a href="https://www.google.com/maps/place/South+Park+Court,+18+S+Park+Rd,+London+SW19+8TD,+UK/@51.4202191,-0.2046367,17z/data=!3m1!4b1!4m6!3m5!1s0x487608baa7401b31:0x873a95ca58e122b2!8m2!3d51.4202192!4d-0.200152!16s%2Fg%2F11c1z48z8w"><img src="./img/icon-marker.svg" alt=""><div>18 South Park, London</div></a>
+                    <a
+                        href="https://www.google.com/maps/@42.3300628,-71.0941915,618m/data=!3m1!1e3" target="_blank"><img
+                            src="./img/icon-marker.svg" alt="">
+                        <div>1 Central Street, Boston (entrance from the store)</div>
+                    </a>
+                    <a
+                        href="https://www.google.com/maps/@51.4202192,-0.200152,563m/data=!3m1!1e3" target="_blank"><img
+                            src="./img/icon-marker.svg" alt="">
+                        <div>18 South Park, London</div>
+                    </a>
                 </div>
                 <img src="./img/footer-puppy.svg" alt="">
             </div>

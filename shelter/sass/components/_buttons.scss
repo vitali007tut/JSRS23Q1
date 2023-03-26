@@ -7,6 +7,11 @@
     border: 2px solid $color-primary;
     background: inherit;
     cursor: pointer;
+    transition: background-color 1s;
+
+    &:hover {
+        background-color: rgba(241, 205, 179, 0.5);
+    }
 }
 
 .button-rest {
@@ -20,4 +25,10 @@
     width: 261px;
     height: 52px;
     margin: 0 auto;
+    letter-spacing: 0.06em;
+    transition: background-color 1s;
+
+    &:hover {
+        background-color: rgba(241, 205, 179, 0.5);
+    }
 }

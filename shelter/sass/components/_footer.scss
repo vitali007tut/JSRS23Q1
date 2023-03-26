@@ -1,12 +1,31 @@
 .questions>h3,
 .adress>h3 {
     color: $color-light-xl;
+    width: 90%;
+    margin-bottom: 40px;
+}
+
+.questions > a,
+.adress > a {
+    display: flex;
+    align-items: center;
+    transition: color 1s;
+    margin-bottom: 40px;
+    &:hover{
+        color: $color-light-xl;
+    }
+}
+
+.adress>h3,
+.adress>a {
+    margin-bottom: 33px;
 }
 
 .questions,
 .adress {
     display: flex;
     flex-direction: column;
+    padding-top: 17px;
 
     font-family: 'Georgia';
     font-style: normal;
@@ -21,13 +40,7 @@
     max-width: 315px;
 }
 .adress{
-    max-width: 350px;
-}
-.questions > a,
-.adress > a {
-    display: flex;
-    margin-bottom: 30px;
-    align-items: center;
+    max-width: 338px;
 }
 
 .questions > a > img,
