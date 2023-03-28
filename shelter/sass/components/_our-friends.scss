@@ -10,6 +10,7 @@
     height: 90px;
     margin: 0 auto;
     margin-bottom: 60px;
+    white-space: break-spaces;
 }
 
 .pet-card {
@@ -20,6 +21,11 @@
     align-items: center;
     margin: 0 40px;
     cursor: pointer;
+    transition: box-shadow 1s;
+
+    &:hover {
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+    }
 
     img {
         margin-bottom: 3px;
@@ -46,7 +52,8 @@
     justify-content: center;
     cursor: pointer;
     transition: background-color 1s;
-    &:hover{
+
+    &:hover {
         background-color: rgba(241, 205, 179, 0.5);
     }
 }
