@@ -1,0 +1,49 @@
+.questions>h3,
+.adress>h3 {
+    color: $color-light-xl;
+    width: 90%;
+    margin-bottom: 40px;
+}
+
+.questions > a,
+.adress > a {
+    display: flex;
+    align-items: center;
+    transition: color 1s;
+    margin-bottom: 40px;
+    &:hover{
+        color: $color-light-xl;
+    }
+}
+
+.adress>h3,
+.adress>a {
+    margin-bottom: 33px;
+}
+
+.questions,
+.adress {
+    display: flex;
+    flex-direction: column;
+    padding-top: 17px;
+
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 2.3rem;
+    letter-spacing: 0.06em;
+    color: $color-primary;
+}
+
+.questions{
+    max-width: 315px;
+}
+.adress{
+    max-width: 338px;
+}
+
+.questions > a > img,
+.adress > a > img {
+    margin-right: 20px;
+}
