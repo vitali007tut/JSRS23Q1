@@ -37,6 +37,7 @@ li {
     & .lighting {
         color: $color-dark-3xl;
         border-bottom: 3px solid $color-primary;
+        cursor: default;
     }
 }
 

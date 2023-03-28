@@ -149,6 +149,7 @@ a {
 .nav-ul .lighting {
   color: #FAFAFA;
   border-bottom: 3px solid #F1CDB3;
+  cursor: default;
 }
 
 .li-item {
