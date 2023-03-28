@@ -233,7 +233,7 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 90px;
+  margin-bottom: 60px;
 }
 
 .title-friends {
@@ -273,7 +273,6 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 33px;
   cursor: pointer;
   transition: background-color 1s;
 }
@@ -287,6 +286,7 @@ h3 {
   border-radius: 100px;
   border: 2px solid #F1CDB3;
   background: inherit;
+  margin-bottom: 30px;
   cursor: pointer;
   transition: background-color 1s;
 }
