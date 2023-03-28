@@ -22,6 +22,7 @@ h1 {
     background: $color-light-s;
     border-radius: 9px;
     text-align: center;
+    cursor: pointer;
 }
 
 h3 {
@@ -47,6 +48,10 @@ h3 {
     border-radius: 100px;
     background: inherit;
     cursor: pointer;
+    transition: background-color 1s;
+    &:hover {
+        background-color: rgba(241, 205, 179, 0.5);
+    }
 }
 
 
@@ -72,6 +77,11 @@ h3 {
     align-items: center;
     justify-content: center;
 
+    transition: background-color 1s;
+    &:hover {
+        background-color: rgba(241, 205, 179, 0.5);
+    }
+
     &:last-child {
         margin-right: 0;
     }
@@ -84,4 +94,6 @@ h3 {
         border-color: $color-primary;
         color: $color-dark-3xl;
     }
+
+
 }
