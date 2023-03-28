@@ -116,6 +116,7 @@ h1 {
   text-align: center;
   width: 44%;
   margin: 0 auto 60px;
+  white-space: break-spaces;
 }
 
 .grid-pets {
@@ -132,6 +133,10 @@ h1 {
   border-radius: 9px;
   text-align: center;
   cursor: pointer;
+  transition: box-shadow 1s;
+}
+.pet-card:hover {
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
 h3 {

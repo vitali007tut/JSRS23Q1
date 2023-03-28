@@ -241,6 +241,7 @@ h3 {
   height: 90px;
   margin: 0 auto;
   margin-bottom: 60px;
+  white-space: break-spaces;
 }
 
 .pet-card {
@@ -251,6 +252,10 @@ h3 {
   align-items: center;
   margin: 0 40px;
   cursor: pointer;
+  transition: box-shadow 1s;
+}
+.pet-card:hover {
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 .pet-card img {
   margin-bottom: 3px;
