@@ -90,6 +90,7 @@ li {
 .nav-ul .lighting {
   color: #292929;
   border-bottom: 3px solid #F1CDB3;
+  cursor: default;
 }
 
 .li-item {
@@ -183,14 +184,11 @@ h3 {
   border: 2px solid #CDCDCD;
   border-radius: 100px;
   margin-right: 20px;
-  cursor: pointer;
+  cursor: not-allowed;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color 1s;
-}
-.cycles:hover {
-  background-color: rgba(241, 205, 179, 0.5);
 }
 .cycles:last-child {
   margin-right: 0;
@@ -199,10 +197,18 @@ h3 {
   background: #F1CDB3;
   border-color: #F1CDB3;
   color: #292929;
+  cursor: pointer;
+}
+.cycles.cycle-colored:hover {
+  background-color: rgba(241, 205, 179, 0.5);
 }
 .cycles.cycle-next {
   border-color: #F1CDB3;
   color: #292929;
+  cursor: pointer;
+}
+.cycles.cycle-next:hover {
+  background-color: rgba(241, 205, 179, 0.5);
 }
 
 .questions > h3,

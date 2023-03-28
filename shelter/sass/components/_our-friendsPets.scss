@@ -78,15 +78,13 @@ h3 {
     border: 2px solid $color-dark-s;
     border-radius: 100px;
     margin-right: 20px;
-    cursor: pointer;
+    cursor: not-allowed;
     display: flex;
     align-items: center;
     justify-content: center;
 
     transition: background-color 1s;
-    &:hover {
-        background-color: rgba(241, 205, 179, 0.5);
-    }
+
 
     &:last-child {
         margin-right: 0;
@@ -95,10 +93,18 @@ h3 {
         background: $color-primary;
         border-color: $color-primary;
         color: $color-dark-3xl;
+        cursor: pointer;
+        &:hover {
+            background-color: rgba(241, 205, 179, 0.5);
+        }
     }
     &.cycle-next{
         border-color: $color-primary;
         color: $color-dark-3xl;
+        cursor: pointer;
+        &:hover {
+            background-color: rgba(241, 205, 179, 0.5);
+        }
     }
 
 
