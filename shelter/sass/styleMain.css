@@ -188,10 +188,10 @@ h1 {
   height: 52px;
   padding: 15px 51px 15px 51px;
   cursor: pointer;
-  transition: opacity 1s;
+  transition: background-color 1s;
 }
 .btn-make-friend:hover {
-  opacity: 0.7;
+  background-color: #FDDCC4;
 }
 
 .text-section {
@@ -253,10 +253,11 @@ h3 {
   align-items: center;
   margin: 0 40px;
   cursor: pointer;
-  transition: box-shadow 1s;
+  transition: all 1s;
 }
 .pet-card:hover {
   box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+  background: #FFFFFF;
 }
 .pet-card img {
   margin-bottom: 3px;
@@ -297,7 +298,7 @@ h3 {
   transition: background-color 1s;
 }
 .button-friend:hover {
-  background-color: rgba(241, 205, 179, 0.5);
+  background-color: #FDDCC4;
 }
 
 .button-rest {
@@ -313,7 +314,7 @@ h3 {
   transition: background-color 1s;
 }
 .button-rest:hover {
-  background-color: rgba(241, 205, 179, 0.5);
+  background-color: #FDDCC4;
 }
 
 .help-grid > li {
@@ -410,10 +411,10 @@ h3 {
   align-items: center;
   justify-content: space-evenly;
   margin-bottom: 20px;
-  transition: color 1s;
+  transition: background-color 1s;
 }
 .credit-cart:hover {
-  color: #292929;
+  background-color: #FDDCC4;
 }
 
 .donation-text > p:nth-child(4) {

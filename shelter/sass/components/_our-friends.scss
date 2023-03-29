@@ -21,10 +21,11 @@
     align-items: center;
     margin: 0 40px;
     cursor: pointer;
-    transition: box-shadow 1s;
+    transition: all 1s;
 
     &:hover {
         box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+        background: $color-light-xl;
     }
 
     img {

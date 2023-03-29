@@ -31,9 +31,10 @@
     align-items: center;
     justify-content: space-evenly;
     margin-bottom: 20px;
-    transition: color 1s;
-    &:hover{
-        color: $color-dark-3xl;
+    transition: background-color 1s;
+
+    &:hover {
+        background-color: $color-primary-light;
     }
 }
 
