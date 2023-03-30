@@ -107,6 +107,21 @@ li {
 .nav-items {
   padding: 46px 0 50px 0;
 }
+@media screen and (max-width: 767px) {
+  .nav-items {
+    display: none;
+  }
+}
+
+.ico-burger {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .ico-burger {
+    display: block;
+    cursor: pointer;
+  }
+}
 
 h1 {
   font-family: "Georgia";

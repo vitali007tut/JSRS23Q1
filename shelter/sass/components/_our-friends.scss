@@ -30,6 +30,9 @@
 
     img {
         margin-bottom: 3px;
+        max-width: 270px;
+        max-height: 270px;
+        width: 100%;
     }
 
     h4 {
@@ -40,6 +43,10 @@
         line-height: 2.3rem;
         letter-spacing: 0.102rem;
         margin-bottom: 30px;
+    }
+
+    @media screen and (max-width: ($content-width - 1)) {
+        margin: 0 calc(5px + (40 - 5) * (100vw - 320px) / (1280 - 320));
     }
 }
 

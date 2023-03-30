@@ -54,4 +54,16 @@ li {
 
 .nav-items {
     padding: 46px 0 50px 0;
+
+    @media screen and  (max-width: ($tablet-width - 1)) {
+        display: none;
+    }
+}
+
+.ico-burger {
+    display: none;
+    @media screen and  (max-width: ($tablet-width - 1)) {
+        display: block;
+        cursor: pointer;
+    }
 }
