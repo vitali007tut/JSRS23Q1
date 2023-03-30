@@ -24,6 +24,10 @@
     align-items: center;
     margin-bottom: 90px;
     padding-top: 30px;
+
+    @media (max-width: $tablet-width) {
+        margin-bottom: 70px;
+    }
 }
 
 .nav-ul {
@@ -49,4 +53,20 @@
 
 .li-item:last-child {
     margin-right: 0;
+}
+
+.nav-items {
+    @media screen and  (max-width: ($tablet-width - 1)) {
+
+        display: none;
+    }
+}
+
+.ico-burger {
+    display: none;
+
+    @media screen and  (max-width: ($tablet-width - 1)) {
+        display: block;
+        cursor: pointer;
+    }
 }

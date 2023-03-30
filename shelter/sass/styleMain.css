@@ -49,6 +49,47 @@ a {
   margin: 0 auto;
   padding: 0 40px;
 }
+@media (max-width: 768px) {
+  .container {
+    padding: 0 154px;
+  }
+}
+
+.container-header {
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+@media (max-width: 768px) {
+  .container-header {
+    padding: 0 30px;
+  }
+}
+
+.container-help {
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+@media (max-width: 768px) {
+  .container-help {
+    padding: 0 30px;
+  }
+}
+
+.container-footer {
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+@media (max-width: 768px) {
+  .container-footer {
+    padding: 0 64px;
+  }
+}
 
 .header {
   width: 100%;
@@ -58,6 +99,11 @@ a {
 .layout-2-colums {
   display: flex;
   justify-content: space-between;
+}
+@media screen and (max-width: 768px) {
+  .layout-2-colums {
+    flex-direction: column;
+  }
 }
 
 .about {
@@ -100,6 +146,13 @@ a {
   padding: 80px 182px 100px 183px;
   justify-content: center;
 }
+@media (max-width: 768px) {
+  .container-addition {
+    flex-direction: column-reverse;
+    padding-left: 131px;
+    padding-right: 132px;
+  }
+}
 
 .footer {
   width: 100%;
@@ -110,6 +163,12 @@ a {
 .flex-3-colums {
   display: flex;
   justify-content: space-between;
+}
+@media (max-width: 768px) {
+  .flex-3-colums {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 .logo-title {
@@ -139,6 +198,11 @@ a {
   margin-bottom: 90px;
   padding-top: 30px;
 }
+@media (max-width: 768px) {
+  .header-elements {
+    margin-bottom: 70px;
+  }
+}
 
 .nav-ul {
   display: flex;
@@ -164,6 +228,22 @@ a {
   margin-right: 0;
 }
 
+@media screen and (max-width: 767px) {
+  .nav-items {
+    display: none;
+  }
+}
+
+.ico-burger {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .ico-burger {
+    display: block;
+    cursor: pointer;
+  }
+}
+
 h1 {
   font-family: "Georgia";
   color: #FFFFFF;
@@ -172,6 +252,13 @@ h1 {
   font-weight: 400;
   margin-bottom: 42px;
   max-width: 400px;
+}
+@media screen and (max-width: 320px) {
+  h1 {
+    font-size: 2.5rem;
+    line-height: 3.2rem;
+    letter-spacing: 0.06em;
+  }
 }
 
 .text-only {
@@ -185,13 +272,18 @@ h1 {
   background: #F1CDB3;
   border: none;
   border-radius: 100px;
+  width: 207px;
   height: 52px;
-  padding: 15px 51px 15px 51px;
   cursor: pointer;
   transition: background-color 1s;
 }
 .btn-make-friend:hover {
   background-color: #FDDCC4;
+}
+@media (max-width: 768px) {
+  .btn-make-friend {
+    margin-bottom: 100px;
+  }
 }
 
 .text-section {
@@ -200,6 +292,26 @@ h1 {
   justify-content: center;
   max-width: 38.85%;
   margin-top: -80px;
+}
+@media (max-width: 768px) {
+  .text-section {
+    max-width: 73%;
+    margin-top: -10px;
+  }
+}
+
+.start-dog {
+  max-width: 698px;
+  max-height: 728px;
+  width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 768px) {
+  .start-dog {
+    width: 569px;
+    height: 593px;
+    padding-left: calc(50% - 284.5px + 70px);
+  }
 }
 
 h3 {
@@ -211,10 +323,20 @@ h3 {
   width: 80%;
   margin: 0 0 25px 0;
 }
+@media (max-width: 768px) {
+  h3 {
+    width: 100%;
+  }
+}
 
 .about-colums {
   display: flex;
   justify-content: space-between;
+}
+@media (max-width: 768px) {
+  .about-colums {
+    flex-direction: column-reverse;
+  }
 }
 
 .about-text {
@@ -228,6 +350,19 @@ h3 {
 }
 .about-text p:nth-child(2) {
   margin-bottom: 25px;
+}
+@media (max-width: 768px) {
+  .about-text {
+    width: 100%;
+    margin-bottom: 80px;
+  }
+}
+
+.img-about-pets {
+  max-width: 300px;
+  max-height: 408px;
+  width: 100%;
+  height: 100%;
 }
 
 .our-friends-cards {
@@ -261,6 +396,8 @@ h3 {
 }
 .pet-card img {
   margin-bottom: 3px;
+  max-width: 270px;
+  max-height: 270px;
 }
 .pet-card h4 {
   font-family: "Georgia";
@@ -271,12 +408,17 @@ h3 {
   letter-spacing: 0.102rem;
   margin-bottom: 30px;
 }
+@media screen and (max-width: 1279px) {
+  .pet-card {
+    margin: 0 calc(5px + 35 * (100vw - 320px) / 960);
+  }
+}
 
 .cycle {
   border: 2px solid #F1CDB3;
   width: 52px;
   height: 52px;
-  border-radius: 100px;
+  border-radius: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -285,6 +427,12 @@ h3 {
 }
 .cycle:hover {
   background-color: rgba(241, 205, 179, 0.5);
+}
+
+@media (max-width: 768px) {
+  .our-friends-cards :nth-child(4) {
+    display: none;
+  }
 }
 
 .button-friend {
@@ -380,6 +528,12 @@ h3 {
   text-align: center;
 }
 
+.help-title {
+  text-align: center;
+  max-width: 350px;
+  margin: 0 auto 60px;
+}
+
 .donation-text {
   max-width: 380px;
   margin-left: 30px;
@@ -468,6 +622,11 @@ h3 {
 
 .adress {
   max-width: 338px;
+}
+@media (max-width: 768px) {
+  .adress {
+    max-width: 325px;
+  }
 }
 
 .questions > a > img,
