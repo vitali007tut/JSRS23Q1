@@ -41,6 +41,10 @@
 }
 .adress{
     max-width: 338px;
+
+    @media (max-width: $tablet-width){
+        max-width: 325px;
+    }
 }
 
 .questions > a > img,

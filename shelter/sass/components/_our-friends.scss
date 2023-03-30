@@ -32,7 +32,7 @@
         margin-bottom: 3px;
         max-width: 270px;
         max-height: 270px;
-        width: 100%;
+        // width: 100%;
     }
 
     h4 {
@@ -54,7 +54,7 @@
     border: 2px solid $color-primary;
     width: 52px;
     height: 52px;
-    border-radius: 100px;
+    border-radius: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,5 +63,11 @@
 
     &:hover {
         background-color: rgba(241, 205, 179, 0.5);
+    }
+}
+
+.our-friends-cards :nth-child(4) {
+    @media (max-width:$tablet-width) {
+        display: none;
     }
 }
