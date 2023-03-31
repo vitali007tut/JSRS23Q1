@@ -3,6 +3,14 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 60px;
+
+    @media (max-width: $tablet-width) {
+        margin-bottom: 58px;
+    }
+
+    @media (max-width: $mobile-width) {
+        flex-wrap: wrap;
+    }
 }
 
 .title-friends {
@@ -11,6 +19,14 @@
     margin: 0 auto;
     margin-bottom: 60px;
     white-space: break-spaces;
+
+    @media (max-width: $mobile-width) {
+        font-size: 2.5rem;
+        line-height: 3.2rem;
+        letter-spacing: 0.06em;
+        margin-bottom: 42px;
+        max-width: 300px;
+    }
 }
 
 .pet-card {
@@ -48,6 +64,14 @@
     @media screen and (max-width: ($content-width - 1)) {
         margin: 0 calc(5px + (40 - 5) * (100vw - 320px) / (1280 - 320));
     }
+
+    @media (max-width:$tablet-width) {
+        margin: 0;
+    }
+
+    @media (max-width:$mobile-width) {
+        margin: 0 0 20px 0;
+    }
 }
 
 .cycle {
@@ -69,5 +93,23 @@
 .our-friends-cards :nth-child(4) {
     @media (max-width:$tablet-width) {
         display: none;
+    }
+}
+
+#our-friends>div>div>div:nth-child(3) {
+    @media (max-width:$mobile-width) {
+        display: none;
+    }
+}
+
+.cycle:nth-child(1) {
+    @media (max-width:$mobile-width) {
+        order: 2;
+    }
+}
+
+.cycle:nth-child(5) {
+    @media (max-width:$mobile-width) {
+        order: 3;
     }
 }

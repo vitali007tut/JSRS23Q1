@@ -5,6 +5,10 @@
     font-size: 2rem;
     line-height: 2.3rem;
     letter-spacing: 0.102rem;
+
+    @media (max-width: $tablet-width) {
+        margin: 0;
+    }
 }
 
 .item-a {
@@ -13,6 +17,12 @@
     grid-template-rows: auto 30px auto;
     justify-items: center;
     justify-content: left;
+
+    @media (max-width: $tablet-width) {
+        margin: 0;
+        grid-column: span 1;
+        justify-content: center;
+    }
 }
 
 .item-b1 {
@@ -22,6 +32,11 @@
     justify-content: space-around;
     justify-items: center;
     margin-left: 50px;
+
+    @media (max-width: $tablet-width) {
+        margin: 0;
+        grid-column: span 1;
+    }
 }
 
 .item-b {
@@ -31,10 +46,19 @@
     justify-content: space-around;
     justify-items: center;
     margin-left: 18px;
+
+    @media (max-width: $tablet-width) {
+        margin: 0;
+        grid-column: span 1;
+    }
 }
 
 .help-grid>li:nth-child(9) {
     margin-left: 48px;
+
+    @media (max-width: $tablet-width) {
+        margin: 0;
+    }
 }
 
 .help-grid {
@@ -46,14 +70,33 @@
 
     &>li:nth-child(3) {
         margin-left: 62px;
+
+        @media (max-width: $tablet-width) {
+            margin: 0;
+        }
     }
 
     &>li:nth-child(4) {
         margin-left: 38px;
+
+        @media (max-width: $tablet-width) {
+            margin: 0;
+        }
     }
 
     &>li:nth-child(5) {
         margin-left: 105px;
+
+        @media (max-width: $tablet-width) {
+            margin: 0;
+        }
+    }
+
+    @media (max-width: $tablet-width) {
+        padding: 0;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-row-gap: 55px;
     }
 }
 
@@ -68,4 +111,9 @@
     text-align: center;
     max-width: 350px;
     margin: 0 auto 60px;
+
+    @media (max-width: $mobile-width) {
+        font-size: 2.5rem;
+        line-height: 3.2rem;
+    }
 }
