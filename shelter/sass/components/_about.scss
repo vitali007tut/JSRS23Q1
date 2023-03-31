@@ -10,6 +10,12 @@ h3 {
     @media (max-width: $tablet-width) {
         width: 85%;
     }
+
+    @media (max-width: $mobile-width) {
+        font-size: 2.5rem;
+        line-height: 3.2rem;
+    }
+
 }
 
 .about-colums {

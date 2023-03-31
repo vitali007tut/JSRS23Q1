@@ -6,11 +6,24 @@
         margin-left: 63px;
         margin-bottom: 60px;
     }
+
+    @media (max-width: $mobile-width) {
+        margin: 0 0 42px 0;
+    }
 }
 
 .donation-title {
     width: 80%;
     margin-bottom: 20px;
+
+    @media (max-width: $mobile-width) {
+        font-size: 2.5rem;
+        line-height: 3.2rem;
+        text-align: center;
+        padding-left: 30px;
+        padding-left: 25px;
+        letter-spacing: 0.06em;
+    }
 }
 
 .donation-text>p:nth-child(2) {
@@ -19,6 +32,11 @@
     line-height: 1.7rem;
     letter-spacing: 0.06em;
     margin-bottom: 20px;
+
+    @media (max-width: $mobile-width) {
+        line-height: 2.4rem;
+        letter-spacing: normal;
+    }
 }
 
 .credit-cart {
@@ -41,6 +59,13 @@
     &:hover {
         background-color: $color-primary-light;
     }
+
+    @media (max-width: $mobile-width) {
+        width: 281px;
+        height: 43px;
+        font-size: 1.5rem;
+        line-height: 1.7rem;
+    }
 }
 
 .donation-text>p:nth-child(4) {
@@ -48,4 +73,11 @@
     font-style: italic;
     font-size: 1.2rem;
     line-height: 1.8rem;
+}
+
+.img-donation {
+    @media (max-width: $mobile-width) {
+        width: 260px;
+        height: 135.2px;
+    }
 }

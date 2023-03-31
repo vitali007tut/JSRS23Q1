@@ -6,11 +6,11 @@
 
     @media (max-width: $tablet-width) {
         max-width: $tablet-width;
-        //     padding: 0 154px;
     }
 
     @media (max-width: $mobile-width) {
-        padding: 0 30px;
+        max-width: $mobile-width;
+        padding: 0 10px;
     }
 }
 
@@ -39,7 +39,11 @@
 
     @media (max-width: $tablet-width) {
         max-width: $tablet-width;
-        // padding: 0 30px;
+    }
+
+    @media (max-width: $mobile-width) {
+        max-width: $mobile-width;
+        padding: 42px 15px;
     }
 }
 
@@ -86,7 +90,7 @@
     }
 
     @media (max-width: $mobile-width) {
-        padding: 42px 25px 42px 25px;
+        padding: 42px 10px 42px 10px;
     }
 }
 
@@ -111,6 +115,10 @@
     width: 100%;
     background: $color-light-xl;
     padding: 80px 0 100px 0;
+
+    @media (max-width: $mobile-width) {
+        
+    }
 }
 
 .in-addition {
@@ -127,6 +135,10 @@
         flex-direction: column-reverse;
         padding-left: 131px;
         padding-right: 132px;
+    }
+
+    @media (max-width: $mobile-width) {
+        padding: 42px 20px;
     }
 }
 

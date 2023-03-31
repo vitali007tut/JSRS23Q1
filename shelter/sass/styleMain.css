@@ -56,7 +56,8 @@ a {
 }
 @media (max-width: 320px) {
   .container {
-    padding: 0 30px;
+    max-width: 320px;
+    padding: 0 10px;
   }
 }
 
@@ -88,6 +89,12 @@ a {
 @media (max-width: 768px) {
   .container-help {
     max-width: 768px;
+  }
+}
+@media (max-width: 320px) {
+  .container-help {
+    max-width: 320px;
+    padding: 42px 15px;
   }
 }
 
@@ -138,7 +145,7 @@ a {
 }
 @media (max-width: 320px) {
   .container-about {
-    padding: 42px 25px 42px 25px;
+    padding: 42px 10px 42px 10px;
   }
 }
 
@@ -164,7 +171,6 @@ a {
   background: #FFFFFF;
   padding: 80px 0 100px 0;
 }
-
 .in-addition {
   width: 100%;
   background: #F6F6F6;
@@ -180,6 +186,11 @@ a {
     flex-direction: column-reverse;
     padding-left: 131px;
     padding-right: 132px;
+  }
+}
+@media (max-width: 320px) {
+  .container-addition {
+    padding: 42px 20px;
   }
 }
 
@@ -304,6 +315,9 @@ h1 {
     font-size: 2.5rem;
     line-height: 3.2rem;
     letter-spacing: 0.06em;
+    text-align: center;
+    width: 85%;
+    padding-left: 23px;
   }
 }
 
@@ -316,6 +330,12 @@ h1 {
 @media (max-width: 768px) {
   .text-only {
     width: 94%;
+  }
+}
+@media (max-width: 320px) {
+  .text-only {
+    width: 100%;
+    text-align: center;
   }
 }
 
@@ -337,6 +357,12 @@ h1 {
     margin-left: 127px;
   }
 }
+@media (max-width: 320px) {
+  .btn-make-friend {
+    margin-bottom: 105px;
+    margin-left: 46px;
+  }
+}
 
 .text-section {
   display: flex;
@@ -350,6 +376,12 @@ h1 {
     max-width: 73%;
     margin-top: -10px;
     margin-left: 113px;
+  }
+}
+@media (max-width: 320px) {
+  .text-section {
+    margin: -11px 0 0 0;
+    max-width: 100%;
   }
 }
 
@@ -370,6 +402,7 @@ h1 {
   .start-dog {
     height: 272px;
     width: 260px;
+    padding-left: 40px;
   }
 }
 
@@ -385,6 +418,12 @@ h3 {
 @media (max-width: 768px) {
   h3 {
     width: 85%;
+  }
+}
+@media (max-width: 320px) {
+  h3 {
+    font-size: 2.5rem;
+    line-height: 3.2rem;
   }
 }
 
@@ -596,6 +635,13 @@ h3 {
     margin: 0;
   }
 }
+@media (max-width: 320px) {
+  .help-grid > li {
+    font-size: 1.5rem;
+    line-height: 1.7rem;
+    letter-spacing: 0.06em;
+  }
+}
 
 .item-a {
   grid-column: span 4;
@@ -656,7 +702,7 @@ h3 {
   padding: 0 87px 0 87px;
   grid-template-columns: repeat(20, 1fr);
   grid-template-rows: 113px 113px;
-  row-gap: 55px;
+  grid-row-gap: 55px;
 }
 .help-grid > li:nth-child(3) {
   margin-left: 62px;
@@ -687,7 +733,13 @@ h3 {
     padding: 0;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    grid-row-gap: 55px;
+  }
+}
+@media (max-width: 320px) {
+  .help-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    row-gap: 17px;
   }
 }
 
@@ -707,6 +759,15 @@ h3 {
   .help-title {
     font-size: 2.5rem;
     line-height: 3.2rem;
+    width: 80%;
+    margin-bottom: 42px;
+  }
+}
+
+@media (max-width: 320px) {
+  #help > div > ul > li > img {
+    width: 50px;
+    height: 50px;
   }
 }
 
@@ -720,10 +781,25 @@ h3 {
     margin-bottom: 60px;
   }
 }
+@media (max-width: 320px) {
+  .donation-text {
+    margin: 0 0 42px 0;
+  }
+}
 
 .donation-title {
   width: 80%;
   margin-bottom: 20px;
+}
+@media (max-width: 320px) {
+  .donation-title {
+    font-size: 2.5rem;
+    line-height: 3.2rem;
+    text-align: center;
+    padding-left: 30px;
+    padding-left: 25px;
+    letter-spacing: 0.06em;
+  }
 }
 
 .donation-text > p:nth-child(2) {
@@ -732,6 +808,12 @@ h3 {
   line-height: 1.7rem;
   letter-spacing: 0.06em;
   margin-bottom: 20px;
+}
+@media (max-width: 320px) {
+  .donation-text > p:nth-child(2) {
+    line-height: 2.4rem;
+    letter-spacing: normal;
+  }
 }
 
 .credit-cart {
@@ -752,12 +834,27 @@ h3 {
 .credit-cart:hover {
   background-color: #FDDCC4;
 }
+@media (max-width: 320px) {
+  .credit-cart {
+    width: 281px;
+    height: 43px;
+    font-size: 1.5rem;
+    line-height: 1.7rem;
+  }
+}
 
 .donation-text > p:nth-child(4) {
   color: #B2B2B2;
   font-style: italic;
   font-size: 1.2rem;
   line-height: 1.8rem;
+}
+
+@media (max-width: 320px) {
+  .img-donation {
+    width: 260px;
+    height: 135.2px;
+  }
 }
 
 .questions > h3,
