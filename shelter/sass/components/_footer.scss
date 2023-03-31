@@ -38,12 +38,17 @@
 
 .questions{
     max-width: 315px;
+    @media (max-width: $tablet-width){
+        margin-right: 25px;
+        margin-bottom: 25px;
+    }
+
 }
 .adress{
     max-width: 338px;
 
     @media (max-width: $tablet-width){
-        max-width: 325px;
+        max-width: 300px;
     }
 }
 

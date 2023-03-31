@@ -49,6 +49,11 @@ a {
   margin: 0 auto;
   padding: 0 40px;
 }
+@media (max-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
 @media (max-width: 320px) {
   .container {
     padding: 0 30px;
@@ -63,11 +68,13 @@ a {
 }
 @media (max-width: 768px) {
   .container-header {
+    max-width: 768px;
     padding: 0 30px;
   }
 }
 @media (max-width: 320px) {
   .container-header {
+    max-width: 320px;
     padding: 0 20px;
   }
 }
@@ -80,7 +87,7 @@ a {
 }
 @media (max-width: 768px) {
   .container-help {
-    padding: 0 30px;
+    max-width: 768px;
   }
 }
 
@@ -92,6 +99,7 @@ a {
 }
 @media (max-width: 768px) {
   .container-footer {
+    max-width: 768px;
     padding: 0 64px;
   }
 }
@@ -124,6 +132,7 @@ a {
 }
 @media (max-width: 768px) {
   .container-about {
+    max-width: 768px;
     padding: 66px 169px 100px 169px;
   }
 }
@@ -179,6 +188,11 @@ a {
   background: radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
   padding-top: 40px;
 }
+@media (max-width: 768px) {
+  .footer {
+    padding-top: 13px;
+  }
+}
 
 .flex-3-colums {
   display: flex;
@@ -199,7 +213,8 @@ a {
 }
 @media (max-width: 768px) {
   .container-our-friends {
-    padding: 0 20px;
+    max-width: 768px;
+    padding: 0 30px;
   }
 }
 .logo-title {
@@ -495,8 +510,8 @@ h3 {
 
 .cycle {
   border: 2px solid #F1CDB3;
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   border-radius: 100%;
   display: flex;
   align-items: center;
@@ -506,6 +521,12 @@ h3 {
 }
 .cycle:hover {
   background-color: rgba(241, 205, 179, 0.5);
+}
+
+@media (max-width: 768px) {
+  #our-friends > div > div > div:nth-child(2) {
+    margin-right: 30px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -693,6 +714,12 @@ h3 {
   max-width: 380px;
   margin-left: 30px;
 }
+@media (max-width: 768px) {
+  .donation-text {
+    margin-left: 63px;
+    margin-bottom: 60px;
+  }
+}
 
 .donation-title {
   width: 80%;
@@ -774,13 +801,19 @@ h3 {
 .questions {
   max-width: 315px;
 }
+@media (max-width: 768px) {
+  .questions {
+    margin-right: 25px;
+    margin-bottom: 25px;
+  }
+}
 
 .adress {
   max-width: 338px;
 }
 @media (max-width: 768px) {
   .adress {
-    max-width: 325px;
+    max-width: 300px;
   }
 }
 

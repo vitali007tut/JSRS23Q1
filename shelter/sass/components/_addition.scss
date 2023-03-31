@@ -1,6 +1,11 @@
 .donation-text {
     max-width: 380px;
     margin-left: 30px;
+
+    @media (max-width: $tablet-width) {
+        margin-left: 63px;
+        margin-bottom: 60px;
+    }
 }
 
 .donation-title {

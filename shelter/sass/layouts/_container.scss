@@ -5,7 +5,8 @@
     padding: 0 40px;
 
     @media (max-width: $tablet-width) {
-    //     padding: 0 154px;
+        max-width: $tablet-width;
+        //     padding: 0 154px;
     }
 
     @media (max-width: $mobile-width) {
@@ -20,10 +21,12 @@
     padding: 0 40px;
 
     @media (max-width: $tablet-width) {
+        max-width: $tablet-width;
         padding: 0 30px;
     }
 
     @media (max-width: $mobile-width) {
+        max-width: $mobile-width;
         padding: 0 20px;
     }
 }
@@ -35,7 +38,8 @@
     padding: 0 40px;
 
     @media (max-width: $tablet-width) {
-        padding: 0 30px;
+        max-width: $tablet-width;
+        // padding: 0 30px;
     }
 }
 
@@ -46,16 +50,17 @@
     padding: 0 40px;
 
     @media (max-width: $tablet-width) {
+        max-width: $tablet-width;
         padding: 0 64px;
     }
 }
 
-.header{
+.header {
     width: 100%;
     background: $color-background-main;
 }
 
-.layout-2-colums{
+.layout-2-colums {
     display: flex;
     justify-content: space-between;
 
@@ -64,7 +69,7 @@
     }
 }
 
-.about{
+.about {
     width: 100%;
     background: $color-light-s;
 }
@@ -76,6 +81,7 @@
     padding: 80px 215px 100px 215px;
 
     @media (max-width: $tablet-width) {
+        max-width: $tablet-width;
         padding: 66px 169px 100px 169px;
     }
 
@@ -84,7 +90,7 @@
     }
 }
 
-.our-friends{
+.our-friends {
     width: 100%;
     background: $color-back-main;
     padding: 80px 0 100px 0;
@@ -92,27 +98,27 @@
     @media (max-width: $mobile-width) {
         padding: 42px 0;
     }
-    
+
 }
 
-.elements-our-friends{
+.elements-our-friends {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.help{
+.help {
     width: 100%;
     background: $color-light-xl;
     padding: 80px 0 100px 0;
 }
 
-.in-addition{
+.in-addition {
     width: 100%;
     background: $color-back-main;
 }
 
-.container-addition{
+.container-addition {
     display: flex;
     padding: 80px 182px 100px 183px;
     justify-content: center;
@@ -128,8 +134,13 @@
     width: 100%;
     background: $color-back-main-footer;
     padding-top: 40px;
+
+    @media (max-width: $tablet-width) {
+        padding-top: 13px;
+    }
 }
-.flex-3-colums{
+
+.flex-3-colums {
     display: flex;
     justify-content: space-between;
 
@@ -146,10 +157,9 @@
     padding: 0 40px;
 
     @media (max-width: $tablet-width) {
-        padding: 0 20px;
+        max-width: $tablet-width;
+        padding: 0 30px;
     }
 
-    @media (max-width: $mobile-width) {
-        
-    }
+    @media (max-width: $mobile-width) {}
 }
