@@ -37,6 +37,7 @@ li {
     & .lighting {
         color: $color-dark-3xl;
         border-bottom: 3px solid $color-primary;
+        cursor: default;
     }
 }
 
@@ -53,4 +54,20 @@ li {
 
 .nav-items {
     padding: 46px 0 50px 0;
+
+    @media screen and  (max-width: ($tablet-width - 1)) {
+        display: none;
+    }
+
+    @media (max-width: $tablet-width) {
+        padding-bottom: 47px;
+    }
+}
+
+.ico-burger {
+    display: none;
+    @media screen and  (max-width: ($tablet-width - 1)) {
+        display: block;
+        cursor: pointer;
+    }
 }

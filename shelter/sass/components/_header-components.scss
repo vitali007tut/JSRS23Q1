@@ -24,6 +24,10 @@
     align-items: center;
     margin-bottom: 90px;
     padding-top: 30px;
+
+    @media (max-width: $tablet-width) {
+        margin-bottom: 71px;
+    }
 }
 
 .nav-ul {
@@ -35,6 +39,7 @@
     & .lighting {
         color: $color-light-s;
         border-bottom: 3px solid $color-primary;
+        cursor: default;
     }
 }
 
@@ -48,4 +53,20 @@
 
 .li-item:last-child {
     margin-right: 0;
+}
+
+.nav-items {
+    @media screen and  (max-width: ($tablet-width - 1)) {
+
+        display: none;
+    }
+}
+
+.ico-burger {
+    display: none;
+
+    @media screen and  (max-width: ($tablet-width - 1)) {
+        display: block;
+        cursor: pointer;
+    }
 }
