@@ -14,6 +14,9 @@ h3 {
     @media (max-width: $mobile-width) {
         font-size: 2.5rem;
         line-height: 3.2rem;
+        text-align: center;
+        width: 100%;
+        letter-spacing: 0.06em;
     }
 
 }
@@ -36,15 +39,28 @@ h3 {
         color: $color-dark-xl;
         font-size: 1.5rem;
         line-height: 2.4rem;
+
+        @media (max-width: $mobile-width) {
+            text-align: justify;
+        }
     }
 
     p:nth-child(2) {
         margin-bottom: 25px;
+
+        @media (max-width: $mobile-width) {
+            margin-bottom: 22px;
+        }
     }
 
     @media (max-width: $tablet-width) {
         width: 100%;
         margin-bottom: 80px;
+    }
+
+    @media (max-width: $mobile-width) {
+        margin-top: 0;
+        margin-bottom: 40px;
     }
 }
 
@@ -55,7 +71,7 @@ h3 {
     // height: 100%;
 
     @media (max-width: $mobile-width) {
-        height: 354px;
-        width: 260px;
+        max-height: 354px;
+        max-width: 260px;
     }
 }

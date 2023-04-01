@@ -3,15 +3,20 @@
     color: $color-light-xl;
     width: 90%;
     margin-bottom: 40px;
+
+    @media (max-width: $mobile-width) {
+        margin-bottom: 45px;
+    }
 }
 
-.questions > a,
-.adress > a {
+.questions>a,
+.adress>a {
     display: flex;
     align-items: center;
     transition: color 1s;
     margin-bottom: 40px;
-    &:hover{
+
+    &:hover {
         color: $color-light-xl;
     }
 }
@@ -19,6 +24,10 @@
 .adress>h3,
 .adress>a {
     margin-bottom: 33px;
+
+    @media (max-width: $mobile-width) {
+        margin-bottom: 39px;
+    }
 }
 
 .questions,
@@ -34,25 +43,67 @@
     line-height: 2.3rem;
     letter-spacing: 0.06em;
     color: $color-primary;
+
+    @media (max-width: $mobile-width) {
+        align-items: center;
+    }
 }
 
-.questions{
+.questions {
     max-width: 315px;
-    @media (max-width: $tablet-width){
+
+    @media (max-width: $tablet-width) {
         margin-right: 25px;
         margin-bottom: 25px;
     }
 
-}
-.adress{
-    max-width: 338px;
-
-    @media (max-width: $tablet-width){
-        max-width: 300px;
+    @media (max-width: $mobile-width) {
+        margin-bottom: 0;
+        margin-right: 0;
     }
 }
 
-.questions > a > img,
-.adress > a > img {
+.adress {
+    max-width: 338px;
+
+    @media (max-width: $tablet-width) {
+        max-width: 300px;
+        padding-top: 18px;
+    }
+
+    @media (max-width: $mobile-width) {
+        padding-top: 1px;
+    }
+}
+
+.questions>a>img,
+.adress>a>img {
     margin-right: 20px;
+
+    @media (max-width: $mobile-width) {
+        // margin-right: 20px;
+    }
+}
+
+#contacts>div>div>div.adress>a:nth-child(3) {
+    @media (max-width: $mobile-width) {
+        margin-right: 30px;
+    }
+}
+
+#contacts>div>div>img {
+    @media (max-width: $mobile-width) {
+        width: 260px;
+        height: 268px;
+    }
+}
+
+#contacts>div>div>div.questions>h3 {
+    @media (max-width: $mobile-width) {
+        margin-bottom: 40px;
+    }
+}
+
+#contacts > div > div > div.adress > a:nth-child(3) {
+    margin-bottom: 40px;
 }

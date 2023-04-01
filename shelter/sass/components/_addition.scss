@@ -73,11 +73,16 @@
     font-style: italic;
     font-size: 1.2rem;
     line-height: 1.8rem;
+
+    @media (max-width: $mobile-width) {
+        text-align: justify;
+    }
 }
 
 .img-donation {
     @media (max-width: $mobile-width) {
         width: 260px;
-        height: 135.2px;
+        height: 135px;
+        padding-left: 12px;
     }
 }

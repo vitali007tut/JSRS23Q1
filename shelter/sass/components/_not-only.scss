@@ -54,7 +54,7 @@ h1 {
     }
 
     @media (max-width: $mobile-width) {
-        margin-bottom: 105px;
+        margin-bottom: 104px;
         margin-left: 46px;
     }
 }
@@ -85,14 +85,14 @@ h1 {
     height: 100%;
 
     @media screen and (max-width: $tablet-width) {
-        width: 569px;
-        height: 593px;
+        max-width: 569px;
+        max-height: 593px;
         padding-left: calc(50% - 569px/2 + 70px);
     }
 
     @media (max-width: $mobile-width) {
-        height: 272px;
-        width: 260px;
+        max-height: 272px;
+        max-width: 260px;
         padding-left: 40px;
 
     }

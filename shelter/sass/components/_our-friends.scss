@@ -10,6 +10,8 @@
 
     @media (max-width: $mobile-width) {
         flex-wrap: wrap;
+        margin-bottom: 42px;
+        justify-content: center;
     }
 }
 
@@ -22,10 +24,11 @@
 
     @media (max-width: $mobile-width) {
         font-size: 2.5rem;
-        line-height: 3.2rem;
-        letter-spacing: 0.06em;
+        line-height: 3.25rem;
         margin-bottom: 42px;
-        max-width: 300px;
+        width: 287px;
+        height: 65px;
+        text-align: left;
     }
 }
 
@@ -100,6 +103,10 @@
     @media (max-width:$tablet-width) {
         margin-right: 30px;
     }
+
+    @media (max-width:$mobile-width) {
+        margin-right: 0;
+    }
 }
 
 .our-friends-cards :nth-child(4) {
@@ -117,6 +124,7 @@
 .cycle:nth-child(1) {
     @media (max-width:$mobile-width) {
         order: 2;
+        margin-right: 83px;
     }
 }
 
