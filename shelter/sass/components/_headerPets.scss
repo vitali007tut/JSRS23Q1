@@ -58,6 +58,10 @@ li {
     @media screen and  (max-width: ($tablet-width - 1)) {
         display: none;
     }
+
+    @media (max-width: $tablet-width) {
+        padding-bottom: 47px;
+    }
 }
 
 .ico-burger {

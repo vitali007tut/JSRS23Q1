@@ -8,6 +8,11 @@ h1 {
     width: 44%;
     margin: 0 auto 60px;
     white-space: break-spaces;
+
+    @media (max-width: $tablet-width) {
+        width: 80%;
+        margin-bottom: 30px;
+    }
 }
 
 .grid-pets {
@@ -17,6 +22,14 @@ h1 {
     column-gap: 3.33%;
     row-gap: 25px;
     margin-bottom: 60px;
+
+    @media (max-width: $tablet-width) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        column-gap: 7%;
+        row-gap: 30px;
+        margin-bottom: 40px;
+    }
 }
 
 .pet-card {
@@ -32,6 +45,13 @@ h1 {
     }
 }
 
+.grid-pets > div:nth-child(7),
+.grid-pets > div:nth-child(8) {
+    @media (max-width: $tablet-width) {
+        display: none;
+    }
+}
+
 h3 {
     font-family: 'Georgia';
     font-size: 2rem;
@@ -39,6 +59,10 @@ h3 {
     font-weight: 400;
     letter-spacing: 0.06em;
     margin: 30px 0 30px 0;
+
+    @media (max-width: $tablet-width) {
+        margin-top: 28px;
+    }
 }
 
 .button-friend {
@@ -56,6 +80,7 @@ h3 {
     background: inherit;
     cursor: pointer;
     transition: background-color 1s;
+
     &:hover {
         background-color: rgba(241, 205, 179, 0.5);
     }
@@ -90,19 +115,23 @@ h3 {
     &:last-child {
         margin-right: 0;
     }
+
     &.cycle-colored {
         background: $color-primary;
         border-color: $color-primary;
         color: $color-dark-3xl;
         cursor: pointer;
+
         &:hover {
             background-color: rgba(241, 205, 179, 0.5);
         }
     }
-    &.cycle-next{
+
+    &.cycle-next {
         border-color: $color-primary;
         color: $color-dark-3xl;
         cursor: pointer;
+
         &:hover {
             background-color: rgba(241, 205, 179, 0.5);
         }

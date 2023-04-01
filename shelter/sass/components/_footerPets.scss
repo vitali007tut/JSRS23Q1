@@ -9,7 +9,7 @@
     margin: 0;
 }
 
-.questions>h3{
+.questions>h3 {
     margin-bottom: 40px;
 }
 
@@ -43,14 +43,26 @@
     line-height: 2.3rem;
     letter-spacing: 0.06em;
     color: $color-primary;
+
+    @media (max-width: $tablet-width) {
+        padding-top: 0;
+    }
 }
 
 .questions {
     max-width: 315px;
+
+    @media (max-width: $tablet-width) {
+        max-width: 330px;
+    }
 }
 
 .adress {
     max-width: 338px;
+
+    @media (max-width: $tablet-width) {
+        max-width: 300px;
+    }
 }
 
 .questions>a>img,
@@ -60,4 +72,8 @@
 
 .flex-3-colums>img {
     height: 310px;
+
+    @media (max-width: $tablet-width) {
+        padding-top: 24px;
+    }
 }
