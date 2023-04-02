@@ -54,6 +54,11 @@ a {
     padding: 0 94px;
   }
 }
+@media (max-width: 767px) {
+  .container-our-friends {
+    padding: 0 calc(84 * (100vw - 320px) / 448);
+  }
+}
 @media (max-width: 320px) {
   .container-our-friends {
     padding: 0px 10px;
@@ -230,6 +235,11 @@ h1 {
   row-gap: 25px;
   margin-bottom: 60px;
 }
+@media (max-width: 1279px) {
+  .grid-pets {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
 @media (max-width: 768px) {
   .grid-pets {
     grid-template-columns: repeat(2, 1fr);
@@ -237,6 +247,11 @@ h1 {
     column-gap: 7%;
     row-gap: 30px;
     margin-bottom: 40px;
+  }
+}
+@media (max-width: 767px) {
+  .grid-pets {
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   }
 }
 @media (max-width: 320px) {
@@ -348,6 +363,11 @@ h3 {
 }
 .cycles.cycle-next:hover {
   background-color: rgba(241, 205, 179, 0.5);
+}
+@media (max-width: 767px) {
+  .cycles {
+    margin-right: calc(5px + 10 * (100vw - 320px) / 960);
+  }
 }
 @media (max-width: 320px) {
   .cycles {
@@ -463,6 +483,7 @@ h3 {
 
 .flex-3-colums > img {
   height: 310px;
+  margin-bottom: 1px;
 }
 @media (max-width: 768px) {
   .flex-3-colums > img {
@@ -472,6 +493,7 @@ h3 {
 @media (max-width: 320px) {
   .flex-3-colums > img {
     height: 269px;
+    margin-top: 2px;
   }
 }
 
