@@ -2,7 +2,7 @@
     box-sizing: border-box;
     max-width: $content-width;
     margin: 0 auto;
-    padding: 0 40px;
+    // padding: 0 40px;
 
     @media (max-width: $tablet-width) {
         max-width: $tablet-width;
@@ -72,9 +72,14 @@
 .layout-2-colums {
     display: flex;
     justify-content: space-between;
+    padding: 0 40px;
 
     @media screen and (max-width: $tablet-width) {
         flex-direction: column;
+    }
+
+    @media (max-width: $mobile-width) {
+        padding: 0 10px;
     }
 }
 
@@ -89,9 +94,19 @@
     margin: 0 auto;
     padding: 80px 215px 100px 215px;
 
+    @media (max-width: ($content-width - 1)) {
+        padding-right: calc(50 * (100vw - 320px) / (1280 - 320));
+        padding-left: calc(50 * (100vw - 320px) / (1280 - 320));
+    }
+
     @media (max-width: $tablet-width) {
         max-width: $tablet-width;
         padding: 66px 169px 100px 169px;
+    }
+
+    @media (max-width: ($tablet-width - 1)) {
+        padding-right: calc(50 * (100vw - 320px) / (768 - 320));
+        padding-left: calc(50 * (100vw - 320px) / (768 - 320));
     }
 
     @media (max-width: $mobile-width) {
@@ -141,6 +156,11 @@
         flex-direction: column-reverse;
         padding-left: 131px;
         padding-right: 132px;
+    }
+
+    @media (max-width: ($tablet-width - 1)) {
+        padding-right: calc(50 * (100vw - 320px) / (768 - 320));
+        padding-left: calc(50 * (100vw - 320px) / (768 - 320));
     }
 
     @media (max-width: $mobile-width) {
