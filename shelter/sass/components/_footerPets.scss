@@ -105,6 +105,7 @@
 
 .flex-3-colums>img {
     height: 310px;
+    margin-bottom: 1px;
 
     @media (max-width: $tablet-width) {
         padding-top: 24px;
@@ -112,5 +113,6 @@
 
     @media (max-width: $mobile-width) {
         height: 269px;
+        margin-top: 2px;
     }
 }

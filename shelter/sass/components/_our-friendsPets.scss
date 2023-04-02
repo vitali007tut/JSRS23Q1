@@ -30,12 +30,20 @@ h1 {
     row-gap: 25px;
     margin-bottom: 60px;
 
+    @media (max-width: ($content-width - 1)) {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
     @media (max-width: $tablet-width) {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(3, 1fr);
         column-gap: 7%;
         row-gap: 30px;
         margin-bottom: 40px;
+    }
+
+    @media (max-width: ($tablet-width - 1)) {
+        grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));  
     }
 
     @media (max-width: $mobile-width) {
@@ -111,6 +119,7 @@ h3 {
 .nav-buttons {
     display: flex;
     justify-content: center;
+
 }
 
 .cycles {
@@ -156,6 +165,10 @@ h3 {
         &:hover {
             background-color: rgba(241, 205, 179, 0.5);
         }
+    }
+
+    @media (max-width: ($tablet-width - 1)) {
+        margin-right: calc(5px + 10 * (100vw - 320px) / (1280 - 320))
     }
 
     @media (max-width: $mobile-width) {
