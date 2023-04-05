@@ -582,6 +582,7 @@ h3 {
 @media (max-width: 767px) {
   .title-friends {
     width: auto;
+    font-size: calc(2.5rem + (100vw - 320px) / 408);
   }
 }
 @media (max-width: 320px) {

@@ -24,6 +24,7 @@
 
     @media (max-width: ($tablet-width - 1)) {
         width: auto;
+        font-size: calc(2.5rem + (100vw - 320px) / (728 - 320))
     }
 
     @media (max-width: $mobile-width) {
