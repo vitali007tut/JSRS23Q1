@@ -1,0 +1,33 @@
+.hamburger__line, .hamburger:after, .hamburger:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    background-color: #000000;
+    width: 100%;
+    height: 2px;
+  }
+
+.hamburger {
+    display: none;
+    position: relative;
+    width: 30px;
+    height: 22px;
+
+    @media (max-width: ($tablet-width - 1)) {
+        display: inline-block;
+    }
+  }
+
+  .hamburger:before {
+    top: 0;
+    left: 0;
+  }
+  .hamburger:after {
+    bottom: 0;
+    left: 0;
+  }
+  
+  .hamburger__line {
+    top: calc( 50% - 1px );
+    left: 0;
+  }
