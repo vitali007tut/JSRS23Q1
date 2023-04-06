@@ -7,10 +7,20 @@
     line-height: 4.5rem;
     letter-spacing: 0.06em;
     margin: 0;
+
+    @media (max-width: $mobile-width) {
+        font-size: 2.5rem;
+        line-height: 3.2rem;
+        text-align: center;
+    }
 }
 
-.questions>h3{
+.questions>h3 {
     margin-bottom: 40px;
+
+    @media (max-width: $mobile-width) {
+        // text-align: center;
+    }
 }
 
 .questions>a,
@@ -30,6 +40,25 @@
     margin-bottom: 33px;
 }
 
+.adress>h3 {
+@media (max-width: $mobile-width) {
+    padding-left: 15px;
+    margin-bottom: 40px;
+}
+}
+
+.adress>a {
+    @media (max-width: $mobile-width) {
+        margin-bottom: 40px;
+    }
+}
+
+.adress > a:nth-child(3) {
+    @media (max-width: $mobile-width) {
+        margin-bottom: 16px;
+    }
+}
+
 .questions,
 .adress {
     display: flex;
@@ -43,14 +72,30 @@
     line-height: 2.3rem;
     letter-spacing: 0.06em;
     color: $color-primary;
+
+    @media (max-width: $tablet-width) {
+        padding-top: 0;
+    }
 }
 
 .questions {
     max-width: 315px;
+
+    @media (max-width: $tablet-width) {
+        max-width: 330px;
+    }
+
+    @media (max-width: $mobile-width) {
+        align-items: center;
+    }
 }
 
 .adress {
     max-width: 338px;
+
+    @media (max-width: $tablet-width) {
+        max-width: 300px;
+    }
 }
 
 .questions>a>img,
@@ -60,4 +105,14 @@
 
 .flex-3-colums>img {
     height: 310px;
+    margin-bottom: 1px;
+
+    @media (max-width: $tablet-width) {
+        padding-top: 24px;
+    }
+
+    @media (max-width: $mobile-width) {
+        height: 269px;
+        margin-top: 2px;
+    }
 }

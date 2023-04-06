@@ -6,6 +6,15 @@ h1 {
     font-weight: 400;
     margin-bottom: 42px;
     max-width: 400px;
+
+    @media screen and (max-width: $mobile-width) {
+        font-size: 2.5rem;
+        line-height: 3.2rem;
+        letter-spacing: 0.06em;
+        text-align: center;
+        width: 85%;
+        padding-left: 23px;
+    }
 }
 
 .text-only {
@@ -13,6 +22,15 @@ h1 {
     font-size: 1.5rem;
     line-height: 2.4rem;
     margin-bottom: 42px;
+
+    @media (max-width: $tablet-width) {
+        width: 94%;
+    }
+
+    @media (max-width: $mobile-width) {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 .btn-make-friend {
@@ -21,14 +39,27 @@ h1 {
     background: $color-primary;
     border: none;
     border-radius: 100px;
-    // max-width: 207px;
+    width: 207px;
     height: 52px;
-    padding: 15px 51px 15px 51px;
     cursor: pointer;
     transition: background-color 1s;
 
     &:hover {
         background-color: $color-primary-light;
+    }
+
+    @media (max-width: $tablet-width) {
+        margin-bottom: 100px;
+        margin-left: 127px;
+    }
+
+    @media (max-width: ($tablet-width - 1)) {
+        margin-left: calc((100vw - 320px) / (768 - 320))
+    }
+
+    @media (max-width: $mobile-width) {
+        margin-bottom: 104px;
+        margin-left: 46px;
     }
 }
 
@@ -38,4 +69,46 @@ h1 {
     justify-content: center;
     max-width: 38.85%;
     margin-top: -80px;
+
+    @media (max-width: $tablet-width) {
+        max-width: 73%;
+        margin-top: -10px;
+        margin-left: 113px;
+    }
+
+    @media (max-width: ($tablet-width - 1)) {
+        margin-left: calc((100vw - 320px) / (768 - 320))
+    }
+
+    @media (max-width: $mobile-width) {
+        margin: -11px 0 0 0;
+        max-width: 100%;
+    }
+}
+
+.start-dog {
+    max-width: 698px;
+    max-height: 728px;
+    width: 100%;
+    height: 100%;
+    margin-bottom: -2px;
+
+    @media screen and (max-width: $tablet-width) {
+        max-width: 569px;
+        max-height: 593px;
+        padding-left: calc(50% - 569px/2 + 70px);
+    }
+
+    @media (max-width: ($tablet-width - 1)) {
+        max-width: 569px;
+        max-height: 593px;
+        padding-left: calc(50% - 569px / 2);
+    }
+
+    @media (max-width: $mobile-width) {
+        max-height: 272px;
+        max-width: 260px;
+        padding-left: 36px;
+        width: 90%;
+    }
 }

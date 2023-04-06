@@ -3,6 +3,16 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 60px;
+
+    @media (max-width: $tablet-width) {
+        margin-bottom: 58px;
+        flex-wrap: wrap;
+    }
+
+    @media (max-width: $mobile-width) {
+        margin-bottom: 42px;
+        justify-content: center;
+    }
 }
 
 .title-friends {
@@ -11,6 +21,20 @@
     margin: 0 auto;
     margin-bottom: 60px;
     white-space: break-spaces;
+
+    @media (max-width: ($tablet-width - 1)) {
+        width: auto;
+        font-size: calc(2.5rem + (100vw - 320px) / (728 - 320))
+    }
+
+    @media (max-width: $mobile-width) {
+        font-size: 2.5rem;
+        line-height: 3.25rem;
+        margin-bottom: 42px;
+        width: 287px;
+        height: 65px;
+        text-align: left;
+    }
 }
 
 .pet-card {
@@ -30,6 +54,9 @@
 
     img {
         margin-bottom: 3px;
+        max-width: 270px;
+        max-height: 270px;
+        width: 100%;
     }
 
     h4 {
@@ -41,20 +68,74 @@
         letter-spacing: 0.102rem;
         margin-bottom: 30px;
     }
+
+    @media screen and (max-width: ($content-width - 1)) {
+        margin: 0 calc(15 * (100vw - 320px) / (1280 - 320));
+    }
+
+    @media (max-width:$tablet-width) {
+        margin: 0;
+    }
+
+    @media (max-width:$mobile-width) {
+        margin: 0 0 20px 0;
+    }
 }
 
 .cycle {
     border: 2px solid $color-primary;
-    width: 52px;
-    height: 52px;
-    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    flex-shrink: 0;
     transition: background-color 1s;
 
     &:hover {
         background-color: rgba(241, 205, 179, 0.5);
+    }
+}
+
+#our-friends > div > div > span:nth-child(1) {
+    @media (max-width:$tablet-width) {
+        // margin-right: -13px;
+    }
+}
+
+#our-friends > div > div > div:nth-child(2){
+    @media (max-width:$tablet-width) {
+        margin-right: 30px;
+    }
+
+    @media (max-width:$mobile-width) {
+        margin-right: 0;
+    }
+}
+
+.our-friends-cards :nth-child(4) {
+    @media (max-width:$tablet-width) {
+        display: none;
+    }
+}
+
+#our-friends>div>div>div:nth-child(3) {
+    @media (max-width:$mobile-width) {
+        display: none;
+    }
+}
+
+.cycle:nth-child(1) {
+    @media (max-width:$mobile-width) {
+        order: 2;
+        margin-right: 83px;
+    }
+}
+
+.cycle:nth-child(5) {
+    @media (max-width:$mobile-width) {
+        order: 3;
     }
 }
