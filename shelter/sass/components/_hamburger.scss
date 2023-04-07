@@ -12,6 +12,8 @@
     position: relative;
     width: 30px;
     height: 22px;
+    cursor: pointer;
+    z-index: 100;
 
     @media (max-width: ($tablet-width - 1)) {
         display: inline-block;
@@ -21,13 +23,39 @@
   .hamburger:before {
     top: 0;
     left: 0;
+    transition: 0.5s;
   }
   .hamburger:after {
     bottom: 0;
     left: 0;
+    transition: 1s;
   }
   
   .hamburger__line {
     top: calc( 50% - 1px );
     left: 0;
+    transition: 0.5s;
   }
+
+  .hamburger.hamburgerOpen:before{
+    top: 50%;
+    left: 50%;
+    transform: rotate(90deg);
+  }
+
+  .hamburgerOpen .hamburger__line {
+    top: 50%;
+    left: -50%;
+    transform: rotate(90deg);
+  }
+
+  .hamburger.hamburgerOpen:after {
+    top: 50%;
+    left: 0;
+    transform: rotate(90deg);
+  }
+
+  body.navOpen{
+      height: 100vh;
+      overflow-y: hidden;
+    }
