@@ -20,7 +20,8 @@
                     </a>
                     <p class="logo-text">Shelter for pets in Boston</p>
                 </div>
-                <img class="ico-burger" src="./img/burgerMain.svg" alt="">
+                <span class="header__hamburger hamburger"><span class="hamburger__line"></span></span>
+                
                 <nav class="nav-items">
                     <div class="nav-ul">
                         <a class="li-item lighting" href="#">About the shelter</a>
@@ -30,6 +31,7 @@
                     </div>
                 </nav>
             </div>
+            <div class="backOpacity"></div>
         </div>
 
         <div class="not-only layout-2-colums">
@@ -70,9 +72,58 @@
     </section>
 
     <section id='our-friends' class="our-friends">
-        <div class="container-our-friends">
-            <h3 class="title-friends">      Our friends who are looking for a house</h3>
-            <div class="our-friends-cards">
+        <h3 class="title-friends">      Our friends who are looking for a house</h3>
+        <div class="carousel">
+            <div class="container-our-friends">
+                <div class="our-friends-cards active">
+                    <div class="pet-card"><img src="" alt="">
+                        <h4>Katrine</h4>
+                        <button class="button-friend">Learn more</button>
+                    </div>
+                    <div class="pet-card"><img src="" alt="">
+                        <h4>Katrine</h4>
+                        <button class="button-friend">Learn more</button>
+                    </div>
+                    <div class="pet-card"><img src="" alt="">
+                        <h4>Katrine</h4>
+                        <button class="button-friend">Learn more</button>
+                    </div>
+                </div>
+                <div class="our-friends-cards">
+                    <div class="pet-card"><img src="./img/pets-jennifer.png" alt="">
+                        <h4>Jennifer</h4>
+                        <button class="button-friend">Learn more</button>
+                    </div>
+                    <div class="pet-card"><img src="./img/pets-jennifer.png" alt="">
+                        <h4>Jennifer</h4>
+                        <button class="button-friend">Learn more</button>
+                    </div>
+                    <div class="pet-card"><img src="./img/pets-jennifer.png" alt="">
+                        <h4>Jennifer</h4>
+                        <button class="button-friend">Learn more</button>
+                    </div>
+                </div>
+                <div class="our-friends-cards">
+                    <div class="pet-card"><img src="./img/pets-woody.png" alt="">
+                        <h4>Woody</h4>
+                        <button class="button-friend">Learn more</button>
+                    </div>
+                    <div class="pet-card"><img src="./img/pets-woody.png" alt="">
+                        <h4>Woody</h4>
+                        <button class="button-friend">Learn more</button>
+                    </div>
+                    <div class="pet-card"><img src="./img/pets-woody.png" alt="">
+                        <h4>Woody</h4>
+                        <button class="button-friend">Learn more</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cycle left"><img src="./img/Arrow-left.png" alt="">
+            </div>
+            <div class="cycle right"><img src="./img/Arrow-right.png" alt="">
+            </div>
+        </div>
+<!--             <div class="our-friends-cards">
                 <span class="cycle"><img src="./img/Arrow-left.png" alt=""></span>
                 <div class="pet-card"><img src="./img/pets-katrine.png" alt="">
                     <h4>Katrine</h4>
@@ -87,9 +138,10 @@
                     <button class="button-friend">Learn more</button>
                 </div>
                 <span class="cycle"><img src="./img/Arrow-right.png" alt=""></span>
-            </div>
-            <a class="button-rest" href="our-pets.html">Get to know the rest</a>
+            </div> -->
+           
         </div>
+        <a class="button-rest" href="our-pets.html">Get to know the rest</a>
     </section>
 
     <section id="help" class="help">
@@ -174,5 +226,5 @@
     </footer>
 
 </body>
-
+<script src="styleMain.js"></script>
 </html>
