@@ -176,6 +176,7 @@ a {
 }
 
 .our-friends {
+  position: relative;
   width: 100%;
   background: #F6F6F6;
   padding: 80px 0 100px 0;
@@ -1232,5 +1233,185 @@ body.navOpen {
   height: 100vh;
   overflow-y: hidden;
 }
+
+.carousel {
+  width: 100%;
+  text-align: center;
+}
+
+/*   .items-container {
+    position: relative;
+    width: 100%;
+  } */
+.container-our-friends {
+  position: relative;
+  /* width: 100%; */
+  overflow: hidden;
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 10%;
+}
+
+.our-friends-cards {
+  display: none;
+  position: relative;
+  animation: 0.5s ease-in-out;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.pet-card {
+  background: #FAFAFA;
+  border-radius: 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 40px;
+  cursor: pointer;
+  transition: all 1s;
+}
+
+.button-friend {
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  letter-spacing: 0.0102rem;
+  /* color: $color-dark-3xl; */
+  width: 187px;
+  height: 52px;
+  border-radius: 100px;
+  border: 2px solid #F1CDB3;
+  background: inherit;
+  margin-bottom: 30px;
+  cursor: pointer;
+  transition: background-color 1s;
+}
+
+.button-friend:hover {
+  background-color: #FDDCC4;
+}
+
+.active,
+.next {
+  display: flex;
+}
+
+.next {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.description {
+  margin: 30px 20%;
+  font-size: 32px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+
+.project-name {
+  padding: 10px;
+}
+
+.cycle {
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  /* width: 15%; */
+  border: 2px solid #F1CDB3;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 1s;
+}
+
+.cycle:hover {
+  background-color: rgba(241, 205, 179, 0.5);
+}
+
+.cycle.left {
+  left: 30px;
+  right: auto;
+}
+
+.cycle.right {
+  right: 30px;
+  left: auto;
+}
+
+/*   .arrow {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 84px;
+  }
+
+  .arrow.right {
+    right: 50%;
+  } */
+.to-left {
+  animation-name: left;
+}
+
+.from-right {
+  animation-name: right;
+}
+
+.to-right {
+  animation-name: right;
+  animation-direction: reverse;
+}
+
+.from-left {
+  animation-name: left;
+  animation-direction: reverse;
+}
+
+@keyframes left {
+  from {
+    left: 0;
+  }
+  to {
+    left: -100%;
+  }
+}
+@keyframes right {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 0;
+  }
+}
+/*   @media (max-width: 960px) {
+    .description {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cycle > .arrow {
+      display: none;
+    }
+
+    .project-name {
+      display: none;
+    }
+
+    .description {
+      border: 0;
+    }
+  } */
 
 /*# sourceMappingURL=styleMain.css.map */
