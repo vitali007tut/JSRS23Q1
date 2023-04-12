@@ -42,6 +42,22 @@
     margin: 0 40px;
     cursor: pointer;
     transition: all 1s;
+
+    @media (max-width: ($content-width - 1)) {
+    margin: 0 1%;
+    }
+
+    @media (max-width: $tablet-width) {
+      &:nth-child(3) {
+        display: none;
+      }
+    }
+
+    @media (max-width: $mobile-width) {
+      &:nth-child(2) {
+        display: none;
+      }
+    }
   }
 
   .button-friend {
@@ -69,6 +85,18 @@
   .active,
   .next {
     display: flex;
+  }
+
+  .active {
+    @media (max-width: 900px) {
+      flex-wrap: wrap;
+    }
+
+    // @media (max-width: $tablet-width) {
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    // }
   }
   
   .next {

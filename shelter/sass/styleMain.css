@@ -356,7 +356,7 @@ a {
     background-color: #292929;
     overflow-x: hidden;
     transition: 0.8s;
-    padding-top: 248px;
+    padding-top: 40%;
   }
   .nav-items.navOpen {
     transform: translateX(0);
@@ -1272,6 +1272,21 @@ body.navOpen {
   cursor: pointer;
   transition: all 1s;
 }
+@media (max-width: 1279px) {
+  .pet-card {
+    margin: 0 1%;
+  }
+}
+@media (max-width: 768px) {
+  .pet-card:nth-child(3) {
+    display: none;
+  }
+}
+@media (max-width: 320px) {
+  .pet-card:nth-child(2) {
+    display: none;
+  }
+}
 
 .button-friend {
   font-family: "Georgia";
@@ -1298,6 +1313,12 @@ body.navOpen {
 .active,
 .next {
   display: flex;
+}
+
+@media (max-width: 900px) {
+  .active {
+    flex-wrap: wrap;
+  }
 }
 
 .next {
