@@ -748,5 +748,9 @@ body.navOpen {
   width: 100%;
   cursor: pointer;
 }
+.modal .close-btn:hover {
+  background-color: #FDDCC4;
+  border-radius: 50%;
+}
 
 /*# sourceMappingURL=stylePets.css.map */

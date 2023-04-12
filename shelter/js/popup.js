@@ -89,13 +89,14 @@ const pets = [
 	}
 ]
 
-const btns = document.querySelectorAll('.button-friend')
+// const btns = document.querySelectorAll('.button-friend')
 const modalOverlay = document.querySelector('.modal-overlay ');
+const cards = document.querySelectorAll('.pet-card')
 
-btns.forEach((el) => {
+cards.forEach((el) => {
 
 	el.addEventListener('click', (e) => {
-		let petName = el.previousElementSibling.innerHTML
+		let petName = el.children[1].innerHTML
 		let text = ''
 		for (let element of pets) {
 			if (element['name'] === petName) {
