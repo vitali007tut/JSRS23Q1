@@ -122,6 +122,8 @@ btns.forEach((el) => {
 		document.querySelector('.modal-overlay').append(modalWindow)
 		modalWindow.classList.add('modal--visible');
 		modalOverlay.classList.add('modal-overlay--visible');
+		
+		document.body.style.overflowY = 'hidden';
 	})
 })
 
@@ -133,11 +135,13 @@ modalOverlay.addEventListener('click', (e) => {
 			el.remove()
 		})
 	}
-	if ((e.target == document.querySelector("#our-friends > div.modals > div > div > div > img"))) {
+	if ((e.target == document.querySelector(".modals > div > div > div > img"))) {
 		modalOverlay.classList.remove('modal-overlay--visible');
 		document.querySelectorAll('.modal').forEach((el) => {
 			el.classList.remove('modal--visible');
 			el.remove()
 		})
 	}
+
+	document.body.style.overflowY = ''
 })

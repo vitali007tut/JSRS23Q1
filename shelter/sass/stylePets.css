@@ -593,4 +593,160 @@ body.navOpen {
   overflow-y: hidden;
 }
 
+.modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(41, 41, 41, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.modal {
+  z-index: 2;
+  position: absolute;
+  background-color: #FAFAFA;
+  width: 900px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  border-radius: 9px;
+  justify-content: space-between;
+}
+@media (max-width: 768px) {
+  .modal {
+    width: 630px;
+    height: 350px;
+  }
+}
+@media (max-width: 320px) {
+  .modal {
+    width: 240px;
+    height: 331px;
+  }
+}
+
+.modal-overlay--visible {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.3s ease-in-out;
+}
+
+.modal--visible {
+  display: flex;
+}
+
+.text-contant {
+  max-width: 350px;
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 110%;
+  letter-spacing: 0.06em;
+  padding-right: 20px;
+}
+@media (max-width: 768px) {
+  .text-contant {
+    padding-left: 3px;
+    padding-right: 10px;
+  }
+}
+
+.breed {
+  font-size: 20px;
+  line-height: 115%;
+  letter-spacing: 0.06em;
+  margin-bottom: 40px;
+}
+@media (max-width: 768px) {
+  .breed {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 320px) {
+  .breed {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+}
+
+.desc {
+  margin-bottom: 40px;
+}
+@media (max-width: 768px) {
+  .desc {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+}
+
+.modal h3 {
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 130%;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+@media (max-width: 320px) {
+  .modal h3 {
+    font-size: 25px;
+    margin-bottom: 5px;
+  }
+}
+
+.modal .img {
+  margin: 0;
+  order: -1;
+  width: 500px;
+  height: 500px;
+  border-radius: 9px;
+}
+@media (max-width: 768px) {
+  .modal .img {
+    width: 350px;
+    height: 350px;
+  }
+}
+@media (max-width: 320px) {
+  .modal .img {
+    display: none;
+  }
+}
+
+.modal li {
+  margin-bottom: 11px;
+}
+@media (max-width: 768px) {
+  .modal li {
+    margin-bottom: 6px;
+  }
+}
+@media (max-width: 320px) {
+  .modal li {
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+}
+
+.modal .close-btn {
+  position: absolute;
+  right: -45px;
+  top: -40px;
+  max-width: 50px;
+  width: 100%;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=stylePets.css.map */
