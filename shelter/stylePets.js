@@ -6,13 +6,15 @@ const backOpacity = document.querySelector('.backOpacity')
 const body = document.querySelector('body')
 const liItems = document.querySelectorAll('.li-item')
 
-hamburger.addEventListener('click', toggleMenu)
-backOpacity.addEventListener('click', toggleMenu)
-liItems.forEach(element => element.addEventListener('click', toggleMenu))
+if (document.documentElement.clientWidth < 768) {
+    hamburger.addEventListener('click', toggleMenu)
+    backOpacity.addEventListener('click', toggleMenu)
+    liItems.forEach(element => element.addEventListener('click', toggleMenu))
 
-function toggleMenu() {
-    hamburger.classList.toggle('hamburgerOpen')
-    nav.classList.toggle('navOpen')
-    backOpacity.classList.toggle('navOpen')
-    body.classList.toggle('navOpen')
+    function toggleMenu() {
+        hamburger.classList.toggle('hamburgerOpen')
+        nav.classList.toggle('navOpen')
+        backOpacity.classList.toggle('navOpen')
+        body.classList.toggle('navOpen')
+    }
 }

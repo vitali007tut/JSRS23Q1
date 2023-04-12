@@ -141,4 +141,9 @@
   max-width: 50px;
   width: 100%;
   cursor: pointer;
+
+  &:hover {
+    background-color: $color-primary-light;
+    border-radius: 50%;
+  }
 }
