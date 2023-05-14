@@ -1,0 +1,45 @@
+body {
+  background: tan;
+}
+
+.test {
+  min-height: 16px;
+  min-width: 16px;
+  background-color: cadetblue;
+  border: 0.5rem outset #699d58;
+  padding: 1rem;
+}
+.mine-content {
+  display: grid;
+  grid-template-columns: repeat(9, 24px);
+  grid-template-rows: repeat(9, 24px);
+  border-width: 3px;
+  border-style: solid;
+  border-color: rgb(128, 128, 128) rgb(245, 245, 245) rgb(245, 245, 245) rgb(128, 128, 128);
+}
+
+.ceil {
+  /* position: absolute; */
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(245, 245, 245) rgb(128, 128, 128) rgb(128, 128, 128) rgb(245, 245, 245);
+}
+.container {
+  display: inline-block;
+}
+
+.test1 {
+  min-height: 16px;
+  min-width: 16px;
+  background-color: #fff;
+  border: 0.5rem solid #a5d196;
+  padding: 1rem;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}
