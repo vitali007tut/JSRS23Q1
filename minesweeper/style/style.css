@@ -4,18 +4,18 @@
 }
 
 body {
-  background: rgb(78, 71, 62);
+  background: rgb(32 33 36);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.test {
-  /* min-height: 16px;
+/* .test {
+  min-height: 16px;
   min-width: 16px;
   background-color: cadetblue;
   border: 0.5rem outset #699d58;
-  padding: 1rem; */
+  padding: 1rem;
   width: 50px;
   height: 50px;
   background-color: lightgray;
@@ -23,7 +23,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .mine-content {
   background-color: rgb(192, 192, 192);
@@ -87,16 +87,16 @@ body {
   left: 40%;
 }
 
-.test1 {
-  /* min-height: 16px;
+/* .test1 {
+  min-height: 16px;
   min-width: 16px;
   background-color: #fff;
   border: 0.5rem solid #a5d196;
-  padding: 1rem; */
+  padding: 1rem;
   width: 50px;
   height: 50px;
-  /* background-color: lightgray; */
-  /* border: 1px solid darkgray; */
+  background-color: lightgray;
+  border: 1px solid darkgray;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,7 +104,7 @@ body {
   border: 5px solid grey;
   border-style: outset;
   cursor: pointer;
-}
+} */
 
 .grid {
   display: flex;
