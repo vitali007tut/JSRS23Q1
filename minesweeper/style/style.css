@@ -1,18 +1,54 @@
+* {
+  box-sizing: border-box;
+  /* font-family: Arial, Helvetica, sans-serif; */
+}
+
 body {
-  background: tan;
+  background: rgb(78, 71, 62);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .test {
-  min-height: 16px;
+  /* min-height: 16px;
   min-width: 16px;
   background-color: cadetblue;
   border: 0.5rem outset #699d58;
-  padding: 1rem;
+  padding: 1rem; */
+  width: 50px;
+  height: 50px;
+  background-color: lightgray;
+  border: 1px solid darkgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .mine-content {
+  background-color: rgb(192, 192, 192);
+  padding: 5px;
+}
+
+.mine__score-bar {
+  height: 40px;
+  border-radius: 1px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(128, 128, 128) rgb(245, 245, 245) rgb(245, 245, 245) rgb(128, 128, 128);
+  margin-bottom: 5px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  padding: 3px 7px 3px 4px;
+}
+
+.mine-content__inner {
   display: grid;
-  grid-template-columns: repeat(9, 24px);
-  grid-template-rows: repeat(9, 24px);
+  grid-template-columns: repeat(10, 24px);
+  grid-template-rows: repeat(10, 24px);
   border-width: 3px;
   border-style: solid;
   border-color: rgb(128, 128, 128) rgb(245, 245, 245) rgb(245, 245, 245) rgb(128, 128, 128);
@@ -20,26 +56,90 @@ body {
 
 .ceil {
   /* position: absolute; */
+  font-family: monospace;
   position: relative;
   width: 24px;
   height: 24px;
   border-width: 2px;
   border-style: solid;
+  background: tan;
   border-color: rgb(245, 245, 245) rgb(128, 128, 128) rgb(128, 128, 128) rgb(245, 245, 245);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
 }
+
 .container {
   display: inline-block;
 }
 
+.ceil.checked {
+  background-color: lightgray;
+  border: 1px solid darkgray;
+  cursor: default;
+}
+
+.result {
+  position: absolute;
+  background: chartreuse;
+  left: 40%;
+}
+
 .test1 {
-  min-height: 16px;
+  /* min-height: 16px;
   min-width: 16px;
   background-color: #fff;
   border: 0.5rem solid #a5d196;
-  padding: 1rem;
+  padding: 1rem; */
+  width: 50px;
+  height: 50px;
+  /* background-color: lightgray; */
+  /* border: 1px solid darkgray; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 5px solid grey;
+  border-style: outset;
+  cursor: pointer;
 }
 
 .grid {
   display: flex;
   flex-wrap: wrap;
+}
+
+.one,
+.two,
+.three,
+.four,
+.five,
+.six {
+  font-size: x-large;
+}
+
+.one {
+  color: blue;
+}
+
+.two {
+  color: green;
+}
+
+.three {
+  color: red;
+}
+
+.four {
+  color: #E91E63;
+}
+
+.five {
+  color: #ff4700;
+}
+
+.six {
+  color: darkred;
 }
