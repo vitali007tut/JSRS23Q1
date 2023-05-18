@@ -47,8 +47,8 @@ body {
 
 .mine-content__inner {
   display: grid;
-  grid-template-columns: repeat(10, 24px);
-  grid-template-rows: repeat(10, 24px);
+  grid-template-columns: repeat(10, 25px);
+  grid-template-rows: repeat(10, 25px);
   border-width: 3px;
   border-style: solid;
   border-color: rgb(128, 128, 128) rgb(245, 245, 245) rgb(245, 245, 245) rgb(128, 128, 128);
@@ -83,28 +83,19 @@ body {
 
 .result {
   position: absolute;
-  background: chartreuse;
-  left: 40%;
+  left: 33%;
+  top: 50%;
+  padding: 5px;
+  border-radius: 10px;
 }
 
-/* .test1 {
-  min-height: 16px;
-  min-width: 16px;
-  background-color: #fff;
-  border: 0.5rem solid #a5d196;
-  padding: 1rem;
-  width: 50px;
-  height: 50px;
-  background-color: lightgray;
-  border: 1px solid darkgray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.result.game-over{
+  background: chartreuse;
+}
 
-  border: 5px solid grey;
-  border-style: outset;
-  cursor: pointer;
-} */
+.result.game-win{
+  background: yellow;
+}
 
 .grid {
   display: flex;
