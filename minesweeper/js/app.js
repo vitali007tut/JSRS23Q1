@@ -62,17 +62,10 @@ function startTimer() {
 }
 
 // new game using button click
-// btnStart.addEventListener("click", () => {
-//   flags = 0;
-//   isGameOver = false;
-//   result.innerHTML = '';
-//   mineContentInner.innerHTML = '';
-//   createBoard();
-//   clearInterval(time);
-//   time = null;
-//   sec = 0;
-//   showTimer(sec);
-// });
+btnStart.addEventListener("click", () => {
+  clearBoard()
+  createBoard();
+});
 
 function createBoard() {
   flagsAmount.innerHTML = minesAmount;
@@ -92,7 +85,6 @@ function createBoard() {
     square.addEventListener("click", function (e) {
       click(square);
     });
-    //left click
     square.oncontextmenu = function (e) {
       e.preventDefault();
       addFlag(square);
@@ -102,50 +94,35 @@ function createBoard() {
   // add total mines around the empty ceil
   for (let i = 0; i < squares.length; i++) {
     let total = 0;
-    const isLeftEdge = i % width === 0;
-    const isRightEdge = i % width === width - 1;
+    const isLeftEdge = i % width === 0; // left column
+    const isRightEdge = i % width === width - 1; // right column
     if (squares[i].classList.contains("empty")) {
-      if (i > 0 && !isLeftEdge && squares[i - 1].classList.contains("mine"))
-        total++;
-      if (
-        i > 9 &&
-        !isRightEdge &&
-        squares[i + 1 - width].classList.contains("mine")
-      )
-        total++;
-      if (i > 10 && squares[i - width].classList.contains("mine")) total++;
-      if (
-        i > 11 &&
-        !isLeftEdge &&
-        squares[i - 1 - width].classList.contains("mine")
-      )
-        total++;
-      if (i < 98 && !isRightEdge && squares[i + 1].classList.contains("mine"))
-        total++;
-      if (
-        i < 90 &&
-        !isLeftEdge &&
-        squares[i - 1 + width].classList.contains("mine")
-      )
-        total++;
-      if (
-        i < 88 &&
-        !isRightEdge &&
-        squares[i + 1 + width].classList.contains("mine")
-      )
-        total++;
-      if (i < 89 && squares[i + width].classList.contains("mine")) total++;
+      if (!isLeftEdge && squares[i - 1].classList.contains("mine")) total++;
+      if (!isRightEdge && squares[i + 1].classList.contains("mine")) total++;
+      if (i >= width && squares[i - width].classList.contains("mine")) total++;
+      if (i < (width*(width-1)) && squares[i + width].classList.contains("mine")) total++;
+      if (i >= width && !isLeftEdge && squares[i - 1 - width].classList.contains("mine")) total++;
+      if (i >= width && !isRightEdge && squares[i - width + 1].classList.contains("mine")) total++;
+      if (i < (width*(width - 1)) && !isLeftEdge && squares[i - 1 + width].classList.contains("mine")) total++;
+      if (i < (width*(width - 1)) && !isRightEdge && squares[i + 1 + width].classList.contains("mine")) total++;
       squares[i].setAttribute("data", total);
-
+      // console.log(`ячейка ${i} заполняется total ${total}`)
       squares[i].innerHTML = total; // testing
     }
   }
+
+  // mouse left click in ceil counter
+document.querySelectorAll('.ceil').forEach((e) => e.addEventListener('mousedown', () => {
+  var e = e || window.event;
+  var btnCode;
+  btnCode = e.button
+  if (btnCode === 0) stepsNumber++;
+ }))
 }
 
 createBoard();
 
 function click(square) {
-  // console.log("ceil is", square.classList[1]);
   let currentId = square.id;
   if (isGameOver) return;
 
@@ -158,12 +135,9 @@ function click(square) {
       console.log("game started");
       startTimer();
     } else {
-      console.log(square.getAttribute("id"));
-      // const newSquareId = square.getAttribute('id')
-      mineContentInner.innerHTML = "";
+      const newSquareId = square.getAttribute('id')
+      clearBoard();
       createBoard();
-      // console.log(square.getAttribute('id'))
-      console.log(document.getElementById(square.getAttribute("id")));
       const newSquare = document.getElementById(square.getAttribute("id"));
       click(newSquare);
       return;
@@ -288,11 +262,17 @@ function checkForWin() {
   }
 }
 
-// mouse left click in ceil counter
-document.querySelectorAll('.ceil').forEach((e) => e.addEventListener('mousedown', () => {
-  var e = e || window.event;
-  var btnCode;
-  btnCode = e.button
-  if (btnCode === 0) stepsNumber++;
-  console.log(stepsNumber, btnCode)
- }))
+function clearBoard() {
+  mineContentInner.innerHTML = '';
+  flags = 0;
+  clearInterval(time);
+  sec = 0;
+  stepsNumber = 0;
+  flagsAmount.innerHTML = minesAmount;
+  timer.innerHTML = `${sec % 60} sec`;
+  clicksNumber.innerHTML = `Clicks number: ${stepsNumber}`;
+  result.innerHTML = '';
+  result.classList.remove('game-over', 'game-win')
+  squares = [];
+  isGameOver = false;
+}
