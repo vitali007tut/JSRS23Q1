@@ -7,7 +7,7 @@ document.head.insertAdjacentHTML(
 let sec = 0;
 let time = null;
 let squares = [];
-// let stepsNumber = 0;
+let stepsNumber = 0;
 const width = 10;
 const minesAmount = 10;
 let flags = 0;
@@ -44,6 +44,11 @@ const timer = document.createElement("div");
 timer.classList.add("timer");
 timer.innerHTML = `${sec % 60} sec`;
 scoreBar.appendChild(timer);
+
+const clicksNumber = document.createElement("div");
+clicksNumber.classList.add('clicks-number');
+clicksNumber.innerHTML = `Clicks number: ${stepsNumber}`;
+scoreBar.appendChild(clicksNumber)
 
 const mineContentInner = document.createElement("div");
 mineContentInner.classList.add("mine-content__inner");
@@ -94,6 +99,7 @@ function createBoard() {
     };
   }
 
+  // add total mines around the empty ceil
   for (let i = 0; i < squares.length; i++) {
     let total = 0;
     const isLeftEdge = i % width === 0;
@@ -143,6 +149,7 @@ function click(square) {
   let currentId = square.id;
   if (isGameOver) return;
 
+  clicksNumber.innerHTML = `Clicks number: ${stepsNumber}`;
   if (
     document.querySelectorAll(".checked").length === 0 &&
     !square.classList.contains("flag")
@@ -203,7 +210,7 @@ function addFlag(square) {
 
 function gameOver(square) {
   clearInterval(time);
-  result.innerHTML = "Game Over! Try one more time...";
+  result.innerHTML = "Boom! Game Over! Try one more time...";
   result.classList.add("game-over");
   isGameOver = true;
 
@@ -230,7 +237,7 @@ function checkSquare(square, currentId) {
       const newSquare = document.getElementById(newId);
       click(newSquare);
     }
-    if (currentId > 10) {
+    if (currentId >= 10) {
       const newId = squares[parseInt(currentId - width)].id;
       const newSquare = document.getElementById(newId);
       click(newSquare);
@@ -273,10 +280,19 @@ function checkForWin() {
       matches++;
     }
     if (matches === minesAmount) {
-      result.innerHTML = `Hooray! You found all mines in ${sec} seconds and N moves`;
+      result.innerHTML = `Hooray! You found all mines in ${sec} seconds and ${stepsNumber} moves`;
       result.classList.add('game-win')
       clearInterval(time);
       isGameOver = true;
     }
   }
 }
+
+// mouse left click in ceil counter
+document.querySelectorAll('.ceil').forEach((e) => e.addEventListener('mousedown', () => {
+  var e = e || window.event;
+  var btnCode;
+  btnCode = e.button
+  if (btnCode === 0) stepsNumber++;
+  console.log(stepsNumber, btnCode)
+ }))
