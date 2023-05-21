@@ -314,43 +314,43 @@ function checkSquare(square, currentId) {
   const isLeftEdge = currentId % width === 0; // left column
   const isRightEdge = currentId % width === width - 1; // right column
   setTimeout(() => {
-    if (currentId > 0 && !isLeftEdge) {
+    if (!isLeftEdge) {
       const newId = squares[parseInt(currentId) - 1].id;
       const newSquare = document.getElementById(newId);
       click(newSquare);
     }
-    if (currentId > 9 && !isRightEdge) {
-      const newId = squares[parseInt(currentId) + 1 - width].id;
-      const newSquare = document.getElementById(newId);
-      click(newSquare);
-    }
-    if (currentId >= 10) {
-      const newId = squares[parseInt(currentId - width)].id;
-      const newSquare = document.getElementById(newId);
-      click(newSquare);
-    }
-    if (currentId > 10 && !isLeftEdge) {
-      const newId = squares[parseInt(currentId) - 1 - width].id;
-      const newSquare = document.getElementById(newId);
-      click(newSquare);
-    }
-    if (currentId < 99 && !isRightEdge) {
+    if (!isRightEdge) {
       const newId = squares[parseInt(currentId) + 1].id;
       const newSquare = document.getElementById(newId);
       click(newSquare);
     }
-    if (currentId < 90 && !isLeftEdge) {
-      const newId = squares[parseInt(currentId) - 1 + width].id;
+    if (currentId >= width) {
+      const newId = squares[parseInt(currentId - width)].id;
       const newSquare = document.getElementById(newId);
       click(newSquare);
     }
-    if (currentId < 88 && !isRightEdge) {
-      const newId = squares[parseInt(currentId) + 1 + width].id;
-      const newSquare = document.getElementById(newId);
-      click(newSquare);
-    }
-    if (currentId < 90) {
+    if (currentId < width*(width-1)) {
       const newId = squares[parseInt(currentId) + width].id;
+      const newSquare = document.getElementById(newId);
+      click(newSquare);
+    }
+    if (currentId >= width && !isLeftEdge) {
+      const newId = squares[parseInt(currentId) - 1 - width].id;
+      const newSquare = document.getElementById(newId);
+      click(newSquare);
+    }
+    if (currentId >= width && !isRightEdge) {
+      const newId = squares[+currentId - width + 1].id;
+      const newSquare = document.getElementById(newId);
+      click(newSquare);
+    }
+    if (currentId < width*(width-1) && !isLeftEdge) {
+      const newId = squares[+(currentId) - 1 + width].id;
+      const newSquare = document.getElementById(newId);
+      click(newSquare);
+    }
+    if (currentId < width*(width-1) && !isRightEdge) {
+      const newId = squares[+currentId + 1 + width].id;
       const newSquare = document.getElementById(newId);
       click(newSquare);
     }
