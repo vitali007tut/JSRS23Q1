@@ -40,7 +40,7 @@ body {
   border-color: rgb(128, 128, 128) rgb(245, 245, 245) rgb(245, 245, 245) rgb(128, 128, 128);
   margin-bottom: 5px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   -webkit-box-align: center;
   align-items: center;
   -webkit-box-pack: justify;
@@ -87,7 +87,7 @@ body {
 .result {
   position: absolute;
   left: 20%;
-  top: 50%;
+  bottom: 30%;
   padding: 5px;
   border-radius: 10px;
   font-size: 1.4em;

@@ -37,9 +37,22 @@ dropDownText.addEventListener("click", () => {
   dropDown.classList.toggle('hidden');
   clearBoard()
   createBoard();
+  if (sound.checked) new Audio('./asserts/start.wav').play();
 });
 // add separator in dropDownMenu
 addHtmlElement('div', 'mine__drop-down__separator', dropDownMenu)
+const dropDownRowSound = addHtmlElement('div', 'mine__drop-down__row', dropDownMenu);
+// add in dropDownSound
+addHtmlElement('div', 'mine__drop-down__check', dropDownRowSound);
+const dropDownTextSound = addHtmlElement('div', 'mine__drop-down__text', dropDownRowSound,
+  `<label><input type="checkbox" id="sound">Sound
+  </label>`);
+const sound = document.querySelector('#sound')
+sound.addEventListener('change', () => {
+  dropDown.classList.toggle('hidden');
+  localStorage.setItem('sound', sound.checked);
+})
+
 // add in topBar
 const topBarText = addHtmlElement('div', 'mine__top-bar__text', topBar, 'Game settings')
 topBarText.addEventListener('click', () => {
@@ -66,12 +79,6 @@ flagsLine.innerHTML = `Flags left: <span class='flags-amount'></span>`;
 scoreBar.appendChild(flagsLine);
 const flagsAmount = document.querySelector(".flags-amount");
 
-// const btnStart = document.createElement("button");
-// btnStart.classList.add(".btn-start");
-// btnStart.innerHTML = "New game";
-// scoreBar.appendChild(btnStart);
-// document.querySelector(".btn-start");
-
 const timer = document.createElement("div");
 timer.classList.add("timer");
 timer.innerHTML = `${sec % 60} sec`;
@@ -93,14 +100,13 @@ function startTimer() {
   }, 1000);
 }
 
-// new game using button click
-// btnStart.addEventListener("click", () => {
-//   clearBoard()
-//   createBoard();
-// });
-
 function createBoard() {
   flagsAmount.innerHTML = minesAmount;
+
+  // if (localStorage.getItem('sound') === 'false') {
+  //   sound.checked = false;
+  // } else sound.checked = true;
+  sound.checked = localStorage.getItem('sound') === 'true' ? true : false;
 
   const minesArray = Array(minesAmount).fill("mine");
   const emptyArray = Array(width * width - minesAmount).fill("empty");
@@ -138,21 +144,29 @@ function createBoard() {
       if (i < (width*(width - 1)) && !isLeftEdge && squares[i - 1 + width].classList.contains("mine")) total++;
       if (i < (width*(width - 1)) && !isRightEdge && squares[i + 1 + width].classList.contains("mine")) total++;
       squares[i].setAttribute("data", total);
-      // console.log(`ячейка ${i} заполняется total ${total}`)
       squares[i].innerHTML = total; // testing
     }
   }
+  // if (sound.checked) new Audio('./asserts/start.wav').play();
 
   // mouse left click in ceil counter
 document.querySelectorAll('.ceil').forEach((e) => e.addEventListener('mousedown', () => {
   var e = e || window.event;
   var btnCode;
   btnCode = e.button
-  if (btnCode === 0) stepsNumber++;
+  if (btnCode === 0) {
+    if (sound.checked) new Audio('./asserts/click.wav').play();
+    stepsNumber++;
+  }
+  if (btnCode === 2) {
+    if (sound.checked) new Audio('./asserts/right-click.mp3').play();
+  }
  }))
 }
 
-createBoard();
+  createBoard();
+
+
 
 function click(square) {
   let currentId = square.id;
@@ -164,10 +178,8 @@ function click(square) {
     !square.classList.contains("flag")
   ) {
     if (square.classList[1] != "mine") {
-      console.log("game started");
       startTimer();
     } else {
-      const newSquareId = square.getAttribute('id')
       clearBoard();
       createBoard();
       const newSquare = document.getElementById(square.getAttribute("id"));
@@ -215,6 +227,7 @@ function addFlag(square) {
 }
 
 function gameOver(square) {
+  if (sound.checked) new Audio('./asserts/lose.wav').play();
   clearInterval(time);
   result.innerHTML = "Boom! Game Over! Try one more time...";
   result.classList.add("game-over");
@@ -286,6 +299,7 @@ function checkForWin() {
       matches++;
     }
     if (matches === minesAmount) {
+      if (sound.checked) new Audio('./asserts/win.wav').play();
       result.innerHTML = `Hooray! You found all mines in ${sec} seconds and ${stepsNumber} moves`;
       result.classList.add('game-win')
       clearInterval(time);
