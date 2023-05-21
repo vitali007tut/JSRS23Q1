@@ -91,6 +91,7 @@ body {
   padding: 5px;
   border-radius: 10px;
   font-size: 1.4em;
+  z-index: 1;
 }
 
 .result.game-over{
@@ -158,6 +159,7 @@ body {
   position: absolute;
   display: flex;
   /* height: 20px; */
+  /* z-index: 5; */
 }
 
 .mine__top-bar {
@@ -191,10 +193,15 @@ body {
   box-shadow: rgb(100, 100, 100) 2px 2px 1px;
   border: 1px solid gray;
   padding: 2px;
-  display: grid;
-  grid-template-columns: 18px auto;
+  /* display: grid; */
+  /* grid-template-columns: 18px auto; */
   line-height: 18px;
   font-size: 1.2em;
+  width: 190px;
+}
+
+.mine__drop-downs.z-index{
+  z-index: 5;
 }
 
 .mine__drop-down__row {
@@ -203,7 +210,6 @@ body {
 
 .mine__drop-down__row:hover {
   color: rgb(22, 96, 232);
-  cursor: pointer;
 }
 
 .mine__drop-down__separator {
@@ -211,4 +217,19 @@ body {
   height: 1px;
   background-color: gray;
   margin: 3px 1px;
+}
+
+.mine__drop-down__text {
+  padding: 3px 15px;
+}
+
+.backOpacity.menu-open {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(41, 41, 41, 0.6);
+  opacity: 0.5;
+  z-index: 2;
 }
