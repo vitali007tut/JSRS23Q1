@@ -138,3 +138,77 @@ body {
 .six {
   color: darkred;
 }
+
+.mine__top-bar {
+  position: relative;
+  display: flex;
+  background-color: rgb(236, 233, 216);
+}
+
+.mine__drop-down {
+  position: relative;
+  z-index: 1;
+}
+
+.mine__drop-down.hidden {
+  visibility: hidden;
+}
+
+.mine__drop-downs {
+  position: absolute;
+  display: flex;
+  /* height: 20px; */
+}
+
+.mine__top-bar {
+  position: relative;
+  display: flex;
+  /* height: 20px; */
+  background-color: rgb(236, 233, 216);
+}
+
+.mine__top-bar__text {
+  padding: 5px;
+  height: 100%;
+  line-height: 20px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.mine__drop-down__title {
+  padding: 5px;
+  height: 100%;
+  line-height: 20px;
+  font-size: 1.2em;
+  color: white;
+  background-color: rgb(22, 96, 232);
+  cursor: pointer;
+}
+
+.mine__drop-down__menu {
+  background-color: white;
+  position: absolute;
+  box-shadow: rgb(100, 100, 100) 2px 2px 1px;
+  border: 1px solid gray;
+  padding: 2px;
+  display: grid;
+  grid-template-columns: 18px auto;
+  line-height: 18px;
+  font-size: 1.2em;
+}
+
+.mine__drop-down__row {
+  display: contents;
+}
+
+.mine__drop-down__row:hover {
+  color: rgb(22, 96, 232);
+  cursor: pointer;
+}
+
+.mine__drop-down__separator {
+  grid-column: 1 / 5;
+  height: 1px;
+  background-color: gray;
+  margin: 3px 1px;
+}

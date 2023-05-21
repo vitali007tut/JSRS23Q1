@@ -13,13 +13,45 @@ const minesAmount = 10;
 let flags = 0;
 let isGameOver = false;
 
-const result = document.createElement("div");
-result.classList.add("result");
-document.body.appendChild(result);
+// add in body
+const result = addHtmlElement("div", 'result', document.body);
+const container = addHtmlElement("div", 'container', document.body);
+// add in contaner
+const dropDowns = addHtmlElement('div', 'mine__drop-downs', container);
+const topBar = addHtmlElement('div', 'mine__top-bar', container);
+// add in dropDowns
+const dropDown = addHtmlElement('div', 'mine__drop-down', dropDowns);
+dropDown.classList.add('hidden');
+// add in dropDown
+const dropDownTitle = addHtmlElement('div', 'mine__drop-down__title', dropDown, 'Game settings')
+dropDownTitle.addEventListener('click', () => {
+  dropDown.classList.toggle('hidden');
+})
+const dropDownMenu = addHtmlElement('div', 'mine__drop-down__menu', dropDown);
+// add in dropDownMenu
+const dropDownRow = addHtmlElement('div', 'mine__drop-down__row', dropDownMenu);
+// add in dropDownRow
+addHtmlElement('div', 'mine__drop-down__check', dropDownRow);
+const dropDownText = addHtmlElement('div', 'mine__drop-down__text', dropDownRow, 'New game');
+dropDownText.addEventListener("click", () => {
+  dropDown.classList.toggle('hidden');
+  clearBoard()
+  createBoard();
+});
+// add separator in dropDownMenu
+addHtmlElement('div', 'mine__drop-down__separator', dropDownMenu)
+// add in topBar
+const topBarText = addHtmlElement('div', 'mine__top-bar__text', topBar, 'Game settings')
+topBarText.addEventListener('click', () => {
+  dropDown.classList.toggle('hidden');
+})
 
-const container = document.createElement("div");
-container.classList.add("container");
-document.body.appendChild(container);
+function addHtmlElement(element, classElement, insert, innerText = '') {
+  const newElement = document.createElement(element);
+  newElement.classList.add(classElement);
+  newElement.innerHTML = innerText;
+  return insert.appendChild(newElement)
+}
 
 const mineContent = document.createElement("div");
 mineContent.classList.add("mine-content");
@@ -34,11 +66,11 @@ flagsLine.innerHTML = `Flags left: <span class='flags-amount'></span>`;
 scoreBar.appendChild(flagsLine);
 const flagsAmount = document.querySelector(".flags-amount");
 
-const btnStart = document.createElement("button");
-btnStart.classList.add(".btn-start");
-btnStart.innerHTML = "New game";
-scoreBar.appendChild(btnStart);
-document.querySelector(".btn-start");
+// const btnStart = document.createElement("button");
+// btnStart.classList.add(".btn-start");
+// btnStart.innerHTML = "New game";
+// scoreBar.appendChild(btnStart);
+// document.querySelector(".btn-start");
 
 const timer = document.createElement("div");
 timer.classList.add("timer");
@@ -62,10 +94,10 @@ function startTimer() {
 }
 
 // new game using button click
-btnStart.addEventListener("click", () => {
-  clearBoard()
-  createBoard();
-});
+// btnStart.addEventListener("click", () => {
+//   clearBoard()
+//   createBoard();
+// });
 
 function createBoard() {
   flagsAmount.innerHTML = minesAmount;
