@@ -49,10 +49,10 @@ dropDownText.addEventListener("click", () => {
   toggleMenu();
   clearBoard();
   createBoard();
-  if (localStorage.getItem('color') === 'true') {
+  // if (localStorage.getItem('color') === 'true') {
     // toggleColor()
-    document.querySelectorAll(".ceil").forEach((e) => { e.classList.toggle('color') });
-  }
+    // document.querySelectorAll(".ceil").forEach((e) => { e.classList.toggle('color') });
+  // }
   if (sound.checked) new Audio("./asserts/start.wav").play();
 });
 // add separator in dropDownMenu
@@ -294,7 +294,7 @@ function createBoard() {
       )
         total++;
       squares[i].setAttribute("data", total);
-      squares[i].innerHTML = total; // testing
+      // squares[i].innerHTML = total; // testing
     }
   }
 
@@ -326,15 +326,23 @@ function click(square) {
     document.querySelectorAll(".checked").length === 0 &&
     !square.classList.contains("flag")
   ) {
-    if (square.classList[1] != "mine") {
-      startTimer();
-    } else {
+    // if (square.classList[1] != "mine") {
+    //   startTimer();
+    // } else {
+    //   clearBoard();
+    //   createBoard();
+    //   const newSquare = document.getElementById(square.getAttribute("id"));
+    //   click(newSquare);
+    //   return;
+    // }
+    while (square.classList[1] === "mine") {
       clearBoard();
       createBoard();
       const newSquare = document.getElementById(square.getAttribute("id"));
       click(newSquare);
       return;
     }
+    startTimer();
   }
 
   if (square.classList.contains("checked") || square.classList.contains("flag"))
@@ -617,14 +625,14 @@ window.addEventListener('load', () => {
   if (localStorage.getItem('color') === 'true') {
     color.checked = true;
     toggleColor();
-    document.querySelectorAll(".ceil").forEach((e) => { e.classList.toggle('color') });
+    // document.querySelectorAll(".ceil").forEach((e) => { e.classList.toggle('color') });
   }
 })
 
 // color theme
 function toggleColor() {
   document.body.classList.toggle('color');
-  document.querySelectorAll(".ceil").forEach((e) => { e.classList.toggle('color') });
+  // document.querySelectorAll(".ceil").forEach((e) => { e.classList.toggle('color') });
   topBar.classList.toggle('color');
   dropDownMenu.classList.toggle('color');
   mineContent.classList.toggle('color');
