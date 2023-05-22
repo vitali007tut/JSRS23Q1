@@ -14,6 +14,26 @@ body {
   align-items: center;
 }
 
+body.color {
+  background: #9E9E9E;
+  background: url(../asserts/windows.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  color: white;
+}
+.ceil.color{
+  background: #014c6e;
+}
+.mine__top-bar.color,
+.mine__drop-down__menu.color,
+.mine-content.color {
+  background-color: rgb(32 33 36);
+}
+.modal.color,
+.result.color{
+  color: darkblue;
+}
+
 
 .mine-content {
   background-color: rgb(192, 192, 192);
@@ -29,7 +49,7 @@ body {
   border-color: rgb(128, 128, 128) rgb(245, 245, 245) rgb(245, 245, 245) rgb(128, 128, 128);
   margin-bottom: 5px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   padding: 3px 7px 3px 30px;
 }
 
@@ -79,11 +99,11 @@ body {
   z-index: 1;
 }
 
-.result.game-over{
+.result.game-over {
   background: chartreuse;
 }
 
-.result.game-win{
+.result.game-win {
   background: yellow;
 }
 
@@ -123,12 +143,6 @@ body {
 
 .six {
   color: darkred;
-}
-
-.mine__top-bar {
-  position: relative;
-  display: flex;
-  background-color: rgb(236, 233, 216);
 }
 
 .mine__drop-down {
@@ -180,7 +194,7 @@ body {
   width: 190px;
 }
 
-.mine__drop-downs.z-index{
+.mine__drop-downs.z-index {
   z-index: 5;
 }
 
@@ -249,6 +263,7 @@ body {
   color: green;
   padding: 3px;
 }
+
 .result-lose {
   color: red;
   padding: 3px;

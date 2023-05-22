@@ -49,6 +49,10 @@ dropDownText.addEventListener("click", () => {
   toggleMenu();
   clearBoard();
   createBoard();
+  if (localStorage.getItem('color') === 'true') {
+    // toggleColor()
+    document.querySelectorAll(".ceil").forEach((e) => { e.classList.toggle('color') });
+  }
   if (sound.checked) new Audio("./asserts/start.wav").play();
 });
 // add separator in dropDownMenu
@@ -58,7 +62,7 @@ const dropDownRowSound = addHtmlElement(
   "mine__drop-down__row",
   dropDownMenu
 );
-// add in dropDownSound
+// add in dropDownSound 
 // addHtmlElement('div', 'mine__drop-down__check', dropDownRowSound);
 const dropDownTextSound = addHtmlElement(
   "div",
@@ -107,7 +111,6 @@ const dropDownTextSize3 = addHtmlElement(
   dropDownRowSize3,
   `<label><input type="radio" id="hard" name="size" value="hard">Hard (25x25)</label>`
 );
-// const size = document.querySelector('gg');
 document.querySelectorAll('input[name="size"]').forEach((e) => {
   e.addEventListener("change", () => {
     localStorage.setItem("size", e.value);
@@ -151,6 +154,18 @@ const dropDownResults = addHtmlElement(
   dropDownRowResults,
   "Last 10 results..."
 );
+// add separator in dropDownMenu after 10 results
+addHtmlElement("div", "mine__drop-down__separator", dropDownMenu);
+// add last color check in dropDownMenu
+const dropDownRowColor = addHtmlElement("div","mine__drop-down__row", dropDownMenu);
+// add Color 
+const dropDownTextColor = addHtmlElement("div", "mine__drop-down__text", dropDownRowColor,
+  `<label><input type="checkbox" id="color">Color</label>`);
+const color = document.querySelector("#color");
+color.addEventListener("change", () => {
+  localStorage.setItem("color", color.checked);
+  toggleColor();
+});
 
 // add in topBar
 const backOpacity = addHtmlElement("div", "backOpacity", topBar);
@@ -279,7 +294,7 @@ function createBoard() {
       )
         total++;
       squares[i].setAttribute("data", total);
-      // squares[i].innerHTML = total; // testing
+      squares[i].innerHTML = total; // testing
     }
   }
 
@@ -300,7 +315,7 @@ function createBoard() {
   );
 }
 
-createBoard();
+
 
 function click(square) {
   let currentId = square.id;
@@ -587,9 +602,32 @@ function loadBoard() {
 
 window.addEventListener('beforeunload', () => {
   saveBoard();
-  saveElements()
+  saveElements();
 })
 window.addEventListener('load', () => { 
+  createBoard();
+  if (!localStorage.getItem('board')) {
+      saveBoard();
+  saveElements();
+  }
+
+
   loadBoard();
   loadElements();
+  if (localStorage.getItem('color') === 'true') {
+    color.checked = true;
+    toggleColor();
+    document.querySelectorAll(".ceil").forEach((e) => { e.classList.toggle('color') });
+  }
 })
+
+// color theme
+function toggleColor() {
+  document.body.classList.toggle('color');
+  document.querySelectorAll(".ceil").forEach((e) => { e.classList.toggle('color') });
+  topBar.classList.toggle('color');
+  dropDownMenu.classList.toggle('color');
+  mineContent.classList.toggle('color');
+  result.classList.toggle('color');
+  modalWindow.classList.toggle('color');
+}
