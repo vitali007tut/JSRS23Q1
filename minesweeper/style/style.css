@@ -3,6 +3,10 @@
   /* font-family: Arial, Helvetica, sans-serif; */
 }
 
+li {
+  list-style: none;
+}
+
 body {
   background: rgb(32 33 36);
   display: flex;
@@ -10,20 +14,6 @@ body {
   align-items: center;
 }
 
-/* .test {
-  min-height: 16px;
-  min-width: 16px;
-  background-color: cadetblue;
-  border: 0.5rem outset #699d58;
-  padding: 1rem;
-  width: 50px;
-  height: 50px;
-  background-color: lightgray;
-  border: 1px solid darkgray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
 
 .mine-content {
   background-color: rgb(192, 192, 192);
@@ -232,4 +222,55 @@ body {
   background: rgba(41, 41, 41, 0.6);
   opacity: 0.5;
   z-index: 2;
+}
+
+.modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(41, 41, 41, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.modal {
+  z-index: 2;
+  position: absolute;
+  top: 10%;
+  background-color: rgb(192, 192, 192);
+  display: flex;
+  display: none;
+  flex-direction: column;
+  padding: 15px;
+  font-size: 1.1em;
+  font-weight: 700;
+  border-width: 3px;
+  border-style: solid;
+  border-color: rgb(128, 128, 128) rgb(245, 245, 245) rgb(245, 245, 245) rgb(128, 128, 128);
+}
+
+.result-win {
+  color: green;
+  padding: 3px;
+}
+.result-lose {
+  color: red;
+  padding: 3px;
+}
+
+.modal-overlay--visible {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.3s ease-in-out;
+}
+
+.modal--visible {
+  display: flex;
 }
