@@ -161,15 +161,11 @@ const topBarText = addHtmlElement(
   "Game settings"
 );
 topBarText.addEventListener("click", () => {
-  dropDown.classList.toggle("hidden");
-  dropDowns.classList.toggle("z-index");
-  backOpacity.classList.toggle("menu-open");
+  toggleMenu();
 });
 
 backOpacity.addEventListener("click", () => {
-  dropDown.classList.toggle("hidden");
-  dropDowns.classList.toggle("z-index");
-  backOpacity.classList.toggle("menu-open");
+  toggleMenu();
 });
 
 function addHtmlElement(element, classElement, insert, innerText = "") {
@@ -283,10 +279,9 @@ function createBoard() {
       )
         total++;
       squares[i].setAttribute("data", total);
-      squares[i].innerHTML = total; // testing
+      // squares[i].innerHTML = total; // testing
     }
   }
-  // if (sound.checked) new Audio('./asserts/start.wav').play();
 
   // mouse left click in ceil counter
   document.querySelectorAll(".ceil").forEach((e) =>
@@ -347,6 +342,8 @@ function click(square) {
     checkSquare(square, currentId); // if total = 0, recursion on id
   }
   square.classList.add("checked");
+
+
 }
 
 function addFlag(square) {
@@ -513,3 +510,86 @@ modalOverlay.addEventListener("click", (e) => {
     modalWindow.classList.remove("modal--visible");
   }
 });
+
+
+// save board , flags, timer, steps
+function saveBoard() {
+  const size = localStorage.getItem("size");
+  const width = sizeObject[size].widthCeil;
+  const object = {}
+
+  for (let i = 0; i < width * width; i++) {
+    const element = document.getElementById(i)
+    object[i] = {
+      classes: element.className,
+      data: element.getAttribute('data') || '',
+      innerHTML: element.innerHTML,
+    }
+  }
+  localStorage.setItem('board', JSON.stringify(object));
+}
+
+function saveElements() {
+  const objectElements = {};
+  objectElements.flags = flags;
+  objectElements.sec = sec;
+  objectElements.isGameOver = isGameOver;
+  objectElements.stepsNumber = stepsNumber;
+  if (isGameOver) {
+    objectElements.resultClass = result.classList[1];
+    objectElements.resultHTML = result.innerHTML;
+  }
+  
+  localStorage.setItem('elements', JSON.stringify(objectElements));
+}
+
+function loadElements() {
+  const size = localStorage.getItem("size");
+  const minesAmount = sizeObject[size].amountMines;
+
+  const objectElements = JSON.parse(localStorage.getItem('elements'));
+  sec = objectElements.sec;
+  isGameOver = objectElements.isGameOver;
+  flags = objectElements.flags;
+  stepsNumber = objectElements.stepsNumber;
+  resultClass = objectElements.resultClass;
+  resultHTML = objectElements.resultHTML;
+
+  timer.innerHTML = `${Math.floor(sec / 60)} min ${sec % 60} sec`;
+  if (isGameOver) {
+    result.innerHTML = resultHTML;
+    result.classList.add(resultClass);
+  } else {
+    if (sec > 0) startTimer();
+  }
+  clicksNumber.innerHTML = `Clicks number: ${stepsNumber}`;
+  flagsAmount.innerHTML = minesAmount - flags;
+}
+
+function loadBoard() {
+  const size = localStorage.getItem("size");
+  const width = sizeObject[size].widthCeil;
+  const object = JSON.parse(localStorage.getItem('board'));
+
+  for (let i = 0; i < width * width; i++) {
+    const element = document.getElementById(i);
+    element.className = '';
+    element.innerHTML = '';
+    element.setAttribute('data', '');
+
+    element.className = object[i].classes;
+    element.setAttribute('data', object[i].data);
+    element.innerHTML = object[i].innerHTML;
+  }
+
+}
+
+
+window.addEventListener('beforeunload', () => {
+  saveBoard();
+  saveElements()
+})
+window.addEventListener('load', () => { 
+  loadBoard();
+  loadElements();
+})
