@@ -22,7 +22,6 @@ body {
 }
 
 .mine__score-bar {
-  /* height: 40px; */
   font-size: 1.2em;
   border-radius: 1px;
   border-width: 2px;
@@ -30,12 +29,8 @@ body {
   border-color: rgb(128, 128, 128) rgb(245, 245, 245) rgb(245, 245, 245) rgb(128, 128, 128);
   margin-bottom: 5px;
   display: flex;
-  flex-direction: column;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-  padding: 3px 7px 3px 4px;
+  flex-direction: column; 
+  padding: 3px 7px 3px 30px;
 }
 
 .mine-content__inner {
@@ -148,14 +143,11 @@ body {
 .mine__drop-downs {
   position: absolute;
   display: flex;
-  /* height: 20px; */
-  /* z-index: 5; */
 }
 
 .mine__top-bar {
   position: relative;
   display: flex;
-  /* height: 20px; */
   background-color: rgb(236, 233, 216);
 }
 
@@ -183,8 +175,6 @@ body {
   box-shadow: rgb(100, 100, 100) 2px 2px 1px;
   border: 1px solid gray;
   padding: 2px;
-  /* display: grid; */
-  /* grid-template-columns: 18px auto; */
   line-height: 18px;
   font-size: 1.2em;
   width: 190px;

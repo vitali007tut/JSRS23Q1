@@ -189,7 +189,7 @@ const flagsAmount = document.querySelector(".flags-amount");
 
 const timer = document.createElement("div");
 timer.classList.add("timer");
-timer.innerHTML = `${sec % 60} sec`;
+timer.innerHTML = `${sec / 60} min ${sec % 60} sec`;
 scoreBar.appendChild(timer);
 
 const clicksNumber = document.createElement("div");
@@ -207,7 +207,7 @@ document.getElementById(size).checked = true;
 function startTimer() {
   time = setInterval(() => {
     sec++;
-    timer.innerHTML = `${sec % 60} sec`;
+    timer.innerHTML = `${Math.floor(sec / 60)} min ${sec % 60} sec`;
   }, 1000);
 }
 
@@ -375,7 +375,7 @@ function gameOver(square) {
   result.classList.add("game-over");
   isGameOver = true;
   const size = localStorage.getItem("size");
-  resultsArray.push(`Lose level-${size} in ${sec} sec`);
+  resultsArray.push(`Lose level-${size} in ${Math.floor(sec / 60)} min ${sec % 60} sec`);
   localStorage.setItem('Results', resultsArray);
 
   squares.forEach((square) => {
@@ -451,14 +451,14 @@ function checkForWin() {
     }
     if (matches === minesAmount) {
       if (sound.checked) new Audio("./asserts/win.wav").play();
-      result.innerHTML = `Hooray! You found all mines in ${sec} seconds and ${stepsNumber} moves`;
+      result.innerHTML = `Hooray! You found all mines in ${Math.floor(sec / 60)} min ${sec % 60} sec and ${stepsNumber} moves`;
       result.classList.add("game-win");
       clearInterval(time);
       isGameOver = true;
     }
   }
   if (matches === minesAmount) {
-    resultsArray.push(`Win level-${size} in ${sec} sec and ${stepsNumber} moves`)
+    resultsArray.push(`Win level-${size} in ${Math.floor(sec / 60)} min ${sec % 60} sec and ${stepsNumber} moves`)
     localStorage.setItem('Results', resultsArray);
 }
 
@@ -474,7 +474,7 @@ function clearBoard() {
   sec = 0;
   stepsNumber = 0;
   flagsAmount.innerHTML = minesAmount;
-  timer.innerHTML = `${sec % 60} sec`;
+  timer.innerHTML = `${Math.floor(sec / 60)} min ${sec % 60} sec`;
   clicksNumber.innerHTML = `Clicks number: ${stepsNumber}`;
   result.innerHTML = "";
   result.classList.remove("game-over", "game-win");
@@ -497,9 +497,13 @@ dropDownResults.addEventListener("click", () => {
   const array = localStorage.getItem('Results').split(',').reverse();
   const length = array.length > 10 ? 10 : array.length;
   for (let i = 0; i < length; i++) {
-    const classResult = array[i].includes('Win') ? 'result-win' : 'result-lose';
-    addHtmlElement('li', classResult, modalWindow, `${i+1}. ${array[i]}`);
-  }
+    if (array[i] != '') {
+      const classResult = array[i].includes('Win') ? 'result-win' : 'result-lose';
+      addHtmlElement('li', classResult, modalWindow, `${i+1}. ${array[i]}`);
+      }
+
+    }
+
   modalWindow.classList.add("modal--visible");
   modalOverlay.classList.add("modal-overlay--visible");
 });
