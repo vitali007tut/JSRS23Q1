@@ -18,3 +18,14 @@ export type SourceType = {
     id: string;
     name: string;
 };
+
+export type NewsType = {
+    status: string;
+    articles: DataType[];
+    totalResults: number;
+};
+
+export type SourcesType = {
+    status: string;
+    sources: DataType[];
+};
