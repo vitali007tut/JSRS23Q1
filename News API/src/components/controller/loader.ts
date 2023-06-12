@@ -1,3 +1,5 @@
+import { Endpoints } from '../base/base';
+
 type Callback<T = void> = (data: T) => void;
 type OptionsType = {
     apiKey?: string;
@@ -13,7 +15,7 @@ class Loader {
     }
 
     getResp<T>(
-        { endpoint, options }: { endpoint: string; options: OptionsType },
+        { endpoint, options }: { endpoint: Endpoints; options?: OptionsType },
         callback: Callback<T> = () => {
             console.error('No callback for GET response');
         }
