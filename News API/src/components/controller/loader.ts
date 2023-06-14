@@ -1,17 +1,7 @@
-import { Endpoints } from '../base/base';
-
-type Callback<T = void> = (data: T) => void;
-type OptionsType = {
-    apiKey?: string;
-    sources?: string;
-};
+import { OptionsType, Callback, Endpoints } from '../base/base';
 
 class Loader {
-    private baseLink;
-
-    private options;
-
-    constructor(baseLink: string, options: OptionsType) {
+    constructor(private baseLink: string, private options: OptionsType) {
         this.baseLink = baseLink;
         this.options = options;
     }
@@ -34,8 +24,8 @@ class Loader {
         return res;
     }
 
-    private makeUrl(options: OptionsType, endpoint: string): string {
-        const urlOptions = { ...this.options, ...options };
+    private makeUrl(options: OptionsType, endpoint: Endpoints): string {
+        const urlOptions: OptionsType = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {
@@ -45,12 +35,12 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    private load<T>(method: string, endpoint: string, callback: Callback<T>, options: OptionsType = {}): void {
+    private load<T>(method: string, endpoint: Endpoints, callback: Callback<T>, options: OptionsType = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res: Response) => res.json())
-            .then((data) => callback(data))
-            .catch((err) => console.error(err));
+            .then((data: T) => callback(data))
+            .catch((err: Error) => console.error(err));
     }
 }
 

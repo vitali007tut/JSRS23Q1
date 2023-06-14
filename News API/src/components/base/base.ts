@@ -36,3 +36,8 @@ export type SourceType = {
     id: string;
     name: string;
 };
+
+export type OptionsType = {
+    apiKey?: string;
+    sources?: string;
+};
