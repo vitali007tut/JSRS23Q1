@@ -1,3 +1,4 @@
+import { NewsType, SourcesType } from '../base/base';
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
 
@@ -12,10 +13,12 @@ class App {
     }
 
     public start(): void {
-        const docSources = document.querySelector('.sources');
+        const docSources: HTMLElement | null = document.querySelector('.sources');
         if (docSources) {
-            docSources.addEventListener('click', (e) => this.controller.getNews(e, (data) => this.view.drawNews(data)));
-            this.controller.getSources((data) => this.view.drawSources(data));
+            docSources.addEventListener('click', (event: Event) =>
+                this.controller.getNews(event, (data: NewsType) => this.view.drawNews(data))
+            );
+            this.controller.getSources((data: SourcesType) => this.view.drawSources(data));
         }
     }
 }

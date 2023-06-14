@@ -12,27 +12,34 @@ class AppController extends AppLoader {
     }
 
     public getNews(e: Event, callback: Callback<NewsType>): void {
-        let target = e.target as HTMLElement;
-        const newsContainer = e.currentTarget as HTMLElement;
-
-        while (target !== newsContainer && target !== null && newsContainer !== null) {
-            if (target.classList.contains('source__item')) {
-                const sourceId = target.getAttribute('data-source-id') as string;
-                if (newsContainer.getAttribute('data-source') !== sourceId) {
-                    newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp(
-                        {
-                            endpoint: Endpoints.Everything,
-                            options: {
-                                sources: sourceId,
-                            },
-                        },
-                        callback
-                    );
+        let target: HTMLElement | null;
+        let newsContainer: HTMLElement;
+        if (e.target instanceof HTMLElement && e.currentTarget instanceof HTMLElement) {
+            target = e.target;
+            newsContainer = e.currentTarget;
+            while (target !== newsContainer && target !== null && newsContainer !== null) {
+                if (target.classList.contains('source__item')) {
+                    const sourceId: string | null = target.getAttribute('data-source-id');
+                    if (sourceId) {
+                        if (newsContainer.getAttribute('data-source') !== sourceId) {
+                            newsContainer.setAttribute('data-source', sourceId);
+                            super.getResp(
+                                {
+                                    endpoint: Endpoints.Everything,
+                                    options: {
+                                        sources: sourceId,
+                                    },
+                                },
+                                callback
+                            );
+                        }
+                    }
+                    return;
                 }
-                return;
+                if (target.parentNode instanceof HTMLElement) {
+                    target = target.parentNode;
+                }
             }
-            target = target.parentNode as HTMLElement;
         }
     }
 }
