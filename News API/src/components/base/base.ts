@@ -31,3 +31,8 @@ export type NewsType = {
     articles: DataType[];
     totalResults: number;
 };
+
+export type SourceType = {
+    id: string;
+    name: string;
+};

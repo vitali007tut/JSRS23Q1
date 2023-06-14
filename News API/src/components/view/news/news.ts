@@ -1,4 +1,4 @@
-import { DataType } from './DataType';
+import { DataType } from '../../base/base';
 import './news.css';
 
 class News {
