@@ -2,7 +2,7 @@ import { DataType } from '../news/DataType';
 import './sources.css';
 
 class Sources {
-    draw(data: DataType[]) {
+    public draw(data: DataType[]): void {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
 

@@ -7,16 +7,18 @@ type OptionsType = {
 };
 
 class Loader {
-    baseLink;
-    options;
+    private baseLink;
+
+    private options;
+
     constructor(baseLink: string, options: OptionsType) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
-    getResp<T>(
+    protected getResp<T>(
         { endpoint, options }: { endpoint: Endpoints; options?: OptionsType },
-        callback: Callback<T> = () => {
+        callback: Callback<T> = (): void => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -32,7 +34,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: OptionsType, endpoint: string): string {
+    private makeUrl(options: OptionsType, endpoint: string): string {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -43,7 +45,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load<T>(method: string, endpoint: string, callback: Callback<T>, options: OptionsType = {}) {
+    private load<T>(method: string, endpoint: string, callback: Callback<T>, options: OptionsType = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
