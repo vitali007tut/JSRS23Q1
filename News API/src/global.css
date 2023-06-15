@@ -33,3 +33,12 @@ footer .copyright a:hover {
 footer .copyright:before {
     content: '©';
 }
+
+.git-link {
+    color: white;
+    text-decoration: blink;
+}
+
+.git-link:hover {
+    opacity: 0.8;
+}

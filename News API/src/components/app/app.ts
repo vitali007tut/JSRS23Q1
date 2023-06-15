@@ -15,9 +15,10 @@ class App {
     public start(): void {
         const docSources: HTMLElement | null = document.querySelector('.sources');
         if (docSources) {
-            docSources.addEventListener('click', (event: Event) =>
-                this.controller.getNews(event, (data: NewsType) => this.view.drawNews(data))
-            );
+            docSources.addEventListener('click', (event: Event) => {
+                this.controller.getNews(event, (data: NewsType) => this.view.drawNews(data));
+                document.querySelector('.sources')?.classList.add('height');
+            });
             this.controller.getSources((data: SourcesType) => this.view.drawSources(data));
         }
     }
