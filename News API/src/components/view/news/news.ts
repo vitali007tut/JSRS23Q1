@@ -1,4 +1,4 @@
-import { DataType } from '../../base/base';
+import { DataType, NewsTempType } from '../../base/base';
 import { NewsTemplate } from '../../base/newsTemplate';
 import './news.css';
 
@@ -10,16 +10,17 @@ class News {
         if (news != null) {
             news.forEach((item, idx) => {
                 if (item) {
-                    const newsElement = new NewsTemplate(
-                        idx,
-                        item.urlToImage,
-                        item.author,
-                        item.publishedAt,
-                        item.title,
-                        item.source.name,
-                        item.description,
-                        item.url
-                    ).getElement();
+                    const object: NewsTempType = {
+                        index: idx,
+                        url: item.urlToImage,
+                        author: item.author,
+                        publishedAt: item.publishedAt,
+                        title: item.title,
+                        name: item.source.name,
+                        description: item.description,
+                        readUrl: item.url,
+                    };
+                    const newsElement = new NewsTemplate(object).getElement();
                     if (docNews) docNews.appendChild(newsElement);
                 }
             });

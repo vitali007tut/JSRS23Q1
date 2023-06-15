@@ -1,22 +1,31 @@
+import { NewsTempType } from './base';
+
 export class NewsTemplate {
-    constructor(
-        public index: number,
-        public url: string | null,
-        public author: string,
-        public publishedAt: string,
-        public title: string,
-        public name: string,
-        public description: string,
-        public readUrl: string
-    ) {
-        this.index = index;
-        this.url = url;
-        this.author = author;
-        this.publishedAt = publishedAt;
-        this.title = title;
-        this.name = name;
-        this.description = description;
-        this.readUrl = readUrl;
+    public index;
+
+    public url;
+
+    public author;
+
+    public publishedAt;
+
+    public title;
+
+    public name;
+
+    public description;
+
+    public readUrl;
+
+    constructor(object: NewsTempType) {
+        this.index = object.index;
+        this.url = object.url;
+        this.author = object.author;
+        this.publishedAt = object.publishedAt;
+        this.title = object.title;
+        this.name = object.name;
+        this.description = object.description;
+        this.readUrl = object.readUrl;
     }
 
     public getElement(): HTMLElement {

@@ -41,3 +41,14 @@ export type OptionsType = {
     apiKey?: string;
     sources?: string;
 };
+
+export type NewsTempType = {
+    index: number;
+    url: string | null;
+    author: string;
+    publishedAt: string;
+    title: string;
+    name: string;
+    description: string;
+    readUrl: string;
+};
