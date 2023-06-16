@@ -21,12 +21,12 @@ export type DataType = {
     content: string;
 } | null;
 
-export type SourcesType = {
+export type GetSourcesResponseType = {
     status: string;
     sources: DataType[];
 };
 
-export type NewsType = {
+export type GetNewsResponseType = {
     status: string;
     articles: DataType[];
     totalResults: number;
@@ -51,4 +51,11 @@ export type NewsTempType = {
     name: string;
     description: string;
     readUrl: string;
+};
+
+export type LoadPropsType<T> = {
+    method: string;
+    endpoint: Endpoints;
+    callback?: (data: T) => void;
+    options?: OptionsType;
 };

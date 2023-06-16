@@ -1,8 +1,8 @@
-import { Callback, Endpoints, NewsType, SourcesType } from '../base/base';
+import { Callback, Endpoints, GetNewsResponseType, GetSourcesResponseType } from '../base/base';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
-    public getSources(callback: Callback<SourcesType>): void {
+    public getSources(callback: Callback<GetSourcesResponseType>): void {
         super.getResp(
             {
                 endpoint: Endpoints.Sources,
@@ -11,7 +11,7 @@ class AppController extends AppLoader {
         );
     }
 
-    public getNews(e: Event, callback: Callback<NewsType>): void {
+    public getNews(e: Event, callback: Callback<GetNewsResponseType>): void {
         let target: HTMLElement | null;
         let newsContainer: HTMLElement;
         if (e.target instanceof HTMLElement && e.currentTarget instanceof HTMLElement) {

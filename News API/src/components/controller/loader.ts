@@ -1,4 +1,4 @@
-import { OptionsType, Callback, Endpoints } from '../base/base';
+import { OptionsType, Callback, Endpoints, LoadPropsType } from '../base/base';
 
 class Loader {
     constructor(private baseLink: string, private options: OptionsType) {
@@ -12,7 +12,8 @@ class Loader {
             console.error('No callback for GET response');
         }
     ): void {
-        this.load('GET', endpoint, callback, options);
+        const props: LoadPropsType<T> = { method: 'GET', endpoint: endpoint, callback: callback, options: options };
+        this.load(props);
     }
 
     private errorHandler(res: Response): Response {
@@ -35,11 +36,15 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    private load<T>(method: string, endpoint: Endpoints, callback: Callback<T>, options: OptionsType = {}): void {
+    private load<T>({ method, endpoint, callback, options = {} }: LoadPropsType<T>): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res: Response) => res.json())
-            .then((data: T) => callback(data))
+            .then((data: T) => {
+                if (callback) {
+                    callback(data);
+                }
+            })
             .catch((err: Error) => console.error(err));
     }
 }
