@@ -1,0 +1,138 @@
+body {
+  margin: 0;
+}
+
+.header {
+  grid-area: header;
+}
+
+.main {
+  grid-area: main;
+  grid-template-rows: auto 15%;
+}
+
+.side {
+  grid-area: levels;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+.css-editor {
+  grid-area: block1;
+  background-color: #0f0d0b;
+}
+
+.html-viewer {
+  grid-area: block2;
+  background-color: #0f0d0b;
+}
+
+.grid-container {
+  display: grid;
+  box-sizing: border-box;
+  grid-template-areas:
+    'header header levels'
+    'main main levels'
+    'block1 block2 levels'
+    'footer footer levels';
+  gap: 10px;
+  background-color: #151310;
+  padding: 10px;
+  height: 100vh;
+  grid-template-columns: auto auto 20vw;
+  grid-template-rows: 10vh auto auto 10vh;
+}
+
+.grid-container>div {
+  text-align: center;
+}
+
+.footer {
+  background-color: rgba(255, 255, 255, 0.8);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  list-style: none;
+  align-items: center;
+  align-content: center;
+}
+
+.footer li {
+  text-align: center;
+}
+
+.footer img {
+  width: 40%;
+}
+
+.header {
+  background-color: rgba(255, 255, 255, 0.8);
+  display: grid;
+  align-items: center;
+  align-content: center;
+  grid-template-columns: auto 10vw;
+  padding: 10px;
+}
+
+.side {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.main {
+  background: url(./asserts/bg-table.jpg) 100% 100% no-repeat;
+  background-size: cover;
+  display: grid;
+  align-items: center;
+}
+
+.target {
+  animation-name: action;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  transform: rotate(0deg);
+}
+
+@keyframes action {
+  from {
+    transform: scale(1);
+
+  }
+
+  25% {
+    transform: scale(1.1);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  75% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.hovered {
+  filter: drop-shadow(0 0 5px blue);
+}
+
+.figure {
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.css-editor,
+.viewer-tittle {
+  font-family: menlo,monospace;
+  color: rgba(255,255,255,.6);
+}
+
+.rum {
+  font-family: menlo,monospace;
+  font-size: 1rem;
+  color: rgba(255,255,255,.6);
+}
