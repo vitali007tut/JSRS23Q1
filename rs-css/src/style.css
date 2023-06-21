@@ -42,7 +42,7 @@ body {
   padding: 10px;
   height: 100vh;
   grid-template-columns: auto auto 20vw;
-  grid-template-rows: 10vh auto auto 10vh;
+  grid-template-rows: 10vh 35vh auto 10vh;
 }
 
 .grid-container>div {
@@ -131,8 +131,23 @@ body {
   color: rgba(255,255,255,.6);
 }
 
-.rum {
+.codeView {
   font-family: menlo,monospace;
   font-size: 1rem;
+  line-height: 150%;
   color: rgba(255,255,255,.6);
+  text-align: start;
+  padding-left: 10px;
+}
+
+.line {
+  padding-left: 10px;
+}
+
+.line:hover {
+  color: rgb(255,255,255);
+}
+
+.li-item {
+  text-align: left;
 }
