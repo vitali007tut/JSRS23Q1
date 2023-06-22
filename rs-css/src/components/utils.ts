@@ -14,3 +14,13 @@ export function createImgElement(classImg: string, src: string): HTMLImageElemen
 
   return image;
 }
+
+export function viewByCharacters (word: string, inputPlace: HTMLInputElement): void {
+  inputPlace.value = '';
+  const arr = word.split('');
+  arr.forEach((litter, index) => {
+    setTimeout(() => {
+      inputPlace.value += litter;
+    }, index*500)
+  })
+}

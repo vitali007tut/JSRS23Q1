@@ -3,6 +3,7 @@ import ElementScreen from "./elementScreen";
 import GameLevelScreen from "./gameLevelScreen";
 import HeaderScreen from "./headerScreen";
 import InputScreen from "./inputScreen";
+import { viewByCharacters } from "./utils";
 
 export default class App {
   readonly inputScreen = new InputScreen();
@@ -27,8 +28,8 @@ export default class App {
     this.inputScreen.inputBtn.addEventListener('click', () => {
       this.checkAnswer(this.inputScreen.submit());
     })
-    this.headerScreen.helpBtn.addEventListener('click', () => {
-      this.headerScreen.viewByCharacters(this.gameLevelScreen.getRightAnswer(), this.inputScreen.input)
+    this.gameLevelScreen.helpBtn.addEventListener('click', () => {
+      viewByCharacters(this.gameLevelScreen.getRightAnswer(), this.inputScreen.input)
     })
   }
 

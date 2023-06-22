@@ -14,7 +14,7 @@ body {
 .side {
   grid-area: levels;
   display: grid;
-  grid-template-rows: 10vh auto 10vh;
+  grid-template-rows: 10vh auto 10vh 10vh;
 }
 
 .footer {
@@ -51,11 +51,14 @@ body {
   text-align: center;
 }
 
+li {
+  list-style: none;
+}
+
 .footer {
   background-color: rgba(255, 255, 255, 0.8);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  list-style: none;
   align-items: center;
   align-content: center;
 }
@@ -190,7 +193,8 @@ body {
   background-color: #b2ff65;
 }
 
-.reset {
+.reset,
+.bth-help {
   border: solid 2px rgb(21 19 16);
   box-sizing: border-box;
   width: calc(100% - 40px);
@@ -199,7 +203,8 @@ body {
   cursor: pointer;
 }
 
-.reset:hover {
+.reset:hover,
+.bth-help:hover {
   background: rgb(21 19 16);
   color: #fff;
 }

@@ -17,13 +17,13 @@ export default class GameLevelScreen {
       figures: ['hat', 'king', 'flag', 'rum', 'compass'],
     },
     {
-      title: '333333333333',
+      title: 'third task rum',
       rightAnswer: '.rum',
       code: ['<pawn />', '<flag />', '<compass />', '<queen />', '<rum />'],
       figures: ['pawn', 'flag', 'compass', 'queen', 'rum']
     },
     {
-      title: '4 compass',
+      title: 'find compass',
       rightAnswer: '.compass',
       code: ['<hat />', '<king />', '<flag />', '<rum />', '<compass />'],
       figures: ['hat', 'king', 'flag', 'rum', 'compass'],
@@ -32,22 +32,24 @@ export default class GameLevelScreen {
 
   public actualLevel: number = 0;
   private liArray: HTMLElement[] = [];
+  public helpBtn: HTMLElement;
   
   public start(): HTMLElement {
     const element: HTMLElement = createElement('div', 'side');
     element.appendChild(createElement('h2', 'level-tittle', 'Levels'));
 
-    const olList: HTMLElement = document.createElement('ol');
+    const listLiElements: HTMLElement = document.createElement('div');
     this.GameLevels.forEach((key, index) => {
-      const liItem = createElement('li', 'li-item', this.GameLevels[index].title);
+      const liItem = createElement('li', 'li-item', `${index + 1}  ${this.GameLevels[index].title}`);
       this.liArray.push(liItem);
       if (this.GameLevels[index].rightAnswer === this.getRightAnswer()) {
         liItem.classList.add('active-level');
       }
-      olList.appendChild(liItem);
+      listLiElements.appendChild(liItem);
+
       liItem.addEventListener('click', () => {
         this.setActiveLevel(index);
-        const tittleLevel = liItem.innerHTML;
+        const tittleLevel = this.GameLevels[index].title;
         this.GameLevels.forEach((element, index) => {
           if (element.title === tittleLevel) {
             this.actualLevel = index;
@@ -59,12 +61,15 @@ export default class GameLevelScreen {
         })
       })
     })
-    element.appendChild(olList);
+    element.appendChild(listLiElements);
+    this.helpBtn = createElement('a', 'bth-help', 'HELP');
+    element.appendChild(this.helpBtn);
     const resetBtn: HTMLElement = createElement('a', 'reset', 'Reset Progress');
     element.appendChild(resetBtn);
     resetBtn.addEventListener('click', () => {
       this.resetGame();
     })
+
     
     return element;
   }   
