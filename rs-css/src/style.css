@@ -155,3 +155,20 @@ body {
 .active-level {
   background: burlywood;
 }
+
+.css-editor input {
+  font-size: 1rem;
+}
+
+.floatTip {
+  position: absolute; 
+  top: 15vh;
+  display: none ;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 3px 3px 3px grey;
+  background: rgba(255,255,255,.8);
+  font-family: menlo,monospace;
+  font-size: 1rem;
+  z-index: 1;
+ }

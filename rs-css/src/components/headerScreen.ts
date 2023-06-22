@@ -13,5 +13,13 @@ export default class HeaderScreen {
     return header;
   }
 
-
+  public viewByCharacters (word: string, inputPlace: HTMLInputElement): void {
+    inputPlace.value = '';
+    const arr = word.split('');
+    arr.forEach((litter, index) => {
+      setTimeout(() => {
+        inputPlace.value += litter;
+      }, index*500)
+    })
+  }
 }

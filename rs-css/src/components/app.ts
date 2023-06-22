@@ -28,8 +28,8 @@ export default class App {
       this.checkAnswer(this.inputScreen.submit());
     })
     this.headerScreen.helpBtn.addEventListener('click', () => {
-      this.inputScreen.input.value = this.gameLevelScreen.getRightAnswer();
-          })
+      this.headerScreen.viewByCharacters(this.gameLevelScreen.getRightAnswer(), this.inputScreen.input)
+    })
   }
 
   private checkAnswer(data: string): void {
