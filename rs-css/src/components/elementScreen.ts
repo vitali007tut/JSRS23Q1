@@ -2,12 +2,13 @@ import GameLevelScreen from "./gameLevelScreen";
 import { createElement, createImgElement } from "./utils";
 
 export default class ElementScreen {
+  public figures: HTMLElement;
+
   public start(): HTMLElement {
     const main: HTMLElement = createElement('div', 'main');
-    const figures: HTMLElement = createElement('div', 'figures');
-    new GameLevelScreen().viewElements(figures);
-
-    main.appendChild(figures);
+    this.figures = createElement('div', 'figures');
+    new GameLevelScreen().viewElements(this.figures);
+    main.appendChild(this.figures);
     return main;
   }
   

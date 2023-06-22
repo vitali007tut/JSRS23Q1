@@ -29,43 +29,21 @@ export default class InputScreen {
   public getInputValue(): string {
     return this.input.value;
   }
-  public setInputErrorState(): void {
-
+  public setInputErrorState(snakedElement: HTMLElement): void {
+    this.input.classList.add('shake');
+    snakedElement.classList.add('shake');
+    setTimeout(() => {
+      this.input.classList.remove('shake');
+      snakedElement.classList.remove('shake');
+    }, 2000);
   }
   public setInputSuccessState(): void {
     this.input.value = '';
-  }
-  // public submitKey(): string {
-  //   document.addEventListener('keydown', (event) => {
-  //     if (event.key === 'Enter') {
-  //       this.answer = this.getInputValue()
-  //       console.log('answer', this.answer)
-  //       return this.answer;
-  //     }
-  //   });
-  //   return this.answer;
-  // }
-  private submitBtn(): string {
-    this.inputBtn.addEventListener('click', () => {
-      this.answer = this.getInputValue()
-      console.log('answer', this.answer)
-      return this.answer;
-    });
-    return this.answer;
+    
   }
 
   public submit(): string {
-    // this.submitBtn();
-    // this.submitKey();
     this.answer = this.getInputValue();
     return this.answer;
   }
-
-  public helpMode() {
-
-  }
-
-  // private checkAnswer() {
-  //   console.log(this.answer === )
-  // }
 }

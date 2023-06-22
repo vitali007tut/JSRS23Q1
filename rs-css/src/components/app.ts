@@ -7,7 +7,7 @@ import InputScreen from "./inputScreen";
 export default class App {
   readonly inputScreen = new InputScreen();
   readonly elementScreen = new ElementScreen();
-  readonly CodeScreen = new CodeScreen();
+  readonly codeScreen = new CodeScreen();
   readonly gameLevelScreen = new GameLevelScreen();
   readonly headerScreen = new HeaderScreen();
   private container: HTMLDivElement = document.querySelector('.grid-container');
@@ -16,7 +16,7 @@ export default class App {
     this.container.appendChild(this.inputScreen.create());
     this.container.appendChild(this.headerScreen.start());
     this.container.appendChild(this.elementScreen.start());
-    this.container.appendChild(this.CodeScreen.start());
+    this.container.appendChild(this.codeScreen.start());
     this.container.appendChild(this.gameLevelScreen.start())
 
     document.addEventListener('keydown', (event) => {
@@ -35,7 +35,24 @@ export default class App {
   private checkAnswer(data: string): void {
     const rightAnswer = this.gameLevelScreen.GameLevels[this.gameLevelScreen.actualLevel].rightAnswer;
     if (data === rightAnswer) {
-      console.log(`Right answer ${data}`)
-    } else console.log(`${data} -- wrong answer`);
+      console.log(`Right answer ${data}`);
+      this.inputScreen.setInputSuccessState();
+
+      this.gameLevelScreen.getActualLevelLiElement().classList.add('complete');
+      if (this.gameLevelScreen.gameIsComplete()) { 
+        alert('YOU----win!');
+      } else {
+        let newLevel = this.gameLevelScreen.actualLevel + 1;
+        if (newLevel === this.gameLevelScreen.quantityTasks()) newLevel -= 1;
+        this.gameLevelScreen.actualLevel = newLevel;
+        // this.gameLevelScreen.actualLevel += 1
+        this.gameLevelScreen.viewCodeLevel(this.codeScreen.viewerCode);
+        this.gameLevelScreen.viewElements(this.elementScreen.figures);
+        this.gameLevelScreen.setActiveLevel(this.gameLevelScreen.actualLevel);
+      }
+    } else {
+      console.log(`${data} -- wrong answer`);
+      this.inputScreen.setInputErrorState(this.elementScreen.figures);
+    }
   }
 }
