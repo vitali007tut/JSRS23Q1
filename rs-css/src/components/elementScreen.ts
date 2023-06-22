@@ -6,6 +6,8 @@ export default class ElementScreen {
 
   public start(): HTMLElement {
     const main: HTMLElement = createElement('div', 'main');
+    const mainTittle: HTMLElement = createElement('h1', 'h1', 'RSS-CSS Selectors')
+    main.appendChild(mainTittle);
     this.figures = createElement('div', 'figures');
     new GameLevelScreen().viewElements(this.figures);
     main.appendChild(this.figures);

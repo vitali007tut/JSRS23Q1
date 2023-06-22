@@ -1,7 +1,6 @@
 import CodeScreen from "./codeScreen";
 import ElementScreen from "./elementScreen";
 import GameLevelScreen from "./gameLevelScreen";
-import HeaderScreen from "./headerScreen";
 import InputScreen from "./inputScreen";
 import { viewByCharacters } from "./utils";
 
@@ -10,12 +9,10 @@ export default class App {
   readonly elementScreen = new ElementScreen();
   readonly codeScreen = new CodeScreen();
   readonly gameLevelScreen = new GameLevelScreen();
-  readonly headerScreen = new HeaderScreen();
   private container: HTMLDivElement = document.querySelector('.grid-container');
 
   public start(): void {
     this.container.appendChild(this.inputScreen.create());
-    this.container.appendChild(this.headerScreen.start());
     this.container.appendChild(this.elementScreen.start());
     this.container.appendChild(this.codeScreen.start());
     this.container.appendChild(this.gameLevelScreen.start())
