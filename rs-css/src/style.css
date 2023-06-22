@@ -151,3 +151,7 @@ body {
 .li-item {
   text-align: left;
 }
+
+.active-level {
+  background: burlywood;
+}

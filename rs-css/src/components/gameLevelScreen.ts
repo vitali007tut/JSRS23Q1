@@ -37,8 +37,14 @@ export default class GameLevelScreen {
     const olList: HTMLElement = document.createElement('ol');
     for (let key in this.GameLevels) {
       const liItem = createElement('li', 'li-item', this.GameLevels[key].title);
+      if (this.GameLevels[key].rightAnswer === this.getRightAnswer()) {
+        liItem.classList.add('active-level');
+      }
       olList.appendChild(liItem);
       liItem.addEventListener('click', () => {
+        // document.querySelectorAll('.li-item').forEach(elemLi => elemLi.classList.remove('active-level'));
+        // liItem.classList.add('active-level');
+        this.setActiveLevel(liItem);
         const tittleLevel = liItem.innerHTML;
         this.GameLevels.forEach((element, index) => {
           if (element.title === tittleLevel) {
@@ -73,7 +79,11 @@ export default class GameLevelScreen {
   public viewElements(element: HTMLElement): HTMLElement {
     const arrFigures: string[] = this.GameLevels[this.actualLevel].figures;
     arrFigures.forEach(figure => {
-      element.appendChild(createImgElement(figure, `./asserts/${figure}.svg`))
+      const elementFigure = createImgElement(figure, `./asserts/${figure}.svg`);
+      element.appendChild(elementFigure);
+      if (figure === this.getRightAnswer().slice(1)) {
+        elementFigure.classList.add('target');
+      }
     })
     return element;
   }
@@ -82,7 +92,12 @@ export default class GameLevelScreen {
     return this.GameLevels[this.actualLevel].code;
   }
 
-  public getRightAnswer() {
+  public getRightAnswer(): string {
     return this.GameLevels[this.actualLevel].rightAnswer;
+  }
+
+  public setActiveLevel(item: HTMLElement): void {
+    document.querySelectorAll('.li-item').forEach(elemLi => elemLi.classList.remove('active-level'));
+    item.classList.add('active-level');
   }
 }

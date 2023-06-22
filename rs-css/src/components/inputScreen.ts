@@ -1,7 +1,7 @@
 import { createElement } from "./utils";
 
 export default class InputScreen {
-  private input: HTMLInputElement;
+  public input: HTMLInputElement;
   public inputBtn: HTMLInputElement;
   private answer: string;
 

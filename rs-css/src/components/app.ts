@@ -16,6 +16,8 @@ export default class App {
     this.container.appendChild(this.inputScreen.create());
     this.container.appendChild(this.headerScreen.start());
     this.container.appendChild(this.elementScreen.start());
+    this.container.appendChild(this.CodeScreen.start());
+    this.container.appendChild(this.gameLevelScreen.start())
 
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
@@ -25,11 +27,9 @@ export default class App {
     this.inputScreen.inputBtn.addEventListener('click', () => {
       this.checkAnswer(this.inputScreen.submit());
     })
-
-
-    this.container.appendChild(this.CodeScreen.start());
-
-    this.container.appendChild(this.gameLevelScreen.start())
+    this.headerScreen.helpBtn.addEventListener('click', () => {
+      this.inputScreen.input.value = this.gameLevelScreen.getRightAnswer();
+          })
   }
 
   private checkAnswer(data: string): void {
