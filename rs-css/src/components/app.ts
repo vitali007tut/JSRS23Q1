@@ -28,6 +28,8 @@ export default class App {
     this.gameLevelScreen.helpBtn.addEventListener('click', () => {
       viewByCharacters(this.gameLevelScreen.getRightAnswer(), this.inputScreen.input)
     })
+    this.gameLevelScreen.viewElements(this.elementScreen.figures);
+    this.gameLevelScreen.viewDescription(this.elementScreen.description);
   }
 
   private checkAnswer(data: string): void {

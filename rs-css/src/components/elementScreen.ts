@@ -1,15 +1,16 @@
-import GameLevelScreen from "./gameLevelScreen";
 import { createElement, createImgElement } from "./utils";
 
 export default class ElementScreen {
   public figures: HTMLElement;
+  public description: HTMLElement;
 
   public start(): HTMLElement {
     const main: HTMLElement = createElement('div', 'main');
     const mainTittle: HTMLElement = createElement('h1', 'h1', 'RSS-CSS Selectors')
     main.appendChild(mainTittle);
+    this.description = createElement('div', 'description');
+    main.appendChild(this.description);
     this.figures = createElement('div', 'figures');
-    new GameLevelScreen().viewElements(this.figures);
     main.appendChild(this.figures);
     return main;
   }

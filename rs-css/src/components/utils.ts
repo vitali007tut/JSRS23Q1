@@ -1,4 +1,4 @@
-export function createElement(tag: string, classAdd: string, content: string = ''): HTMLElement {
+export function  createElement(tag: string, classAdd: string, content: string = ''): HTMLElement {
   const divElement: HTMLElement = document.createElement(tag);
   divElement.classList.add(classAdd);
   divElement.textContent = content;
@@ -21,6 +21,6 @@ export function viewByCharacters (word: string, inputPlace: HTMLInputElement): v
   arr.forEach((litter, index) => {
     setTimeout(() => {
       inputPlace.value += litter;
-    }, index*500)
+    }, index*200)
   })
 }

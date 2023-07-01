@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-family: "Exo 2", Lato, "Helvetica Neue", sans-serif;
 }
 
 .header {
@@ -8,7 +9,7 @@ body {
 
 .main {
   grid-area: main;
-  grid-template-rows: 10vh auto;
+  grid-template-rows: 10vh 10vh auto;
 }
 
 .side {
@@ -88,7 +89,7 @@ li {
   background: url(./asserts/bg-table.jpg) 100% 100% no-repeat;
   background-size: cover;
   display: grid;
-  align-items: center;
+  align-items: start;
 }
 
 .target {
@@ -155,6 +156,15 @@ li {
 .li-item {
   text-align: left;
   padding: 4px;
+  box-sizing: border-box;
+  width: calc(100% - 15px);
+  margin: 1px auto;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0 , 0, 0.5);
+}
+
+.li-item:hover {
+  opacity: 0.8;
 }
 
 .active-level {
@@ -167,7 +177,7 @@ li {
 
 .floatTip {
   position: absolute; 
-  top: 15vh;
+  top: 17vh;
   display: none ;
   border-radius: 5px;
   padding: 5px;
@@ -197,14 +207,21 @@ li {
 .bth-help {
   border: solid 2px rgb(21 19 16);
   box-sizing: border-box;
-  width: calc(100% - 40px);
+  width: calc(100% - 15px);
   margin: auto;
   padding: 9px 0 11px 0;
   cursor: pointer;
+  transition: all 0.3s;
 }
 
 .reset:hover,
 .bth-help:hover {
   background: rgb(21 19 16);
   color: #fff;
+}
+
+.description {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 35px;
+  font-weight: 400;
 }

@@ -5,28 +5,84 @@ export default class GameLevelScreen {
   
   GameLevels: GameLevelType[] = [
     {
-      title: 'Find pawn',
-      rightAnswer: '.pawn',
-      code: ['<pawn />', '<flag />', '<compass />', '<queen />'],
-      figures: ['pawn', 'flag', 'compass', 'queen']
+      title: 'First',
+      description: 'Select the pawns',
+      rightAnswer: 'pawn',
+      code: ['<pawn />', '<pawn />'],
+      figures: ['pawn', 'pawn'],
+      target: 'pawn',
     },
     {
       title: 'Second',
-      rightAnswer: '.king',
+      rightAnswer: 'king',
+      description: 'Select the king',
       code: ['<hat />', '<king />', '<flag />', '<rum />', '<compass />'],
       figures: ['hat', 'king', 'flag', 'rum', 'compass'],
+      target: 'king',
     },
     {
-      title: 'third task rum',
-      rightAnswer: '.rum',
+      title: 'Third',
+      rightAnswer: 'rum',
+      description: 'Select the 33333333',
       code: ['<pawn />', '<flag />', '<compass />', '<queen />', '<rum />'],
-      figures: ['pawn', 'flag', 'compass', 'queen', 'rum']
+      figures: ['pawn', 'flag', 'compass', 'queen', 'rum'],
+      target: 'rum',
     },
     {
-      title: 'find compass',
+      title: 'Fourth',
       rightAnswer: '.compass',
+      description: 'Select the 4444444444',
       code: ['<hat />', '<king />', '<flag />', '<rum />', '<compass />'],
       figures: ['hat', 'king', 'flag', 'rum', 'compass'],
+      target: 'compass',
+    },
+    {
+      title: 'Fifth',
+      description: 'Select the queens',
+      rightAnswer: 'queen',
+      code: ['<queen />', '<queen />'],
+      figures: ['queen', 'queen'],
+      target: 'queen',
+    },
+    {
+      title: 'Sixth',
+      description: 'Select the 666666666666',
+      rightAnswer: 'queen',
+      code: ['<queen />', '<queen />'],
+      figures: ['queen', 'queen'],
+      target: 'queen',
+    },
+    {
+      title: 'Seventh',
+      description: 'Select the 777777777777',
+      rightAnswer: 'queen',
+      code: ['<queen />', '<queen />'],
+      figures: ['queen', 'queen'],
+      target: 'queen',
+    },
+    {
+      title: 'Eight',
+      description: 'Select the 8888888',
+      rightAnswer: 'queen',
+      code: ['<queen />', '<queen />'],
+      figures: ['queen', 'queen'],
+      target: 'queen',
+    },
+    {
+      title: 'Ninth',
+      description: 'Select the 9999999',
+      rightAnswer: 'queen',
+      code: ['<queen />', '<queen />'],
+      figures: ['queen', 'queen'],
+      target: 'queen',
+    },
+    {
+      title: 'Tenth',
+      description: 'Select the 10101010',
+      rightAnswer: 'queen',
+      code: ['<queen />', '<queen />'],
+      figures: ['queen', 'queen'],
+      target: 'queen',
     },
   ]
 
@@ -57,6 +113,8 @@ export default class GameLevelScreen {
             this.viewCodeLevel(codeView);
             const figuresView: HTMLElement = document.querySelector('.figures');
             this.viewElements(figuresView);
+            const descriptionElement: HTMLElement = document.querySelector('.description');
+            this.viewDescription(descriptionElement);
           }
         })
       })
@@ -109,7 +167,7 @@ export default class GameLevelScreen {
     arrFigures.forEach(figure => {
       const elementFigure = createImgElement(figure, `./asserts/${figure}.svg`);
       element.appendChild(elementFigure);
-      if (figure === this.getRightAnswer().slice(1)) {
+      if (figure === this.getTarget()) {
         elementFigure.classList.add('target');
       }
 
@@ -128,6 +186,14 @@ export default class GameLevelScreen {
     return element;
   }
 
+  public viewDescription(element: HTMLElement): HTMLElement {
+    element.innerHTML = '';
+    // const element = createElement('h2', 'description', `${this.GameLevels[this.actualLevel].description}`);
+    // console.log(element);
+    element.innerHTML = this.GameLevels[this.actualLevel].description;
+    return element;
+  }
+
   public getLevelsLines(): string[] {
     return this.GameLevels[this.actualLevel].code;
   }
@@ -136,6 +202,9 @@ export default class GameLevelScreen {
   }
   public getActualLevelLiElement(): HTMLElement {
     return this.liArray[this.actualLevel];
+  }
+  public getTarget(): string {
+    return this.GameLevels[this.actualLevel].target; 
   }
   public setActiveLevel(index: number): void {
     this.liArray.forEach(elemLi => elemLi.classList.remove('active-level'));
