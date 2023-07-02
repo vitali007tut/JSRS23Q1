@@ -3,8 +3,11 @@ export type GameLevelType = {
   description: string;
   rightAnswer: string;
   code: string[];
-  figures: string[];
-  target: string;
+  figures?: {
+    name: string;
+    size: string
+  }[];
+  target?: number[];
 }
 
 // export type FiguresType = {

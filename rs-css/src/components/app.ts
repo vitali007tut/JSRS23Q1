@@ -45,9 +45,9 @@ export default class App {
         let newLevel = this.gameLevelScreen.actualLevel + 1;
         if (newLevel === this.gameLevelScreen.quantityTasks()) newLevel -= 1;
         this.gameLevelScreen.actualLevel = newLevel;
-        // this.gameLevelScreen.actualLevel += 1
         this.gameLevelScreen.viewCodeLevel(this.codeScreen.viewerCode);
         this.gameLevelScreen.viewElements(this.elementScreen.figures);
+        this.gameLevelScreen.viewDescription(this.elementScreen.description);
         this.gameLevelScreen.setActiveLevel(this.gameLevelScreen.actualLevel);
       }
     } else {

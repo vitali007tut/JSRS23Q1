@@ -11,7 +11,6 @@ export function createImgElement(classImg: string, src: string): HTMLImageElemen
   image.classList.add('figure');
   image.classList.add(classImg);
   image.src = src;
-
   return image;
 }
 
