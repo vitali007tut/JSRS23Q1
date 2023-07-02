@@ -20,6 +20,24 @@ export function viewByCharacters (word: string, inputPlace: HTMLInputElement): v
   arr.forEach((litter, index) => {
     setTimeout(() => {
       inputPlace.value += litter;
-    }, index*200)
+    }, index*100)
   })
+}
+
+export function winModalWindow(element: HTMLElement): void {
+  const modal = createElement('div', 'modal', `Congratulations, you won!`);
+  const closeBtn = createElement('span', 'close', 'X')
+  modal.appendChild(closeBtn);
+  const overlay = createElement('div', 'modal-overlay');
+  overlay.appendChild(modal);
+  element.appendChild(overlay);
+
+  closeBtn.addEventListener('click', () => {
+    modal.remove();
+    overlay.remove();
+  });
+  overlay.addEventListener('click', () => {
+    modal.remove();
+    overlay.remove();
+  });
 }

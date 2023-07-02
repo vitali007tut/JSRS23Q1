@@ -3,14 +3,13 @@ export type GameLevelType = {
   description: string;
   rightAnswer: string;
   code: string[];
-  figures?: {
+  figures: {
     name: string;
-    size: string
+    size: string;
+    inner?: {
+      name: string;
+      size: string;
+    } 
   }[];
-  target?: number[];
+  target: number[];
 }
-
-// export type FiguresType = {
-//   figure: string,
-//   src: string
-// }

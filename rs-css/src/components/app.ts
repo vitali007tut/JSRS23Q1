@@ -2,7 +2,7 @@ import CodeScreen from "./codeScreen";
 import ElementScreen from "./elementScreen";
 import GameLevelScreen from "./gameLevelScreen";
 import InputScreen from "./inputScreen";
-import { viewByCharacters } from "./utils";
+import { viewByCharacters, winModalWindow } from "./utils";
 
 export default class App {
   readonly inputScreen = new InputScreen();
@@ -40,7 +40,7 @@ export default class App {
 
       this.gameLevelScreen.getActualLevelLiElement().classList.add('complete');
       if (this.gameLevelScreen.gameIsComplete()) { 
-        alert('YOU----win!');
+        winModalWindow(this.container);
       } else {
         let newLevel = this.gameLevelScreen.actualLevel + 1;
         if (newLevel === this.gameLevelScreen.quantityTasks()) newLevel -= 1;

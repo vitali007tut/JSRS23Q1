@@ -63,27 +63,35 @@ export default class GameLevelScreen {
     {
       title: 'Eight A + B',
       description: `Select every pawn that's next to a flag`,
-      rightAnswer: 'flag+pawn',
+      rightAnswer: 'flag + pawn',
       code: ['<rum />', '<flag />', '<pawn class = "small"/>', '<flag />', '<pawn />', '<pawn class = "small"/>', '<pawn class = "small"/>'],
       figures: [{ name: 'rum', size: 'normal'}, { name: 'flag', size: 'normal'},{ name: 'pawn', size: 'small'},{ name: 'flag', size: 'normal'},{ name: 'pawn', size: 'normal'}, { name: 'pawn', size: 'small'}, { name: 'pawn', size: 'small'}],
       target: [2, 4],
     },
-    // {
-    //   title: 'Ninth',
-    //   description: 'Select the 9999999',
-    //   rightAnswer: 'queen',
-    //   code: ['<queen />', '<queen />'],
-    //   figures: ['queen', 'queen'],
-    //   target: 'queen',
-    // },
-    // {
-    //   title: 'Tenth',
-    //   description: 'Select the 10101010',
-    //   rightAnswer: 'queen',
-    //   code: ['<queen />', '<queen />'],
-    //   figures: ['queen', 'queen'],
-    //   target: 'queen',
-    // },
+    {
+      title: 'Ninth A ~ B',
+      description: 'Select the hats beside the rum',
+      rightAnswer: 'rum ~ hat',
+      code: ['<compass />', '<rum />', '<hat class = "small" />', '<hat />', '<flag />', '<hat class = "small" />', '<hat />'],
+      figures: [{ name: 'compass', size: 'normal'}, { name: 'rum', size: 'normal'},{ name: 'hat', size: 'small'},{ name: 'hat', size: 'normal'},{ name: 'flag', size: 'normal'}, { name: 'hat', size: 'small'}, { name: 'hat', size: 'normal'}],
+      target: [2, 3],
+    },
+    {
+      title: 'Tenth :first-of-type',
+      description: 'Select first compass',
+      rightAnswer: 'compass:first-of-type',
+      code: ['<flag />', '<compass />', '<compass class = "small" />', '<compass />', '<compass class = "small" />', '<rum />'],
+      figures: [{ name: 'flag', size: 'normal'}, { name: 'compass', size: 'normal'}, { name: 'compass', size: 'small'}, { name: 'compass', size: 'normal'}, { name: 'compass', size: 'small'}, { name: 'rum', size: 'normal'}],
+      target: [1],
+    },
+    {
+      title: 'Eleven A B, A B',
+      description: 'Select elements on papers',
+      rightAnswer: 'paper compass, paper flag',
+      code: ['<paper> <compass /> </paper>', '<rum />', '<hat class = "small" />', '<hat />', '<paper> <flag /> </paper>'],
+      figures: [{ name: 'compass', size: 'normal', inner: {name: 'hat', size: 'TestSize'}}, { name: 'rum', size: 'normal'},{ name: 'compass', size: 'small'},{ name: 'hat', size: 'normal'},{ name: 'flag', size: 'normal', inner: {name: 'hat', size: 'TestSize'}}],
+      target: [0, 4],
+    },
   ]
 
   public actualLevel: number = 0;
@@ -159,22 +167,6 @@ export default class GameLevelScreen {
         document.querySelector('.floatTip').remove();
        })
 
-      // codeLineElement.addEventListener('mouseover', () => {
-      //   const figureHovered = codeLineElement.classList[1];
-      //   const hoveredElement = document.querySelector(`.figure.${figureHovered}`);
-      //   hoveredElement.classList.add('hovered');
-      //   const floatElement = createElement('div', 'floatTip');
-      //   hoveredElement.before(floatElement);
-      //   floatElement.innerText = `<${figureHovered} />`;
-      //   floatElement.style.display = 'inline';
-      // })
-
-      // codeLineElement.addEventListener('mouseout', () => {
-      //   const figureHovered = codeLineElement.classList[1];
-      //   document.querySelector(`.figure.${figureHovered}`).classList.remove('hovered');
-      //   document.querySelector('.floatTip').remove();
-      // })
-
     })
     element.appendChild(endLine);
     return element;
@@ -182,16 +174,26 @@ export default class GameLevelScreen {
 
   public viewElements(element: HTMLElement): HTMLElement {
     element.innerHTML = '';
-    const arrFigures: {name: string; size: string}[] = this.GameLevels[this.actualLevel].figures;
+    const arrFigures: {
+      name: string;
+      size: string;
+      inner?: {
+        name: string;
+        size: string;
+      } 
+    }[] = this.GameLevels[this.actualLevel].figures;
 
     arrFigures.forEach((figure, index) => {
       const elementFigure = createImgElement(figure.size, `./asserts/${figure.name}.svg`);
       elementFigure.classList.add(index.toString());
       element.appendChild(elementFigure);
+      if (figure.inner) {
+        const innerElement = createElement('div', `paper`);
+        elementFigure.before(innerElement)
+      }
       if (this.getTarget().includes(index)) {
         elementFigure.classList.add('target');
       }
-
       elementFigure.addEventListener('mouseover', () => {
         elementFigure.classList.add('hovered');
         const floatElement = createElement('div', 'floatTip');
