@@ -38,6 +38,7 @@ export default class App {
     const rightAnswer = this.gameLevelScreen.GameLevels[this.gameLevelScreen.actualLevel].rightAnswer;
     if (data === rightAnswer) {
       console.log(`Right answer ${data}`);
+      document.querySelectorAll('.target').forEach((element) => element.classList.add('leave-element'));
       this.inputScreen.setInputSuccessState();
 
       this.gameLevelScreen.getActualLevelLiElement().classList.add('complete');
@@ -50,7 +51,8 @@ export default class App {
       if (this.gameLevelScreen.gameIsComplete()) { 
         winModalWindow(this.container);
       } else {
-        let newLevel = this.gameLevelScreen.actualLevel + 1;
+        setTimeout(() => {
+          let newLevel = this.gameLevelScreen.actualLevel + 1;
         if (newLevel === this.gameLevelScreen.quantityTasks()) newLevel -= 1;
         this.gameLevelScreen.actualLevel = newLevel;
         localStorage.setItem('level', newLevel.toString())
@@ -58,6 +60,7 @@ export default class App {
         this.gameLevelScreen.viewElements(this.elementScreen.figures);
         this.gameLevelScreen.viewDescription(this.elementScreen.description);
         this.gameLevelScreen.setActiveLevel(this.gameLevelScreen.actualLevel);
+        }, 800);
       }
     } else {
       console.log(`${data} -- wrong answer`);

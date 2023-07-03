@@ -261,10 +261,8 @@ export default class GameLevelScreen {
     return this.liArray.length;
   }
 
-  // public pageLoadLevelsCompleted(): void {
-  //   this.completeLevels.forEach((level) => {
-  //     this.liArray[level].classList.add('complete');
-  //   })
-  //   // this.liArray.forEach((item, index) => console.log(item, index));
-  // }
+  public getTargetElements(): HTMLElement[] {
+    // const array = this.
+  return
+}
 }
