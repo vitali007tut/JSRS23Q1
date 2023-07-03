@@ -26,16 +26,13 @@ export function viewByCharacters (word: string, inputPlace: HTMLInputElement): v
 
 export function winModalWindow(element: HTMLElement): void {
   const modal = createElement('div', 'modal', `Congratulations, you won!`);
-  const closeBtn = createElement('span', 'close', 'X')
-  modal.appendChild(closeBtn);
+  const imgCongrats: HTMLImageElement = document.createElement('img');
+  imgCongrats.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHV0am1hZmpkdDh4dXR1bnJ5dHAydjBncDFyMm0yZHQ5bzM1eGFocyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BPJmthQ3YRwD6QqcVD/giphy.gif";
+  modal.appendChild(imgCongrats);
   const overlay = createElement('div', 'modal-overlay');
   overlay.appendChild(modal);
   element.appendChild(overlay);
 
-  closeBtn.addEventListener('click', () => {
-    modal.remove();
-    overlay.remove();
-  });
   overlay.addEventListener('click', () => {
     modal.remove();
     overlay.remove();

@@ -94,9 +94,10 @@ export default class GameLevelScreen {
     },
   ]
 
-  public actualLevel: number = 0;
+  public actualLevel: number = (localStorage.getItem('level')) ? +localStorage.getItem('level') : 0;
   private liArray: HTMLElement[] = [];
   public helpBtn: HTMLElement;
+  public completeLevels: number[] = [];
   
   public start(): HTMLElement {
     const element: HTMLElement = createElement('div', 'side');
@@ -105,6 +106,11 @@ export default class GameLevelScreen {
     const listLiElements: HTMLElement = document.createElement('div');
     this.GameLevels.forEach((key, index) => {
       const liItem = createElement('li', 'li-item', `${index + 1}  ${this.GameLevels[index].title}`);
+      let completeLevels: number[] = [];
+      if (JSON.parse(localStorage.getItem('complete levels'))) {
+        completeLevels = JSON.parse(localStorage.getItem('complete levels'));
+      }
+      if (completeLevels.includes(index)) liItem.classList.add('complete');
       this.liArray.push(liItem);
       if (this.GameLevels[index].rightAnswer === this.getRightAnswer()) {
         liItem.classList.add('active-level');
@@ -114,6 +120,7 @@ export default class GameLevelScreen {
       liItem.addEventListener('click', () => {
         this.setActiveLevel(index);
         const tittleLevel = this.GameLevels[index].title;
+        localStorage.setItem('level', index.toString());
         this.GameLevels.forEach((element, index) => {
           if (element.title === tittleLevel) {
             this.actualLevel = index;
@@ -213,8 +220,6 @@ export default class GameLevelScreen {
 
   public viewDescription(element: HTMLElement): HTMLElement {
     element.innerHTML = '';
-    // const element = createElement('h2', 'description', `${this.GameLevels[this.actualLevel].description}`);
-    // console.log(element);
     element.innerHTML = this.GameLevels[this.actualLevel].description;
     return element;
   }
@@ -241,6 +246,8 @@ export default class GameLevelScreen {
   }
   private resetGame(): void {
     console.log('Reset Progress');
+    localStorage.setItem('level', '0');
+    localStorage.setItem('complete levels', JSON.stringify([]))
     this.actualLevel = 0;
     this.setActiveLevel(this.actualLevel);
     const codeView: HTMLElement = document.querySelector('.codeView');
@@ -253,4 +260,11 @@ export default class GameLevelScreen {
   public quantityTasks(): number {
     return this.liArray.length;
   }
+
+  // public pageLoadLevelsCompleted(): void {
+  //   this.completeLevels.forEach((level) => {
+  //     this.liArray[level].classList.add('complete');
+  //   })
+  //   // this.liArray.forEach((item, index) => console.log(item, index));
+  // }
 }

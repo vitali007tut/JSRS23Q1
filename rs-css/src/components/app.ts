@@ -17,6 +17,8 @@ export default class App {
     this.container.appendChild(this.codeScreen.start());
     this.container.appendChild(this.gameLevelScreen.start())
 
+    // this.gameLevelScreen.pageLoadLevelsCompleted();
+
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
         this.checkAnswer(this.inputScreen.submit());
@@ -39,12 +41,19 @@ export default class App {
       this.inputScreen.setInputSuccessState();
 
       this.gameLevelScreen.getActualLevelLiElement().classList.add('complete');
+      this.gameLevelScreen.completeLevels = [];
+      if (JSON.parse(localStorage.getItem('complete levels'))) {
+        this.gameLevelScreen.completeLevels = JSON.parse(localStorage.getItem('complete levels'));
+      }
+      this.gameLevelScreen.completeLevels.push(this.gameLevelScreen.actualLevel);
+      localStorage.setItem('complete levels', JSON.stringify(this.gameLevelScreen.completeLevels));
       if (this.gameLevelScreen.gameIsComplete()) { 
         winModalWindow(this.container);
       } else {
         let newLevel = this.gameLevelScreen.actualLevel + 1;
         if (newLevel === this.gameLevelScreen.quantityTasks()) newLevel -= 1;
         this.gameLevelScreen.actualLevel = newLevel;
+        localStorage.setItem('level', newLevel.toString())
         this.gameLevelScreen.viewCodeLevel(this.codeScreen.viewerCode);
         this.gameLevelScreen.viewElements(this.elementScreen.figures);
         this.gameLevelScreen.viewDescription(this.elementScreen.description);
@@ -55,4 +64,5 @@ export default class App {
       this.inputScreen.setInputErrorState(this.elementScreen.figures);
     }
   }
+
 }
