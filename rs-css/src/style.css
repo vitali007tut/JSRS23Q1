@@ -274,11 +274,11 @@ li {
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  animation-name: animatetop;
+  animation-name: animateFromTop;
   animation-duration: 0.8s;
 }
 
-@keyframes animatetop {
+@keyframes animateFromTop {
   from {top:-300px; opacity:0}
   to {top:0; opacity:1}
 }

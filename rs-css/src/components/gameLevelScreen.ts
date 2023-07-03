@@ -89,14 +89,15 @@ export default class GameLevelScreen {
       description: 'Select elements on papers',
       rightAnswer: 'paper compass, paper flag',
       code: ['<paper> <compass /> </paper>', '<rum />', '<hat class = "small" />', '<hat />', '<paper> <flag /> </paper>'],
-      figures: [{ name: 'compass', size: 'normal', inner: {name: 'hat', size: 'TestSize'}}, { name: 'rum', size: 'normal'},{ name: 'compass', size: 'small'},{ name: 'hat', size: 'normal'},{ name: 'flag', size: 'normal', inner: {name: 'hat', size: 'TestSize'}}],
+      figures: [{ name: 'compass', size: 'normal', inner: {name: 'paper', size: 'paper'}}, { name: 'rum', size: 'normal'},{ name: 'compass', size: 'small'},{ name: 'hat', size: 'normal'},{ name: 'flag', size: 'normal', inner: {name: 'hat', size: 'TestSize'}}],
       target: [0, 4],
     },
   ]
 
-  public actualLevel: number = (localStorage.getItem('level')) ? +localStorage.getItem('level') : 0;
+  level: string | null = localStorage.getItem('level');
+  public actualLevel: number = (this.level) ? +this.level : 0;
   private liArray: HTMLElement[] = [];
-  public helpBtn: HTMLElement;
+  public helpBtn!: HTMLElement;
   public completeLevels: number[] = [];
   
   public start(): HTMLElement {
@@ -107,9 +108,13 @@ export default class GameLevelScreen {
     this.GameLevels.forEach((key, index) => {
       const liItem = createElement('li', 'li-item', `${index + 1}  ${this.GameLevels[index].title}`);
       let completeLevels: number[] = [];
-      if (JSON.parse(localStorage.getItem('complete levels'))) {
-        completeLevels = JSON.parse(localStorage.getItem('complete levels'));
+      const levelFromStorage = localStorage.getItem('complete levels');
+      if (levelFromStorage) {
+        completeLevels = JSON.parse(levelFromStorage);
       }
+      // if (JSON.parse(localStorage.getItem('complete levels'))) {
+      //   completeLevels = JSON.parse(localStorage.getItem('complete levels'));
+      // }
       if (completeLevels.includes(index)) liItem.classList.add('complete');
       this.liArray.push(liItem);
       if (this.GameLevels[index].rightAnswer === this.getRightAnswer()) {
@@ -124,12 +129,12 @@ export default class GameLevelScreen {
         this.GameLevels.forEach((element, index) => {
           if (element.title === tittleLevel) {
             this.actualLevel = index;
-            const codeView: HTMLElement = document.querySelector('.codeView');
-            this.viewCodeLevel(codeView);
-            const figuresView: HTMLElement = document.querySelector('.figures');
-            this.viewElements(figuresView);
-            const descriptionElement: HTMLElement = document.querySelector('.description');
-            this.viewDescription(descriptionElement);
+            const codeView: HTMLElement | null = document.querySelector('.codeView');
+            if (codeView) this.viewCodeLevel(codeView);
+            const figuresView: HTMLElement | null = document.querySelector('.figures');
+            if (figuresView) this.viewElements(figuresView);
+            const descriptionElement: HTMLElement | null = document.querySelector('.description');
+            if (descriptionElement) this.viewDescription(descriptionElement);
           }
         })
       })
@@ -160,9 +165,9 @@ export default class GameLevelScreen {
       codeLineElement.addEventListener('mouseover', () => {
         const index = codeLineElement.classList[1];
         const figureHovered = document.querySelector(`.figure.\\3${index}`)
-        figureHovered.classList.add('hovered');
+        figureHovered?.classList.add('hovered');
         const floatElement = createElement('div', 'floatTip');
-        figureHovered.before(floatElement);
+        figureHovered?.before(floatElement);
         floatElement.innerText = `${this.GameLevels[this.actualLevel].code[+index]}`;
         floatElement.style.display = 'inline';
       })
@@ -170,9 +175,9 @@ export default class GameLevelScreen {
       codeLineElement.addEventListener('mouseout', () => {
         const index = codeLineElement.classList[1];
         const figureHovered = document.querySelector(`.figure.\\3${index}`)
-        figureHovered.classList.remove('hovered');
-        document.querySelector('.floatTip').remove();
-       })
+        figureHovered?.classList.remove('hovered');
+        document.querySelector('.floatTip')?.remove();
+      })
 
     })
     element.appendChild(endLine);
@@ -195,7 +200,9 @@ export default class GameLevelScreen {
       elementFigure.classList.add(index.toString());
       element.appendChild(elementFigure);
       if (figure.inner) {
+        // only for 11th level
         const innerElement = createElement('div', `paper`);
+        innerElement.classList.add('target');
         elementFigure.before(innerElement)
       }
       if (this.getTarget().includes(index)) {
@@ -207,12 +214,12 @@ export default class GameLevelScreen {
         elementFigure.before(floatElement);
         floatElement.innerText = `${this.GameLevels[this.actualLevel].code[index]}`;
         floatElement.style.display = 'inline';
-        document.querySelector(`.line.\\3${index}`).classList.add('hovered');
+        document.querySelector(`.line.\\3${index}`)?.classList.add('hovered');
       })
       elementFigure.addEventListener('mouseout', () => {
         elementFigure.classList.remove('hovered');
-        document.querySelector('.floatTip').remove();
-        document.querySelector(`.line.\\3${index}`).classList.remove('hovered');
+        document.querySelector('.floatTip')?.remove();
+        document.querySelector(`.line.\\3${index}`)?.classList.remove('hovered');
       })
     })
     return element;
@@ -250,19 +257,14 @@ export default class GameLevelScreen {
     localStorage.setItem('complete levels', JSON.stringify([]))
     this.actualLevel = 0;
     this.setActiveLevel(this.actualLevel);
-    const codeView: HTMLElement = document.querySelector('.codeView');
-    this.viewCodeLevel(codeView);
-    const figuresView: HTMLElement = document.querySelector('.figures');
-    this.viewElements(figuresView);
+    const codeView: HTMLElement | null = document.querySelector('.codeView');
+    if (codeView) this.viewCodeLevel(codeView);
+    const figuresView: HTMLElement | null = document.querySelector('.figures');
+    if (figuresView) this.viewElements(figuresView);
     const completeLevels = document.querySelectorAll('.complete');
     completeLevels.forEach(level => level.classList.remove('complete'));
   }
   public quantityTasks(): number {
     return this.liArray.length;
   }
-
-  public getTargetElements(): HTMLElement[] {
-    // const array = this.
-  return
-}
 }
