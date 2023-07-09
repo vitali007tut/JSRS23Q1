@@ -21,13 +21,13 @@ export default class App {
 
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
-                this.checkAnswer(this.inputScreen.submit());
+                this.checkAnswer(this.inputScreen.getInputValue());
             }
         });
         this.inputScreen.inputBtn.addEventListener('click', () => {
-            this.checkAnswer(this.inputScreen.submit());
+            this.checkAnswer(this.inputScreen.getInputValue());
         });
-        this.gameLevelScreen.helpBtn.addEventListener('click', () => {
+        this.gameLevelScreen.helpButton.addEventListener('click', () => {
             viewByCharacters(this.gameLevelScreen.getRightAnswer(), this.inputScreen.input);
         });
         this.gameLevelScreen.viewElements(this.elementScreen.figures);
@@ -35,7 +35,7 @@ export default class App {
     }
 
     private checkAnswer(data: string): void {
-        const rightAnswer = this.gameLevelScreen.GameLevels[this.gameLevelScreen.actualLevel].rightAnswer;
+        const rightAnswer = this.gameLevelScreen.levels.GameLevels[this.gameLevelScreen.actualLevel].rightAnswer;
         if (data === rightAnswer) {
             console.log(`Right answer ${data}`);
             document.querySelectorAll('.target').forEach((element) => element.classList.add('leave-element'));

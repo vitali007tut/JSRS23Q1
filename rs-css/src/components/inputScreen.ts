@@ -1,9 +1,12 @@
 import { createElement } from './utils';
 
 export default class InputScreen {
-    public input!: HTMLInputElement;
-    public inputBtn!: HTMLInputElement;
-    private answer!: string;
+    public input: HTMLInputElement;
+    public inputBtn: HTMLInputElement;
+    constructor() {
+        this.input = document.createElement('input');
+        this.inputBtn = document.createElement('input');
+    }
 
     public create(): HTMLDivElement {
         const inputScreen: HTMLDivElement = document.createElement('div');
@@ -11,12 +14,10 @@ export default class InputScreen {
 
         const editorTittle: HTMLElement = createElement('h4', 'editor-tittle', 'CSS Editor');
 
-        this.input = document.createElement('input');
         this.input.type = 'text';
         this.input.placeholder = 'Type selector...';
         this.input.id = 'editor';
 
-        this.inputBtn = document.createElement('input');
         this.inputBtn.type = 'submit';
         this.inputBtn.value = 'Enter';
 
@@ -39,10 +40,5 @@ export default class InputScreen {
     }
     public setInputSuccessState(): void {
         this.input.value = '';
-    }
-
-    public submit(): string {
-        this.answer = this.getInputValue();
-        return this.answer;
     }
 }

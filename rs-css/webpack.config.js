@@ -1,6 +1,7 @@
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { merge } = require('webpack-merge');
 
@@ -15,6 +16,11 @@ const baseConfig = {
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             filename: 'index.html',
+        }),
+        new CopyPlugin({
+            patterns: [
+            { from: path.resolve(__dirname, './src/asserts'), to: path.resolve(__dirname, 'dist/asserts') },
+            ],
         }),
         new CleanWebpackPlugin(),
     ],
@@ -49,6 +55,5 @@ const baseConfig = {
 module.exports = ({ }, { mode }) => {
     const isProductionMode = mode === 'production';
     const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
-
     return merge(baseConfig, envConfig);
 };

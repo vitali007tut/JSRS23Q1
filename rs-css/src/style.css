@@ -3,6 +3,10 @@ body {
   font-family: "Exo 2", Lato, "Helvetica Neue", sans-serif;
 }
 
+ul {
+  padding: 0;
+}
+
 .header {
   grid-area: header;
 }
@@ -101,7 +105,6 @@ li {
 @keyframes action {
   from {
     transform: scale(1);
-
   }
 
   25% {
@@ -241,13 +244,10 @@ li {
   width: 90px;
   height: 90px;
   color: rgb(9, 105, 155);
-  font-size: 22px;
   box-shadow: rgba(0, 0, 0, 0.1) -3px 4px 0px;
   background-image: url(https://flukeout.github.io/images/line.gif);
   z-index: 0;
   background-color: rgb(197, 214, 221);
-  transform: rotate(-4deg);
-  animation: 0.4s ease-out 0s 1 normal none running slide;
   display: inline-block;
 }
 
