@@ -1,6 +1,6 @@
 import { GameLevelType } from './base';
 import Levels from './gameLevels';
-import { createElement, createImgElement } from './utils';
+import { createElement, createImgElement, findSelectorWrapper } from './utils';
 
 export default class GameLevelScreen {
     constructor() {
@@ -61,12 +61,15 @@ export default class GameLevelScreen {
                 elementFigure.before(floatElement);
                 floatElement.innerText = `${this.levels.GameLevels[this.actualLevel].code[index]}`;
                 floatElement.style.display = 'inline';
-                document.querySelector(`.line.\\3${index}`)?.classList.add(this.ELEMENT_HOVERED_CLASS);
+                const lineElement = findSelectorWrapper(`.line.\\3${index}`);
+                lineElement.classList.add(this.ELEMENT_HOVERED_CLASS);
             });
             elementFigure.addEventListener('mouseout', () => {
                 elementFigure.classList.remove(this.ELEMENT_HOVERED_CLASS);
-                document.querySelector('.floatTip')?.remove();
-                document.querySelector(`.line.\\3${index}`)?.classList.remove(this.ELEMENT_HOVERED_CLASS);
+                const floatTipElement = findSelectorWrapper('.floatTip');
+                floatTipElement.remove();
+                const lineElement = findSelectorWrapper(`.line.\\3${index}`);
+                lineElement.classList.remove(this.ELEMENT_HOVERED_CLASS);
             });
         });
         return element;
@@ -156,17 +159,15 @@ export default class GameLevelScreen {
     }
     private mouseoverOnCodeLineElement(codeLineElement: HTMLElement, index: number) {
         codeLineElement.addEventListener('mouseover', () => {
-            const figureHovered: HTMLElement | null = document.querySelector(`.figure.\\3${index}`);
-            figureHovered?.classList.add(this.ELEMENT_HOVERED_CLASS);
-            if (figureHovered) {
-                const floatElement = this.createTooltip(figureHovered);
-                this.setActiveClassOnHoveredElement(floatElement, index);
-            }
+            const figureHovered: HTMLElement = findSelectorWrapper(`.figure.\\3${index}`);
+            figureHovered.classList.add(this.ELEMENT_HOVERED_CLASS);
+            const floatElement = this.createTooltip(figureHovered);
+            this.setActiveClassOnHoveredElement(floatElement, index);
         });
     }
     private createTooltip(figureHovered: HTMLElement): HTMLElement {
         const floatElement = createElement('div', 'floatTip');
-        figureHovered?.before(floatElement);
+        figureHovered.before(floatElement);
         return floatElement;
     }
     private setActiveClassOnHoveredElement(floatElement: HTMLElement, index: number) {
@@ -176,11 +177,12 @@ export default class GameLevelScreen {
     private removeTooltip(codeLineElement: HTMLElement, index: number) {
         codeLineElement.addEventListener('mouseout', () => {
             this.removeActiveClassFromHoveredElement(index);
-            document.querySelector('.floatTip')?.remove();
+            const floatTipElement = findSelectorWrapper('.floatTip');
+            floatTipElement.remove();
         });
     }
     private removeActiveClassFromHoveredElement(index: number) {
-        const figureHovered = document.querySelector(`.figure.\\3${index}`);
-        figureHovered?.classList.remove(this.ELEMENT_HOVERED_CLASS);
+        const figureHovered: HTMLElement = findSelectorWrapper(`.figure.\\3${index}`);
+        figureHovered.classList.remove(this.ELEMENT_HOVERED_CLASS);
     }
 }

@@ -39,3 +39,10 @@ export function winModalWindow(element: HTMLElement): void {
         overlay.remove();
     });
 }
+
+export function findSelectorWrapper(selector: string): HTMLElement {
+    const element: HTMLElement | null = document.querySelector(selector);
+    if (element) {
+        return element;
+    } else throw new Error('not exists');
+}

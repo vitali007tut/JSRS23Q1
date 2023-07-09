@@ -2,22 +2,19 @@ import CodeScreen from './codeScreen';
 import ElementScreen from './elementScreen';
 import GameLevelScreen from './gameLevelScreen';
 import InputScreen from './inputScreen';
-import { viewByCharacters, winModalWindow } from './utils';
+import { findSelectorWrapper, viewByCharacters, winModalWindow } from './utils';
 
 export default class App {
     readonly inputScreen = new InputScreen();
     readonly elementScreen = new ElementScreen();
     readonly codeScreen = new CodeScreen();
     readonly gameLevelScreen = new GameLevelScreen();
-    private container: HTMLDivElement | null = document.querySelector('.grid-container');
-
+    private container: HTMLElement = findSelectorWrapper('.grid-container');
     public start(): void {
-        this.container?.appendChild(this.inputScreen.create());
-        this.container?.appendChild(this.elementScreen.start());
-        this.container?.appendChild(this.codeScreen.start());
-        this.container?.appendChild(this.gameLevelScreen.start());
-
-        // this.gameLevelScreen.pageLoadLevelsCompleted();
+        this.container.appendChild(this.inputScreen.create());
+        this.container.appendChild(this.elementScreen.start());
+        this.container.appendChild(this.codeScreen.start());
+        this.container.appendChild(this.gameLevelScreen.start());
 
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
