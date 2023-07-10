@@ -8,9 +8,8 @@ export default class InputScreen {
         this.inputBtn = document.createElement('input');
     }
 
-    public create(): HTMLDivElement {
-        const inputScreen: HTMLDivElement = document.createElement('div');
-        inputScreen.classList.add('css-editor');
+    public create(): HTMLElement {
+        const inputScreen: HTMLElement = createElement('div', 'css-editor');
 
         const editorTittle: HTMLElement = createElement('h4', 'editor-tittle', 'CSS Editor');
 
