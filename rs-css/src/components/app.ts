@@ -11,6 +11,7 @@ export default class App {
     readonly elementScreen = new ElementScreen();
     readonly codeScreen = new CodeScreen();
     readonly gameLevelScreen = new GameLevelScreen();
+    private readonly gameLevelStore = GameLevelsStore.getInstance();
     private container: HTMLElement = findSelectorWrapper('.grid-container');
     public start(): void {
         this.container.appendChild(this.inputScreen.create());
@@ -42,15 +43,13 @@ export default class App {
 
             this.gameLevelScreen.getActualLevelLiElement().classList.add('complete');
             this.gameLevelScreen.completeLevels = [];
-            const completeLevel: string | null = GameLevelsStore.getInstance().getCompleteLevelsFromStorage();
+            const completeLevel: string | null = this.gameLevelStore.getCompleteLevelsFromStorage();
             if (completeLevel) {
                 this.gameLevelScreen.completeLevels = JSON.parse(completeLevel);
             }
 
             this.gameLevelScreen.completeLevels.push(this.gameLevelScreen.actualLevel);
-            GameLevelsStore.getInstance().setCompleteLevelsInStorage(
-                JSON.stringify(this.gameLevelScreen.completeLevels)
-            );
+            this.gameLevelStore.setCompleteLevelsInStorage(JSON.stringify(this.gameLevelScreen.completeLevels));
             if (this.gameLevelScreen.gameIsComplete()) {
                 if (this.container) winModalWindow(this.container);
             } else {
@@ -58,7 +57,7 @@ export default class App {
                     let newLevel = this.gameLevelScreen.actualLevel + 1;
                     if (newLevel === this.gameLevelScreen.quantityTasks()) newLevel -= 1;
                     this.gameLevelScreen.actualLevel = newLevel;
-                    GameLevelsStore.getInstance().setLevelInStorage(newLevel.toString());
+                    this.gameLevelStore.setLevelInStorage(newLevel.toString());
                     this.gameLevelScreen.viewCodeLevel(this.codeScreen.viewerCode);
                     this.gameLevelScreen.viewElements(this.elementScreen.figures);
                     this.gameLevelScreen.viewDescription(this.elementScreen.description);

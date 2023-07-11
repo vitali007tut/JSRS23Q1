@@ -1,9 +1,15 @@
 export default class GameLevelsStore {
     private readonly LEVEL_KEY: string = 'level';
     private readonly COMPLETE_LEVELS_KEY: string = 'complete levels';
-    private static instanceStorage = new GameLevelsStore();
+    private static instanceStorage: GameLevelsStore;
+    private constructor() {
+        //...
+    }
     public static getInstance() {
-        return this.instanceStorage;
+        if (!GameLevelsStore.instanceStorage) {
+            GameLevelsStore.instanceStorage = new GameLevelsStore();
+        }
+        return GameLevelsStore.instanceStorage;
     }
 
     setLevelInStorage(level: string): void {
