@@ -11,8 +11,7 @@ export default class GameLevelScreen {
     private ELEMENT_HOVERED_CLASS = 'hovered';
     private readonly FIRST_LEVEL = 0;
     public readonly levels = new Levels();
-    private readonly gameLevelsStore = new GameLevelsStore();
-    private level: string | null = this.gameLevelsStore.getLevelFromLocalStorage();
+    private level: string | null = GameLevelsStore.getInstance().getLevelFromLocalStorage();
     public actualLevel: number = this.level ? +this.level : this.FIRST_LEVEL;
     private gameLevelElementList: HTMLElement[] = [];
     public helpButton: HTMLElement;
@@ -90,8 +89,8 @@ export default class GameLevelScreen {
     }
     private resetGame(): void {
         console.log('Reset Progress');
-        this.gameLevelsStore.setLevelInStorage('0');
-        this.gameLevelsStore.setCompleteLevelsInStorage(JSON.stringify([]));
+        GameLevelsStore.getInstance().setLevelInStorage('0');
+        GameLevelsStore.getInstance().setCompleteLevelsInStorage(JSON.stringify([]));
         this.actualLevel = 0;
         this.setActiveLevel(this.actualLevel);
         const codeView: HTMLElement = findSelectorWrapper('.codeView');
@@ -108,7 +107,7 @@ export default class GameLevelScreen {
         this.levels.GameLevels.forEach((key, index) => {
             const liItem = createElement('li', 'li-item', `${index + 1}  ${this.levels.GameLevels[index].title}`);
             let completeLevels: number[] = [];
-            const levelFromStorage = this.gameLevelsStore.getCompleteLevelsFromStorage();
+            const levelFromStorage = GameLevelsStore.getInstance().getCompleteLevelsFromStorage();
             completeLevels = JSON.parse(levelFromStorage);
             if (completeLevels.includes(index)) liItem.classList.add('complete');
             this.gameLevelElementList.push(liItem);
@@ -188,7 +187,7 @@ export default class GameLevelScreen {
         liItem.addEventListener('click', () => {
             this.setActiveLevel(index);
             const tittleLevel = this.levels.GameLevels[index].title;
-            this.gameLevelsStore.setLevelInStorage(index.toString());
+            GameLevelsStore.getInstance().setLevelInStorage(index.toString());
             this.levels.GameLevels.forEach((item) => {
                 if (item.title === tittleLevel) {
                     this.actualLevel = index;
