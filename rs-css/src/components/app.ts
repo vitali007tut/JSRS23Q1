@@ -2,13 +2,16 @@ import CodeScreen from './codeScreen';
 import ElementScreen from './elementScreen';
 import GameLevelScreen from './gameLevelScreen';
 import InputScreen from './inputScreen';
+import GameLevelsStore from './gameLevelsStore';
 import { findSelectorWrapper, viewByCharacters, winModalWindow } from './utils';
 
 export default class App {
+    private readonly DELAY_FOR_CHANGE_FIGURES: number = 800;
     readonly inputScreen = new InputScreen();
     readonly elementScreen = new ElementScreen();
     readonly codeScreen = new CodeScreen();
     readonly gameLevelScreen = new GameLevelScreen();
+    readonly gameLevelStore = new GameLevelsStore();
     private container: HTMLElement = findSelectorWrapper('.grid-container');
     public start(): void {
         this.container.appendChild(this.inputScreen.create());
@@ -40,13 +43,13 @@ export default class App {
 
             this.gameLevelScreen.getActualLevelLiElement().classList.add('complete');
             this.gameLevelScreen.completeLevels = [];
-            const completeLevel: string | null = localStorage.getItem('complete levels');
+            const completeLevel: string | null = this.gameLevelStore.getCompleteLevelsFromStorage();
             if (completeLevel) {
                 this.gameLevelScreen.completeLevels = JSON.parse(completeLevel);
             }
 
             this.gameLevelScreen.completeLevels.push(this.gameLevelScreen.actualLevel);
-            localStorage.setItem('complete levels', JSON.stringify(this.gameLevelScreen.completeLevels));
+            this.gameLevelStore.setCompleteLevelsInStorage(JSON.stringify(this.gameLevelScreen.completeLevels));
             if (this.gameLevelScreen.gameIsComplete()) {
                 if (this.container) winModalWindow(this.container);
             } else {
@@ -54,12 +57,12 @@ export default class App {
                     let newLevel = this.gameLevelScreen.actualLevel + 1;
                     if (newLevel === this.gameLevelScreen.quantityTasks()) newLevel -= 1;
                     this.gameLevelScreen.actualLevel = newLevel;
-                    localStorage.setItem('level', newLevel.toString());
+                    this.gameLevelStore.setLevelInStorage(newLevel.toString());
                     this.gameLevelScreen.viewCodeLevel(this.codeScreen.viewerCode);
                     this.gameLevelScreen.viewElements(this.elementScreen.figures);
                     this.gameLevelScreen.viewDescription(this.elementScreen.description);
                     this.gameLevelScreen.setActiveLevel(this.gameLevelScreen.actualLevel);
-                }, 800);
+                }, this.DELAY_FOR_CHANGE_FIGURES);
             }
         } else {
             console.log(`${data} -- wrong answer`);

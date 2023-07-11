@@ -1,5 +1,6 @@
 import { GameLevelType } from './base';
 import Levels from './gameLevels';
+import GameLevelsStore from './gameLevelsStore';
 import { createElement, createImgElement, findSelectorWrapper } from './utils';
 
 export default class GameLevelScreen {
@@ -10,7 +11,8 @@ export default class GameLevelScreen {
     private ELEMENT_HOVERED_CLASS = 'hovered';
     private readonly FIRST_LEVEL = 0;
     public readonly levels = new Levels();
-    private level: string | null = localStorage.getItem('level');
+    private readonly gameLevelsStore = new GameLevelsStore();
+    private level: string | null = this.gameLevelsStore.getLevelFromLocalStorage();
     public actualLevel: number = this.level ? +this.level : this.FIRST_LEVEL;
     private gameLevelElementList: HTMLElement[] = [];
     public helpButton: HTMLElement;
@@ -55,22 +57,8 @@ export default class GameLevelScreen {
             if (this.getTarget().includes(index)) {
                 elementFigure.classList.add('target');
             }
-            elementFigure.addEventListener('mouseover', () => {
-                elementFigure.classList.add(this.ELEMENT_HOVERED_CLASS);
-                const floatElement = createElement('div', 'floatTip');
-                elementFigure.before(floatElement);
-                floatElement.innerText = `${this.levels.GameLevels[this.actualLevel].code[index]}`;
-                floatElement.style.display = 'inline';
-                const lineElement = findSelectorWrapper(`.line.\\3${index}`);
-                lineElement.classList.add(this.ELEMENT_HOVERED_CLASS);
-            });
-            elementFigure.addEventListener('mouseout', () => {
-                elementFigure.classList.remove(this.ELEMENT_HOVERED_CLASS);
-                const floatTipElement = findSelectorWrapper('.floatTip');
-                floatTipElement.remove();
-                const lineElement = findSelectorWrapper(`.line.\\3${index}`);
-                lineElement.classList.remove(this.ELEMENT_HOVERED_CLASS);
-            });
+            this.mouseOnFigure(elementFigure, index);
+            this.mouseOutFigure(elementFigure, index);
         });
         return element;
     }
@@ -102,14 +90,14 @@ export default class GameLevelScreen {
     }
     private resetGame(): void {
         console.log('Reset Progress');
-        localStorage.setItem('level', '0');
-        localStorage.setItem('complete levels', JSON.stringify([]));
+        this.gameLevelsStore.setLevelInStorage('0');
+        this.gameLevelsStore.setCompleteLevelsInStorage(JSON.stringify([]));
         this.actualLevel = 0;
         this.setActiveLevel(this.actualLevel);
-        const codeView: HTMLElement | null = document.querySelector('.codeView');
-        if (codeView) this.viewCodeLevel(codeView);
-        const figuresView: HTMLElement | null = document.querySelector('.figures');
-        if (figuresView) this.viewElements(figuresView);
+        const codeView: HTMLElement = findSelectorWrapper('.codeView');
+        this.viewCodeLevel(codeView);
+        const figuresView: HTMLElement = findSelectorWrapper('.figures');
+        this.viewElements(figuresView);
         const completeLevels = document.querySelectorAll('.complete');
         completeLevels.forEach((level) => level.classList.remove('complete'));
     }
@@ -120,30 +108,15 @@ export default class GameLevelScreen {
         this.levels.GameLevels.forEach((key, index) => {
             const liItem = createElement('li', 'li-item', `${index + 1}  ${this.levels.GameLevels[index].title}`);
             let completeLevels: number[] = [];
-            const levelFromStorage = localStorage.getItem('complete levels');
-            if (levelFromStorage) completeLevels = JSON.parse(levelFromStorage);
+            const levelFromStorage = this.gameLevelsStore.getCompleteLevelsFromStorage();
+            completeLevels = JSON.parse(levelFromStorage);
             if (completeLevels.includes(index)) liItem.classList.add('complete');
             this.gameLevelElementList.push(liItem);
             if (this.levels.GameLevels[index].rightAnswer === this.getRightAnswer()) {
                 liItem.classList.add('active-level');
             }
             listContainer.appendChild(liItem);
-            liItem.addEventListener('click', () => {
-                this.setActiveLevel(index);
-                const tittleLevel = this.levels.GameLevels[index].title;
-                localStorage.setItem('level', index.toString());
-                this.levels.GameLevels.forEach((item) => {
-                    if (item.title === tittleLevel) {
-                        this.actualLevel = index;
-                        const codeView: HTMLElement | null = document.querySelector('.codeView');
-                        if (codeView) this.viewCodeLevel(codeView);
-                        const figuresView: HTMLElement | null = document.querySelector('.figures');
-                        if (figuresView) this.viewElements(figuresView);
-                        const descriptionElement: HTMLElement | null = document.querySelector('.description');
-                        if (descriptionElement) this.viewDescription(descriptionElement);
-                    }
-                });
-            });
+            this.listenerForClickOnLiItem(liItem, index);
         });
     }
     private printLevelCode(element: HTMLElement) {
@@ -177,12 +150,56 @@ export default class GameLevelScreen {
     private removeTooltip(codeLineElement: HTMLElement, index: number) {
         codeLineElement.addEventListener('mouseout', () => {
             this.removeActiveClassFromHoveredElement(index);
-            const floatTipElement = findSelectorWrapper('.floatTip');
-            floatTipElement.remove();
+            this.removeTipElement();
         });
     }
     private removeActiveClassFromHoveredElement(index: number) {
         const figureHovered: HTMLElement = findSelectorWrapper(`.figure.\\3${index}`);
         figureHovered.classList.remove(this.ELEMENT_HOVERED_CLASS);
+    }
+    private mouseOnFigure(elementFigure: HTMLElement, index: number) {
+        elementFigure.addEventListener('mouseover', () => {
+            elementFigure.classList.add(this.ELEMENT_HOVERED_CLASS);
+            const floatElement = this.createTooltip(elementFigure);
+            this.setActiveClassOnHoveredElement(floatElement, index);
+            this.codeLineHovered(index);
+        });
+    }
+    private codeLineHovered(index: number) {
+        const lineElement = findSelectorWrapper(`.line.\\3${index}`);
+        lineElement.classList.add(this.ELEMENT_HOVERED_CLASS);
+    }
+    private mouseOutFigure(elementFigure: HTMLElement, index: number) {
+        elementFigure.addEventListener('mouseout', () => {
+            elementFigure.classList.remove(this.ELEMENT_HOVERED_CLASS);
+            this.removeTipElement();
+            this.removeHoverFromLineElement(index);
+        });
+    }
+    private removeTipElement() {
+        const floatTipElement = findSelectorWrapper('.floatTip');
+        floatTipElement.remove();
+    }
+    private removeHoverFromLineElement(index: number) {
+        const lineElement = findSelectorWrapper(`.line.\\3${index}`);
+        lineElement.classList.remove(this.ELEMENT_HOVERED_CLASS);
+    }
+    private listenerForClickOnLiItem(liItem: HTMLElement, index: number) {
+        liItem.addEventListener('click', () => {
+            this.setActiveLevel(index);
+            const tittleLevel = this.levels.GameLevels[index].title;
+            this.gameLevelsStore.setLevelInStorage(index.toString());
+            this.levels.GameLevels.forEach((item) => {
+                if (item.title === tittleLevel) {
+                    this.actualLevel = index;
+                    const codeView: HTMLElement = findSelectorWrapper('.codeView');
+                    this.viewCodeLevel(codeView);
+                    const figuresView: HTMLElement = findSelectorWrapper('.figures');
+                    this.viewElements(figuresView);
+                    const descriptionElement: HTMLElement = findSelectorWrapper('.description');
+                    this.viewDescription(descriptionElement);
+                }
+            });
+        });
     }
 }
