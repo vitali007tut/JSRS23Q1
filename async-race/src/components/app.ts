@@ -1,4 +1,4 @@
-import FigureElements from "./figureElements";
+import FigureElements from "./image-elements";
 import Header from "./header";
 import HeaderView from "./header/header-view";
 import MainView from "./main/main-view";

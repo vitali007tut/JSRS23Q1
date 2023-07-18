@@ -1,5 +1,6 @@
 import { createElement, createInputElement } from "../utils";
-import { InputType } from "../base";
+import { CarType, InputType } from "../base";
+import ImageElements from "../image-elements";
 
 export default class GarageView {
   private raceButton: HTMLElement;
@@ -9,9 +10,24 @@ export default class GarageView {
   private updateButton: HTMLElement;
   private inputTextCreate: HTMLInputElement;
   private inputTextUpdate: HTMLInputElement;
+  private container: HTMLElement;
+  private controls: HTMLElement;
+  private garage: HTMLElement;
+  private numberCarsInGarage: HTMLElement;
+  private numberPagesInGarage: HTMLElement;
+  private baseUrl: string = 'http://127.0.0.1:3000';
+  private Path = {
+    GARAGE: '/garage',
+  } 
+  private carsArray: CarType[];
 
   public create(): HTMLElement {
-    const controls = createElement('div', 'controls');
+    this.container = createElement('div', 'garage-container');
+    this.container.append(this.createControls(), this.createGarage());
+    return this.container;
+  }
+  private createControls(): HTMLElement {
+    this.controls = createElement('div', 'controls');
     this.inputTextCreate = createInputElement('createText', 'text');
     const createLine = this.createControlLine({ className: 'create-line', inputTextElement: this.inputTextCreate, inputColorId: 'createColor'});
     this.createButton = createElement('a', 'buttonCreate', 'Create');
@@ -31,8 +47,17 @@ export default class GarageView {
     this.generateButton = createElement('a', 'generate-button', 'Generate Cars');
     this.generateButton.addEventListener('click', () => this.generate())
     commonLine.append(this.raceButton, this.resetButton, this.generateButton)
-    controls.append(createLine, updateLine, commonLine);
-    return controls;
+    this.controls.append(createLine, updateLine, commonLine);
+    return this.controls;
+}
+  public createGarage(): HTMLElement {
+    this.garage = createElement('div', 'garage');
+    
+    this.numberCarsInGarage = createElement('div', 'cars-number');
+    this.numberPagesInGarage = createElement('div', 'pages-number')
+    this.garage.append(this.numberCarsInGarage, this.numberPagesInGarage);
+    this.getArrayOfCars()
+    return this.garage;
   }
 
   private createControlLine(params: InputType): HTMLElement {
@@ -61,4 +86,21 @@ export default class GarageView {
   private generate(): void {
     console.log('generate');
   }
-}
+
+  private async getCarsFromGarage() {
+    const data = await fetch(`${this.baseUrl}${this.Path.GARAGE}`)
+    const result = await data.json()
+    this.numberCarsInGarage.innerHTML = `Garage(${result.length})`;
+    return result;
+  }
+
+  private async getArrayOfCars() {
+    const data = await this.getCarsFromGarage();
+    data.forEach((element: CarType) => {
+      const carElement = createElement('div', element.name);
+      carElement.innerHTML = ImageElements.getCar(element.color);
+      this.garage.append(carElement);
+    });
+    }
+    // return data;
+  }

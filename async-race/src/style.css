@@ -102,3 +102,13 @@ thead {
   background: blue;
   font-size: 1.6rem;
 }
+
+.cars-number {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.garage {
+  margin-top: 2rem;
+}
