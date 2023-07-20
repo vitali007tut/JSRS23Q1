@@ -1,7 +1,7 @@
 import GarageView from "./main/garage-view";
 import MainView from "./main/main-view";
 import WinnersView from "./main/winners-view";
-import { createElement } from "./utils";
+import { createElement } from "./utils/utils";
 
 export default class Header {
   private NameButtons = {
@@ -13,9 +13,9 @@ export default class Header {
     WINNERS: 'winners-button',
   }
   
-  private garageButton: HTMLElement = createElement('a', this.classButton.GARAGE, this.NameButtons.GARAGE);
-  private winnersButton: HTMLElement = createElement('a', this.classButton.WINNERS, this.NameButtons.WINNERS);
-  private header: HTMLElement = createElement('header', 'header');
+  private garageButton: HTMLElement = createElement('a', [this.classButton.GARAGE], this.NameButtons.GARAGE);
+  private winnersButton: HTMLElement = createElement('a', [this.classButton.WINNERS], this.NameButtons.WINNERS);
+  private header: HTMLElement = createElement('header', ['header']);
 
   public create(mainComponent: MainView): HTMLElement {
     this.garageButton.classList.add('active');

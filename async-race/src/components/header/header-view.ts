@@ -1,7 +1,7 @@
 import GarageView from "../main/garage-view";
 import MainView from "../main/main-view";
 import WinnersView from "../main/winners-view";
-import { createElement } from "../utils";
+import { createElement } from "../utils/utils";
 import Button from "./button";
 
 export default class HeaderView { 
@@ -14,7 +14,7 @@ export default class HeaderView {
   //   WINNERS: 'winners-button',
   // }
   private buttonElements: HTMLElement[] = [];
-  private header: HTMLElement = createElement('header', 'header');;
+  private header: HTMLElement = createElement('header', ['header']);
 
   public create(mainComponent: MainView): HTMLElement { 
     const garageView = new GarageView().create();
@@ -31,15 +31,15 @@ export default class HeaderView {
         callback: mainComponent.setContent(winnersView),
       },
     ]
-    buttonsArray.forEach((item, index) => {
-      const buttonElement = new Button().create(item, this.buttonElements)
-      buttonElement.addEventListener('click', () => {
-        item.callback;
-      })
+    // buttonsArray.forEach((item, index) => {
+    //   const buttonElement = new Button().create(item, this.buttonElements)
+    //   buttonElement.addEventListener('click', () => {
+    //     item.callback;
+    //   })
       
-      this.header.append(buttonElement);
+      // this.header.append(buttonElement);
       // buttonElement.setCallback(item.callback())
-    })
+    // })
 
 
 

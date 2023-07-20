@@ -1,7 +1,7 @@
-import { createElement } from "../utils";
+import { createElement } from "../utils/utils";
 
 export default class MainView {
-  private main: HTMLElement = createElement('main', 'main');
+  private main: HTMLElement = createElement('main', ['main']);
   public create(): HTMLElement { 
     return this.main;
   }

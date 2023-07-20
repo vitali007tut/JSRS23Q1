@@ -1,10 +1,10 @@
-import { createElement } from "../utils";
+import { createElement } from "../utils/utils";
 
 export default class WinnersView {
   public table: HTMLElement;
 
   constructor() {
-    this.table = createElement('table', 'table');
+    this.table = createElement('table', ['table']);
   }
 
   public create(): HTMLElement {
