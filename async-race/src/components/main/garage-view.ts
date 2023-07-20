@@ -1,8 +1,8 @@
 import { createElement, createInputElement } from "../utils/utils";
-import { CarType } from "../base";
+import { CarType } from "../utils/base";
 import ImageElements from "../NO-image-elements";
 import CarLine from "./car-view/car-line";
-import { createCarApi, getCarApi, getCarsApi, getNumberCarsApi, updateCarApi } from "../utils/api";
+import { createCarApi, getCarApi, getCarsOnPageApi, getNumberCarsApi, updateCarApi } from "../utils/api";
 import ImageItems from "./car-view/image-items";
 
 export default class GarageView {
@@ -20,13 +20,18 @@ export default class GarageView {
   private numberPagesInGarage: HTMLElement;
   private inputColorCreate: HTMLInputElement;
   private inputColorUpdate: HTMLInputElement;
+  private buttonPrev: HTMLInputElement;
+  private buttonNext: HTMLInputElement;
+  private readonly FIRST_PAGE = 1;
+  private readonly CARS_ON_PAGE = 7;
+  private carsOnActivePage: number;
+  private activePage: number = 1;
+  private quantityPages: number;
   private carsArray: CarType[];
 
   public create(): HTMLElement {
     this.container = createElement('div', ['garage-container']);
     this.container.append(this.createControls(), this.createGarage());
-
-
     return this.container;
   }
   private createControls(): HTMLElement {
@@ -41,7 +46,6 @@ export default class GarageView {
     this.inputTextUpdate.setAttribute('disabled', "true");
     const updateLine = createElement('div', ['update-line']);
     this.inputColorUpdate = createInputElement(['updateColor'], 'color', '#ffffff');
-    // this.updateButton = createElement('a', ['buttonUpdate'], 'Update');
     this.updateButton = createInputElement(['buttonUpdate'], 'button', 'Update');
     this.updateButton.disabled = true ;
     this.updateButton.addEventListener('click', () => this.updateCar());
@@ -61,11 +65,22 @@ export default class GarageView {
     this.garage = createElement('div', ['garage']);
     const garageDescription: HTMLElement = createElement('div', ['garage-description']);
     this.numberCarsInGarage = createElement('div', ['cars-number']);
-    this.numberPagesInGarage = createElement('div', ['pages-number'], 'Page #')
-    garageDescription.append(this.numberCarsInGarage, this.numberPagesInGarage, this.garage)
+    this.numberPagesInGarage = createElement('div', ['pages-number'])
+    this.numberPagesInGarage.id = this.activePage.toString();
+    garageDescription.append(this.numberCarsInGarage, this.numberPagesInGarage, this.garage, this.createPagesControls())
     this.setQuantityCars();
-    this.carsViewInGarage();
+    this.carsViewInGarageOnPage(this.FIRST_PAGE);
     return garageDescription;
+  }
+
+  private createPagesControls(): HTMLElement {
+    const container: HTMLElement = createElement('div', ['page-controls'])
+    this.buttonPrev = createInputElement(['prev', 'buttonPrev', 'disabled'], 'button', 'Prev');
+    this.buttonPrev.addEventListener('click', () => this.openPrevPage());
+    this.buttonNext = createInputElement(['next', 'buttonNext', 'disabled'], 'button', 'Next');
+    this.buttonNext.addEventListener('click', () => this.openNextPage());
+    container.append(this.buttonPrev, this.buttonNext);
+    return container;
   }
 
   private async createNewCar() {
@@ -87,6 +102,7 @@ export default class GarageView {
     imageUpdateCar.innerHTML = ImageItems.getCar(color);
     document.querySelector(`.tittle-id-${id}`).innerHTML = name;
     this.inputTextUpdate.value = '';
+    this.updateButton.disabled = true ;
   }
 
   private race(): void {
@@ -103,11 +119,16 @@ export default class GarageView {
 
   private async setQuantityCars() {
     const quantity = await getNumberCarsApi()
-    this.numberCarsInGarage.innerHTML = `Garage(${quantity})`
+    this.numberCarsInGarage.innerHTML = `Garage(${quantity})`;
+    this.numberCarsInGarage.id = quantity;
+    this.quantityPages = Math.ceil(Number(quantity) / this.CARS_ON_PAGE);
+    this.numberPagesInGarage.innerHTML = `Page ${this.activePage}/${this.quantityPages}`;
+    this.setActivePageButtons(this.activePage, this.quantityPages)
   }
-  private async carsViewInGarage() {
+  private async carsViewInGarageOnPage(page: number) {
+    console.log('call carsViewInGarageOnPage', page)
     this.garage.innerHTML = '';
-    const data = await getCarsApi();
+    const data = await getCarsOnPageApi(page);
     data.forEach((element: CarType) => {
       const carLine = new CarLine().create(element.name, element.color, element.id)
       this.garage.append(carLine);
@@ -116,7 +137,49 @@ export default class GarageView {
 
   private async addCreatedCar() {
     const data = await createCarApi({ name: this.inputTextCreate.value, color: this.inputColorCreate.value })
-    const carLine = new CarLine().create(data.name, data.color, data.id)
-    this.garage.append(carLine);
+    const dataCars = await getCarsOnPageApi(this.activePage);
+    this.carsOnActivePage = dataCars.length;
+    const carsOnPageBeforeAdding = document.querySelectorAll('.line').length;
+    if (carsOnPageBeforeAdding < 7) {
+      const carLine = new CarLine().create(data.name, data.color, data.id)
+      this.garage.append(carLine);
+    }
   } 
+
+  private setActivePageButtons(pageActive: number, pagesQuantity: number) {
+    if (pageActive > 1) {
+      this.buttonPrev.disabled = false;
+      this.buttonPrev.classList.remove('disabled');
+    }
+    if (pagesQuantity > pageActive) {
+      this.buttonNext.disabled = false;
+      this.buttonNext.classList.remove('disabled');
+    }
+  }
+
+  private async openNextPage() {
+    if (this.activePage < this.quantityPages) {
+      this.activePage += 1;
+      this.numberPagesInGarage.innerHTML = `Page ${this.activePage}/${this.quantityPages}`;
+      this.numberPagesInGarage.setAttribute('id', this.activePage.toString())
+      this.carsViewInGarageOnPage(this.activePage);
+      if (this.buttonPrev.classList.contains('disabled')) this.buttonPrev.classList.remove('disabled');
+      if (this.activePage === this.quantityPages) {
+        this.buttonNext.classList.add('disabled');
+      }
+  }
+  }
+
+  private async openPrevPage() {
+    this.activePage = Number(this.numberPagesInGarage.id)
+    this.quantityPages = Math.ceil(Number(this.numberCarsInGarage.id) / this.CARS_ON_PAGE);
+    if (this.activePage > this.FIRST_PAGE) {
+      this.activePage -= 1;
+      this.numberPagesInGarage.innerHTML = `Page ${this.activePage}/${this.quantityPages}`;
+      this.numberPagesInGarage.setAttribute('id', this.activePage.toString());
+      this.carsViewInGarageOnPage(this.activePage);
+      if (this.activePage === this.FIRST_PAGE) this.buttonPrev.classList.add('disabled');
+      if (this.buttonNext.classList.contains('disabled')) this.buttonNext.classList.remove('disabled');
+    }
+  }
   }

@@ -48,7 +48,9 @@ body {
 .buttonUpdate,
 .race-button,
 .reset-button,
-.generate-button {
+.generate-button,
+.buttonPrev,
+.buttonNext {
   background-color: #13aa52;
   border-radius: 4px;
   box-sizing: border-box;
@@ -64,7 +66,9 @@ body {
 .race-button:hover,
 .reset-button:hover,
 .generate-button:hover,
-.button:hover {
+.button:hover,
+.buttonPrev:hover,
+.buttonNext:hover {
 transform: translateY(-2px);
 }
 
@@ -89,7 +93,8 @@ transform: translateY(-2px);
 .controls {
   display: flex;
   width: 40rem;
-  height: 15rem;
+  margin-top: 1.2rem;
+  height: 10rem;
   flex-direction: column;
   justify-content: space-evenly;
 }
@@ -133,10 +138,6 @@ thead {
   color: burlywood;
 }
 
-.garage {
-  margin-top: 2rem;
-}
-
 .line {
   border-bottom: dashed #fff;
   padding-top: 1rem;
@@ -170,4 +171,20 @@ thead {
 
 .selected {
   background: #1a0f0f;
+}
+
+.page-controls {
+  margin-top: 1rem;
+}
+
+.prev,
+.next {
+  width: 10rem;
+  margin-left: 2rem;
+}
+
+.prev.disabled,
+.next.disabled {
+  background: #545454;
+  cursor: not-allowed;
 }

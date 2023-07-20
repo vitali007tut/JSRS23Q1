@@ -1,10 +1,10 @@
-import { CarType } from "../base";
+import { CarType } from "./base";
 
 const url = 'http://127.0.0.1:3000'
 const path = '/garage'
 
-export async function getCarsApi() {
-  const response = await fetch(`${url}${path}`)
+export async function getCarsOnPageApi(page: number) {
+  const response = await fetch(`${url}${path}?_page=${page}&_limit=7`)
   const cars = await response.json();
   return cars;
 }
@@ -19,6 +19,11 @@ export async function getNumberCarsApi() {
   const numberOfCars = response.headers.get('X-Total-Count');
   return numberOfCars;
 }
+
+// export async function getNumberCarsOnActivePage(page: number) {
+//   const response = await fetch(`${url}${path}?_page=${page}&_limit=7`);
+//   const numberOfCarsOnActivePage =  response.json()
+// }
 
 export async function createCarApi(body: {name: string, color: string}) {
   const response = await fetch(`${url}${path}`, {

@@ -1,6 +1,6 @@
-import { CarType } from "../../base";
+import { CarType } from "../../utils/base";
 import { createElement } from "../../utils/utils";
-import { getCarApi, getCarsApi, getNumberCarsApi, removeCarApi } from "../../utils/api";
+import { getCarApi, getCarsOnPageApi, getNumberCarsApi, removeCarApi } from "../../utils/api";
 import CarLine from "./car-line";
 
 export default class CarButtons {
@@ -8,7 +8,7 @@ export default class CarButtons {
   private removeButton: HTMLElement;
   private startButton: HTMLElement;
   private stopButton: HTMLElement;
-
+  private readonly FIRST_PAGE: number = 1;
   public create() {
 
   }
@@ -39,9 +39,17 @@ export default class CarButtons {
       removeCarApi(id);
       button.closest('.line').remove();
       this.updateGarageQuantity();
+      const carsOnPageAfterRemove = document.querySelectorAll('.line').length
+      if (carsOnPageAfterRemove < 7) {
+        this.updateActivePage();
+      }
+      this.updatePageQuantity();
+
     })
     return button;
   }
+
+
   public getStartButton(): HTMLElement {
     return createElement('a', ['start', 'button'], 'A');
   }
@@ -50,7 +58,52 @@ export default class CarButtons {
   }
 
   private async updateGarageQuantity() {
-    const quantity = await getNumberCarsApi()
-    document.querySelector('.cars-number').innerHTML = `Garage(${quantity})`;
+    const quantity = await getNumberCarsApi();
+    const carsNumber = document.querySelector('.cars-number');
+    carsNumber.innerHTML = `Garage(${quantity})`;
+    carsNumber.id = quantity;
+  }
+  
+  private async updateActivePage() {
+    const LAST_CAR_ON_PAGE = 6;
+    const activePage = Number(document.querySelector('.pages-number').getAttribute('id'))
+    const data = await getCarsOnPageApi(activePage);
+    if (data.length > LAST_CAR_ON_PAGE) {
+      const name = data[LAST_CAR_ON_PAGE].name;
+      const color = data[LAST_CAR_ON_PAGE].color;
+      const id = data[LAST_CAR_ON_PAGE].id;
+      const lastLine = new CarLine().create(name, color, id);
+      document.querySelector('.garage').append(lastLine);
     }
+  }
+  private async updatePageQuantity() {
+    const CARS_ON_PAGE = 7;
+    const carsQuantity = await getNumberCarsApi();
+    const pagesNumberElement = document.querySelector('.pages-number')
+    let activePage = Number(pagesNumberElement.getAttribute('id'));
+    const carsOnPageAfterRemove = await getCarsOnPageApi(activePage);
+    if (carsOnPageAfterRemove.length === 0) {
+      if (activePage > 1) {
+        activePage -= 1;
+        pagesNumberElement.setAttribute('id', activePage.toString());
+        const data = await getCarsOnPageApi(activePage);
+        data.forEach((element: CarType) => {
+          const carLine = new CarLine().create(element.name, element.color, element.id)
+          document.querySelector('.garage').append(carLine);
+        })
+      }
+    }
+    const quantityPages = Math.ceil(Number(carsQuantity) / CARS_ON_PAGE)
+    pagesNumberElement.innerHTML = `Pages ${activePage}/${quantityPages}`
+
+    if (activePage === quantityPages) {
+      const buttonNext = document.querySelector('.buttonNext')
+      buttonNext.classList.add('disabled');
+    }
+    if (activePage === this.FIRST_PAGE) {
+      const buttonPrev = document.querySelector('.buttonPrev')
+      buttonPrev.classList.add('disabled');
+    }
+
+  }
 }
