@@ -1,9 +1,9 @@
 import { createElement, createInputElement } from "../utils/utils";
 import { CarType } from "../utils/base";
-import ImageElements from "../NO-image-elements";
 import CarLine from "./car-view/car-line";
 import { createCarApi, getCarApi, getCarsOnPageApi, getNumberCarsApi, updateCarApi } from "../utils/api";
 import ImageItems from "./car-view/image-items";
+import CarList from "../utils/car-list";
 
 export default class GarageView {
   private raceButton: HTMLElement;
@@ -114,7 +114,12 @@ export default class GarageView {
   }
 
   private generate(): void {
-    console.log('generate');
+    console.log('generate 100 cars');
+    const MAX_QUANTITY_CARS_ON_PAGE = 7;
+    this.addCarsToBase(this.generateListCars());
+    this.setQuantityCars();
+    const carsOnPage = document.querySelectorAll('.line').length;
+    if (carsOnPage < MAX_QUANTITY_CARS_ON_PAGE) this.addCarsOnPage(carsOnPage)
   }
 
   private async setQuantityCars() {
@@ -158,6 +163,8 @@ export default class GarageView {
   }
 
   private async openNextPage() {
+    const quantity = this.numberCarsInGarage.id;
+    this.quantityPages = Math.ceil(Number(quantity) / this.CARS_ON_PAGE);
     if (this.activePage < this.quantityPages) {
       this.activePage += 1;
       this.numberPagesInGarage.innerHTML = `Page ${this.activePage}/${this.quantityPages}`;
@@ -181,5 +188,40 @@ export default class GarageView {
       if (this.activePage === this.FIRST_PAGE) this.buttonPrev.classList.add('disabled');
       if (this.buttonNext.classList.contains('disabled')) this.buttonNext.classList.remove('disabled');
     }
+  }
+  private generateListCars(): {name: string, color: string}[] {
+    const NUMBER_CARS_FOR_GENERATE = 100;
+    const NUMBER_BRANDS = CarList.length;
+    return Array(NUMBER_CARS_FOR_GENERATE).fill(null).map(() => {
+      const randomBrandNumber = this.getRandomNumber(NUMBER_BRANDS);
+      const randomModelNumber = this.getRandomNumber(CarList[randomBrandNumber].models.length);
+      return {
+      name: `${CarList[randomBrandNumber].brand} ${CarList[randomBrandNumber].models[randomModelNumber]}`,
+      color: this.getRandomColor()
+      }
+    });
+  }
+  private getRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color: string = '#'
+    for (let i = 0; i < 6; i += 1) {
+      color += letters[this.getRandomNumber(letters.length)];
+    }
+    return color;
+  }
+  private getRandomNumber(numberElements: number): number {
+    return Math.floor(Math.random() * numberElements)
+  }
+  private addCarsToBase(params: {name: string, color: string}[]) {
+    params.forEach((item) => createCarApi(item))
+  }
+  private async addCarsOnPage(startIndex: number) {
+    const data = await getCarsOnPageApi(this.activePage)
+    data.forEach((element: CarType, index: number) => {
+      if (index >= startIndex) {
+        const carLine = new CarLine().create(element.name, element.color, element.id)
+        this.garage.append(carLine);
+      }
+    })
   }
   }

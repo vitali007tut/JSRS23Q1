@@ -144,7 +144,7 @@ thead {
 }
 
 .car-image svg {  
-  width: calc(20rem - 10vw);
+  width: calc(20rem - 8vw);
   height: auto;
 
 }
