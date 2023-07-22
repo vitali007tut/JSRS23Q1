@@ -61,3 +61,15 @@ export async function startEngineApi(id: number) {
     });
     return response.json();
 }
+export async function switchEngineToDrive(id: number) {
+    const response = await fetch(`${url}${Path.ENGINE}?id=${id}&status=drive`, {
+        method: 'PATCH',
+    });
+    return response;
+}
+export async function stopEngine(id: number) {
+    const response = await fetch(`${url}${Path.ENGINE}?id=${id}&status=stopped`, {
+        method: 'PATCH',
+    });
+    return response;
+}

@@ -134,7 +134,7 @@ export default class GarageView {
         this.garage.innerHTML = '';
         const data = await getCarsOnPageApi(page);
         data.forEach((element: CarType) => {
-            const carLine = new CarLine().create(element.name, element.color, element.id);
+            const carLine = new CarLine(element.id).create(element.name, element.color, element.id);
             this.garage.append(carLine);
         });
     }
@@ -143,7 +143,7 @@ export default class GarageView {
         const data = await createCarApi({ name: this.inputTextCreate.value, color: this.inputColorCreate.value });
         const carsOnPageBeforeAdding = document.querySelectorAll('.line').length;
         if (carsOnPageBeforeAdding < 7) {
-            const carLine = new CarLine().create(data.name, data.color, data.id);
+            const carLine = new CarLine(data.id).create(data.name, data.color, data.id);
             this.garage.append(carLine);
         }
     }
@@ -191,7 +191,6 @@ export default class GarageView {
         const NUMBER_BRANDS = CarList.length;
         return Array(NUMBER_CARS_FOR_GENERATE)
             .fill(null)
-
             .map(() => {
                 const randomBrandNumber = this.getRandomNumber(NUMBER_BRANDS);
                 const randomModelNumber = this.getRandomNumber(CarList[randomBrandNumber].models.length);
@@ -219,7 +218,7 @@ export default class GarageView {
         const data = await getCarsOnPageApi(this.activePage);
         data.forEach((element: CarType, index: number) => {
             if (index >= startIndex) {
-                const carLine = new CarLine().create(element.name, element.color, element.id);
+                const carLine = new CarLine(element.id).create(element.name, element.color, element.id);
                 this.garage.append(carLine);
             }
         });

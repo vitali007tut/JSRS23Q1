@@ -1,6 +1,6 @@
 import { CarType } from '../../utils/base';
 import { createElement, findClosest, findSelector, findSelectorInput } from '../../utils/utils';
-import { getCarApi, getCarsOnPageApi, getNumberCarsApi, removeCarApi, startEngineApi } from '../../utils/api';
+import { getCarApi, getCarsOnPageApi, getNumberCarsApi, removeCarApi } from '../../utils/api';
 import CarLine from './car-line';
 
 export default class CarButtons {
@@ -44,15 +44,12 @@ export default class CarButtons {
     public getStartButton(id: number): HTMLElement {
         const startButton: HTMLElement = createElement('a', ['start', 'button'], 'A');
         startButton.setAttribute('id', id.toString());
-        startButton.addEventListener('click', async () => {
-            console.log('engine started', id);
-            const data = await this.startEngine(id);
-            console.log(data);
-        });
         return startButton;
     }
-    public getStopButton(): HTMLElement {
-        return createElement('a', ['stop', 'button', 'disable'], 'B');
+    public getStopButton(id: number): HTMLElement {
+        const stopButton: HTMLElement = createElement('a', ['stop', 'button', 'disable'], 'B');
+        stopButton.setAttribute('id', id.toString());
+        return stopButton;
     }
 
     private async updateGarageQuantity() {
@@ -70,7 +67,7 @@ export default class CarButtons {
             const name = data[LAST_CAR_ON_PAGE].name;
             const color = data[LAST_CAR_ON_PAGE].color;
             const id = data[LAST_CAR_ON_PAGE].id;
-            const lastLine = new CarLine().create(name, color, id);
+            const lastLine = new CarLine(id).create(name, color, id);
             findSelector('.garage').append(lastLine);
         }
     }
@@ -86,7 +83,7 @@ export default class CarButtons {
                 pagesNumberElement.setAttribute('id', activePage.toString());
                 const data = await getCarsOnPageApi(activePage);
                 data.forEach((element: CarType) => {
-                    const carLine = new CarLine().create(element.name, element.color, element.id);
+                    const carLine = new CarLine(element.id).create(element.name, element.color, element.id);
                     findSelector('.garage').append(carLine);
                 });
             }
@@ -101,25 +98,5 @@ export default class CarButtons {
             const buttonPrev = findSelector('.buttonPrev');
             buttonPrev.classList.add('disabled');
         }
-    }
-
-    private async startEngine(id: number) {
-        const clientWidth = document.documentElement.clientWidth;
-        console.log('clientWidth', clientWidth, 'distance', clientWidth - 170);
-        const element: HTMLElement = findSelector(`.image-id-${id}`);
-        let start = 0;
-        const data = await startEngineApi(id);
-        // console.log(data.velocity)
-        function performAnimation() {
-            console.log(start);
-            element.style.transform = 'translateX(' + Math.min((start * data.velocity) / 60, clientWidth - 170) + 'px)';
-            start += 2;
-            // const requestID: number = requestAnimationFrame(performAnimation);
-        }
-        // setTimeout(() => {
-        //   cancelAnimationFrame(requestID)
-        // }, (clientWidth - 170) * 1000 / data.velocity);
-        performAnimation();
-        // return await startEngineApi(id)
     }
 }
