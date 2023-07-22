@@ -1,6 +1,7 @@
 export default class ImageItems {
-  public static getCar(color = '#ffffff'): string {
-    return `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+    // eslint-disable-next-line max-lines-per-function
+    public static getCar(color = '#ffffff'): string {
+        return `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
      "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
      width="1280.000000pt" height="640.000000pt" viewBox="0 0 1280.000000 640.000000"
@@ -103,12 +104,10 @@ export default class ImageItems {
     61 239 98 16 10 -216 242 -234 235z"/>
     </g>
     </svg>
-    `
-  }
+    `;
+    }
 
-  public static getFlag(): string {
-    return `<svg fill='red' xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32V64 368 480c0 17.7 14.3 32 32 32s32-14.3 32-32V352l64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48V32z"/></svg>`
-  }
-
-  private carsBrands: string = 'Suzuki Dacia Subaru Aston-Martin Smart Cooper Scion Tesla Saturn Bugatti Saab Rolls-Royce Citroen Ram Porsche Toyota Pontiac Ferrari Polestar Nissan Mitsubishi Hummer Mini Geely Mercury Holden  Mercedes-Benz Volkswagen Mazda Isuzu Maserati Lotus Opel Lincoln General-Motors Lexus Seat Land-Rover Kia Jeep Jaguar Hyundai Lamborghini Honda GMC Genesis Ford Fiat Dodge Chrysler Peugeot Chevrolet Cadillac Volvo Buick BMW Renault Bentley Audi Alfa-Romeo'
+    public static getFlag(): string {
+        return `<svg fill='red' xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32V64 368 480c0 17.7 14.3 32 32 32s32-14.3 32-32V352l64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48V32z"/></svg>`;
+    }
 }

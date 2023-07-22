@@ -1,5 +1,4 @@
-import Header from "./header";
-import HeaderView from "./header/header-view";
+import Header from "./header/header-view";
 import MainView from "./main/main-view";
 
 export default class App {

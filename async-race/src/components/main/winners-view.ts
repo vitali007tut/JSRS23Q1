@@ -1,14 +1,14 @@
-import { createElement } from "../utils/utils";
+import { createElement } from '../utils/utils';
 
 export default class WinnersView {
-  public table: HTMLElement;
+    public table: HTMLElement;
 
-  constructor() {
-    this.table = createElement('table', ['table']);
-  }
+    constructor() {
+        this.table = createElement('table', ['table']);
+    }
 
-  public create(): HTMLElement {
-    const tableInner: string = `<thead>
+    public create(): HTMLElement {
+        const tableInner = `<thead>
       <tr>
         <th>Number</th><th>Car</th><th>Name</th><th>Wins</th><th>Best time (seconds)</th>
       </tr>
@@ -27,7 +27,7 @@ export default class WinnersView {
         <td>...</td><td>...</td><td>...</td>
       </tr>
     </tbody>`;
-    this.table.insertAdjacentHTML('afterbegin', tableInner)
-    return this.table;
-}
+        this.table.insertAdjacentHTML('afterbegin', tableInner);
+        return this.table;
+    }
 }

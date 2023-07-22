@@ -1,40 +1,37 @@
 {
-  "plugins": ["prettier", "import", "@typescript-eslint"],
-  "extends": [
-      "airbnb-base/legacy",
-      "airbnb-typescript/base",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:prettier/recommended",
-      "prettier",
-      "airbnb", 
-      "airbnb-typescript"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-      "ecmaVersion": 2022,
-      "sourceType": "module",
-      "project": "./tsconfig.eslint.json"
-  },
-  "env": {
-      "es6": true,
-      "browser": true,
-      "node": true
-  },
-  "rules": {
-      "no-debugger": "off",
-      "no-console": "warn",
-      "class-methods-use-this": "off",
-      "newline-per-chained-call": "error",
-      "prettier/prettier": [
-          "error",
-          {
-              "endOfLine": "auto"
-          }
-      ],
-      "@typescript-eslint/no-explicit-any": "error",
-      "max-lines-per-function": ["error", 40],
-      "import/extensions": "off",
-      "lines-between-class-members": "off",
-      "@typescript-eslint/lines-between-class-members": "off"
+    "plugins": ["prettier", "import", "@typescript-eslint"],
+    "extends": [
+        "airbnb-typescript/base",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2022,
+        "sourceType": "module",
+        "project": "../school/vitali007tut-JSFE2023Q1/async-race/tsconfig.json"
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+        "no-debugger": "off",
+        "no-console": "warn",
+        "class-methods-use-this": "off",
+        "newline-per-chained-call": "error",
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ],
+        "@typescript-eslint/no-explicit-any": "error",
+        "max-lines-per-function": ["error", 40],
+        "import/extensions": "off",
+        "lines-between-class-members": "off",
+        "@typescript-eslint/lines-between-class-members": "off"
+    }
   }
-}
