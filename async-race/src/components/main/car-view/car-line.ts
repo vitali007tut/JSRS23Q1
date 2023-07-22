@@ -4,6 +4,7 @@ import CarButtons from './car-buttons';
 import ImageItems from './image-items';
 
 export default class CarLine {
+    private requestID: number;
     private buttons: CarButtons;
     private startButton: HTMLElement;
     private stopButton: HTMLElement;
@@ -11,6 +12,7 @@ export default class CarLine {
         this.buttons = new CarButtons();
         this.startButton = this.buttons.getStartButton(id);
         this.stopButton = this.buttons.getStopButton(id);
+        this.requestID = 0;
     }
     public create(name: string, color: string, id: number): HTMLElement {
         const carFirstLine = createElement('div', ['car-first-line']);
@@ -50,7 +52,7 @@ export default class CarLine {
                 documentClientWidth - carContainerWidth
             }px);`
         );
-        let requestID: number;
+        // let requestID: number;
         const startTime = new Date().getTime();
         const growInSec: number = (distance * 1000) / timeForAnimation;
         const animation = () => {
@@ -58,25 +60,26 @@ export default class CarLine {
             const step: number = ((currentTime - startTime) / 1000) * growInSec;
             if (step < distance) {
                 carForAnimation.style.transform = `translateX(${step}px)`;
-                requestID = requestAnimationFrame(animation);
+                this.requestID = requestAnimationFrame(animation);
             }
-            return requestID;
+            return this.requestID;
         };
-        requestID = animation();
+        this.requestID = animation();
         try {
             const dataDrive = await switchEngineToDrive(id);
             console.log('status', dataDrive.status);
             if (dataDrive.status === 500) {
                 console.log(`Car ${id} should be stop`);
-                cancelAnimationFrame(requestID);
+                cancelAnimationFrame(this.requestID);
             }
         } catch (error) {}
     }
-    private async carStopped(id: number) {
+    public async carStopped(id: number) {
         console.log(`car ${id} should return on start`);
         this.startButton.classList.remove('disable');
         this.stopButton.classList.add('disable');
         const carForAnimation = findSelector(`.image-id-${id}`);
+        cancelAnimationFrame(this.requestID);
         carForAnimation.style.transform = `translateX(0px)`;
         const dataStop = await stopEngine(id);
     }

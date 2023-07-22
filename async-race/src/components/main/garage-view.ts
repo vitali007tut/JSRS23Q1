@@ -20,6 +20,7 @@ export default class GarageView {
     private readonly CARS_ON_PAGE = 7;
     private activePage = 1;
     private quantityPages: number;
+    private event: Event;
     constructor() {
         this.updateButton = createInputElement(['buttonUpdate'], 'button', 'Update');
         this.inputTextCreate = createInputElement(['createText'], 'text');
@@ -31,6 +32,7 @@ export default class GarageView {
         this.inputColorUpdate = createInputElement(['updateColor'], 'color', '#ffffff');
         this.buttonPrev = createInputElement(['prev', 'buttonPrev', 'disabled'], 'button', 'Prev');
         this.buttonNext = createInputElement(['next', 'buttonNext', 'disabled'], 'button', 'Next');
+        this.event = new Event('click');
         this.quantityPages = 1;
     }
 
@@ -106,11 +108,14 @@ export default class GarageView {
     }
 
     private race(): void {
-        console.log('race');
+        this.reset();
+        const startButtons = document.querySelectorAll('.start');
+        startButtons.forEach((button) => button.dispatchEvent(this.event));
     }
 
     private reset(): void {
-        console.log('reset');
+        const stopButtons = document.querySelectorAll('.stop');
+        stopButtons.forEach((button) => button.dispatchEvent(this.event));
     }
 
     private generate(): void {
