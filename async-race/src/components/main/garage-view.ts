@@ -1,7 +1,30 @@
-import { createElement, createInputElement, findSelector, getAttribute } from '../utils/utils';
+import {
+    createElement,
+    createInputElement,
+    createModalText,
+    findClosest,
+    findSelector,
+    getAttribute,
+    getDistance,
+    getRandomColor,
+    getRandomNumber,
+    removeModalText,
+} from '../utils/utils';
 import { CarType } from '../utils/base';
 import CarLine from './car-view/car-line';
-import { createCarApi, getCarsOnPageApi, getNumberCarsApi, updateCarApi } from '../utils/api';
+import {
+    createCarApi,
+    createWinnerApi,
+    getCarApi,
+    getCarsOnPageApi,
+    getNumberCarsApi,
+    getWinnerApi,
+    startEngineApi,
+    stopEngine,
+    switchEngineToDrive,
+    updateCarApi,
+    updateWinnerApi,
+} from '../utils/api';
 import ImageItems from './car-view/image-items';
 import CarList from '../utils/car-list';
 
@@ -21,6 +44,9 @@ export default class GarageView {
     private activePage = 1;
     private quantityPages: number;
     private event: Event;
+    private numberForFirstWinner: number;
+    private readonly NUMBER_FOR_RESET: number = 10;
+    private readonly FIRST_WIN: number = 1;
     constructor() {
         this.updateButton = createInputElement(['buttonUpdate'], 'button', 'Update');
         this.inputTextCreate = createInputElement(['createText'], 'text');
@@ -34,6 +60,7 @@ export default class GarageView {
         this.buttonNext = createInputElement(['next', 'buttonNext', 'disabled'], 'button', 'Next');
         this.event = new Event('click');
         this.quantityPages = 1;
+        this.numberForFirstWinner = 0;
     }
 
     public create(): HTMLElement {
@@ -107,19 +134,60 @@ export default class GarageView {
         this.updateButton.disabled = true;
     }
 
-    private race(): void {
+    private race() {
         this.reset();
-        const startButtons = document.querySelectorAll('.start');
-        startButtons.forEach((button) => button.dispatchEvent(this.event));
+        this.numberForFirstWinner = 0;
+        const distance = getDistance();
+        try {
+            document.querySelectorAll('.car-image').forEach(async (car) => {
+                const id = Number(car.getAttribute('id'));
+                const dataStarted = await startEngineApi(id);
+                const startTime = new Date().getTime();
+                const timeForAnimation = dataStarted.distance / dataStarted.velocity;
+                const growInSec: number = (distance * 1000) / timeForAnimation;
+                let requestID = 0;
+                const animation = () => {
+                    const currentTime = new Date().getTime();
+                    const step: number = ((currentTime - startTime) / 1000) * growInSec;
+                    if (car instanceof HTMLElement && step < distance) {
+                        car.style.transform = `translateX(${step}px)`;
+                        requestID = requestAnimationFrame(animation);
+                        car.setAttribute('requestID', requestID.toString());
+                    }
+                };
+                animation();
+                const dataDrive = await switchEngineToDrive(id);
+                if (dataDrive.status === 500) cancelAnimationFrame(requestID);
+                if (dataDrive.status === 200) {
+                    this.numberForFirstWinner += 1;
+                    if (this.numberForFirstWinner === 1) {
+                        const dataWinner = await getWinnerApi(id);
+                        const time = Number((timeForAnimation / 1000).toFixed(2));
+                        const carWinner = await getCarApi(id);
+                        createModalText(`Winner: ${carWinner.name}, time: ${time}sec`);
+                        if (!!dataWinner.wins) {
+                            this.updateWinner(id, time, dataWinner);
+                        } else await createWinnerApi({ id, wins: this.FIRST_WIN, time });
+                    }
+                }
+            });
+        } catch {}
     }
 
     private reset(): void {
-        const stopButtons = document.querySelectorAll('.stop');
-        stopButtons.forEach((button) => button.dispatchEvent(this.event));
+        this.numberForFirstWinner = this.NUMBER_FOR_RESET;
+        createModalText();
+        removeModalText();
+        const carsForAnimation = document.querySelectorAll('.car-image');
+        carsForAnimation.forEach(async (car) => {
+            const id = Number(car.getAttribute('id'));
+            const requestID = Number(car.getAttribute('requestID'));
+            cancelAnimationFrame(requestID);
+            await stopEngine(id);
+            if (car instanceof HTMLElement) car.style.transform = `translateX(0px)`;
+        });
     }
-
     private generate(): void {
-        console.log('generate 100 cars');
         const MAX_QUANTITY_CARS_ON_PAGE = 7;
         this.addCarsToBase(this.generateListCars());
         this.setQuantityCars();
@@ -197,24 +265,13 @@ export default class GarageView {
         return Array(NUMBER_CARS_FOR_GENERATE)
             .fill(null)
             .map(() => {
-                const randomBrandNumber = this.getRandomNumber(NUMBER_BRANDS);
-                const randomModelNumber = this.getRandomNumber(CarList[randomBrandNumber].models.length);
+                const randomBrandNumber = getRandomNumber(NUMBER_BRANDS);
+                const randomModelNumber = getRandomNumber(CarList[randomBrandNumber].models.length);
                 return {
                     name: `${CarList[randomBrandNumber].brand} ${CarList[randomBrandNumber].models[randomModelNumber]}`,
-                    color: this.getRandomColor(),
+                    color: getRandomColor(),
                 };
             });
-    }
-    private getRandomColor(): string {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i += 1) {
-            color += letters[this.getRandomNumber(letters.length)];
-        }
-        return color;
-    }
-    private getRandomNumber(numberElements: number): number {
-        return Math.floor(Math.random() * numberElements);
     }
     private addCarsToBase(params: { name: string; color: string }[]) {
         params.forEach((item) => createCarApi(item));
@@ -227,5 +284,10 @@ export default class GarageView {
                 this.garage.append(carLine);
             }
         });
+    }
+    private async updateWinner(id: number, time: number, dataForUpdate: { wins: number; time: number }) {
+        const wins = dataForUpdate.wins + 1;
+        time = Math.min(time, dataForUpdate.time);
+        await updateWinnerApi({ id, wins, time });
     }
 }

@@ -40,3 +40,29 @@ export function getAttribute(item: HTMLElement, attribute: string): string {
         return value;
     } else throw new Error('not exists');
 }
+
+export function getRandomNumber(numberElements: number): number {
+    return Math.floor(Math.random() * numberElements);
+}
+export function getRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i += 1) {
+        color += letters[getRandomNumber(letters.length)];
+    }
+    return color;
+}
+export function createModalText(text = ''): void {
+    const modal = createElement('div', ['modal'], text);
+    document.body.append(modal);
+}
+export function removeModalText(): void {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach((modal) => modal.remove());
+}
+export function getDistance(): number {
+    const documentClientWidth = document.documentElement.clientWidth;
+    const carContainerWidth = findSelector(`.start-container`).clientWidth;
+    const distance = documentClientWidth - carContainerWidth;
+    return distance;
+}

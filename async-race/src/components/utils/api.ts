@@ -5,6 +5,7 @@ const path = '/garage';
 enum Path {
     GARAGE = '/garage',
     ENGINE = '/engine',
+    WINNERS = '/winners',
 }
 
 export async function getCarsOnPageApi(page: number) {
@@ -71,5 +72,44 @@ export async function stopEngine(id: number) {
     const response = await fetch(`${url}${Path.ENGINE}?id=${id}&status=stopped`, {
         method: 'PATCH',
     });
-    return response;
+    return response.json();
+}
+export async function getNumberWinnersApi() {
+    const response = await fetch(`${url}${Path.WINNERS}?_limit=10`);
+    const numberOfWinners = response.headers.get('X-Total-Count');
+    return numberOfWinners;
+}
+
+export async function createWinnerApi(body: { id: number; wins: number; time: number }) {
+    await fetch(`${url}${Path.WINNERS}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+    });
+    // const carCreated = await response.json();
+    // return carCreated;
+}
+export async function getWinnerApi(id: number) {
+    const response = await fetch(`${url}${Path.WINNERS}/${id}`);
+    const data = await response.json();
+    return data;
+}
+export async function updateWinnerApi(param: { id: number; wins: number; time: number }) {
+    await fetch(`${url}${Path.WINNERS}/${param.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            wins: param.wins,
+            time: param.time,
+        }),
+    });
+}
+export async function removeCarFromWinnersApi(id: number) {
+    await fetch(`${url}${Path.WINNERS}/${id}`, {
+        method: 'DELETE',
+    });
 }

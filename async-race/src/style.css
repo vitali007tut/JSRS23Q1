@@ -143,13 +143,16 @@ thead {
 }
 
 .cars-number,
-.pages-number {
+.pages-number,
+.winners-quantity,
+.pages-quantity {
   color: #fff;
   font-size: 1.6rem;
   font-weight: bold;
 }
 
-.pages-number {
+.pages-number,
+.pages-quantity {
   color: burlywood;
 }
 
@@ -203,4 +206,38 @@ thead {
 .next.disabled {
   background: #545454;
   cursor: not-allowed;
+}
+
+.modal {
+  position: fixed;
+  left: 22vw;
+  top: 45vh;
+  font-size: 4rem;
+  color: white;
+  text-shadow: #FC0 1px 0 10px;
+  animation-name: action;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes action {
+  from {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.1);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  75% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }

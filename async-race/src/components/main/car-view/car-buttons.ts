@@ -1,6 +1,6 @@
 import { CarType } from '../../utils/base';
 import { createElement, findClosest, findSelector, findSelectorInput } from '../../utils/utils';
-import { getCarApi, getCarsOnPageApi, getNumberCarsApi, removeCarApi } from '../../utils/api';
+import { getCarApi, getCarsOnPageApi, getNumberCarsApi, removeCarApi, removeCarFromWinnersApi } from '../../utils/api';
 import CarLine from './car-line';
 
 export default class CarButtons {
@@ -30,6 +30,7 @@ export default class CarButtons {
         const button = createElement('a', ['remove', 'button', `${id}`], 'Remove');
         button.addEventListener('click', () => {
             removeCarApi(id);
+            removeCarFromWinnersApi(id);
             findClosest(button, '.line').remove();
             this.updateGarageQuantity();
             const carsOnPageAfterRemove = document.querySelectorAll('.line').length;
