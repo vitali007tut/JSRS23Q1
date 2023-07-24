@@ -111,11 +111,6 @@ export async function removeCarFromWinnersApi(id: number) {
         method: 'DELETE',
     });
 }
-export async function getWinnersApi(page: number, limit: number) {
-    const response = await fetch(`${url}${Path.WINNERS}?_page=${page}&_limit=${limit}`);
-    const data = await response.json();
-    return data;
-}
 export async function sortTable({ page, limit, sort, order }: SortTableType) {
     const response = await fetch(`${url}${Path.WINNERS}?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`);
     return response.json();

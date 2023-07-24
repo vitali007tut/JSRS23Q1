@@ -1,4 +1,4 @@
-import { getCarApi, getNumberWinnersApi, getWinnersApi, sortTable } from '../utils/api';
+import { getCarApi, getNumberWinnersApi, sortTable } from '../utils/api';
 import { LineWinnersType, SortTableType, WinnerType } from '../utils/base';
 import { createElement, createInputElement } from '../utils/utils';
 import ImageItems from './car-view/image-items';
