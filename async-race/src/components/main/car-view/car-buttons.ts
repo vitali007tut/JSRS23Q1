@@ -41,6 +41,7 @@ export default class CarButtons {
             this.updatePageQuantity();
             WinnersView.getInstance().setWinnersDescription();
             WinnersView.getInstance().updateControlButtons();
+            WinnersView.getInstance().drawTableBody();
         });
         return button;
     }
