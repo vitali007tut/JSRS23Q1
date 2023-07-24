@@ -39,6 +39,8 @@ export default class WinnersView {
 
     public create(): HTMLElement {
         this.setWinnersDescription();
+        this.table.setAttribute('sort', 'id');
+        this.table.setAttribute('order', 'ASC');
         this.table.append(this.createDescription(), this.createTable(), this.createPagesControls());
         this.updateControlButtons();
         return this.table;
@@ -104,20 +106,9 @@ export default class WinnersView {
     }
     public async drawTableBody() {
         this.tableBody.innerHTML = '';
-        const data = await getWinnersApi(this.numberOfActivePage, this.WINNERS_ON_PAGE);
-        data.forEach(async (element: WinnerType, index: number) => {
-            const id = element.id;
-            const carFromGarage = await getCarApi(id);
-            const param = {
-                index,
-                color: carFromGarage.color,
-                name: carFromGarage.name,
-                wins: element.wins,
-                time: element.time,
-            };
-            const line = this.drawWinnerLine(param);
-            this.tableBody.append(line);
-        });
+        const sort = this.table.getAttribute('sort');
+        const order = this.table.getAttribute('order');
+        if (sort && order) this.drawTableWithSort(sort, order);
     }
     private drawWinnerLine(param: LineWinnersType): HTMLElement {
         const line = document.createElement('tr');
@@ -153,9 +144,13 @@ export default class WinnersView {
         if (this.numberClicksWins % 2 === 1) {
             this.buttonWins.innerHTML = `Wins &#9660;`;
             this.drawTableWithSort('wins', 'DESC');
+            this.table.setAttribute('sort', 'wins');
+            this.table.setAttribute('order', 'DESC');
         } else {
             this.buttonWins.innerHTML = `Wins &#9650;`;
             this.drawTableWithSort('wins', 'ASC');
+            this.table.setAttribute('sort', 'wins');
+            this.table.setAttribute('order', 'ASC');
         }
     }
     private sortByTime() {
@@ -164,12 +159,16 @@ export default class WinnersView {
         if (this.numberClicksTime % 2 === 1) {
             this.buttonBestTime.innerHTML = `Best time (sec) &#9660;`;
             this.drawTableWithSort('time', 'DESC');
+            this.table.setAttribute('sort', 'time');
+            this.table.setAttribute('order', 'DESC');
         } else {
             this.buttonBestTime.innerHTML = `Best time (sec) &#9650;`;
             this.drawTableWithSort('time', 'ASC');
+            this.table.setAttribute('sort', 'time');
+            this.table.setAttribute('order', 'ASC');
         }
     }
-    private async drawTableWithSort(sort: string, order: string) {
+    private async drawTableWithSort(sort = 'id', order = 'ASC') {
         const paramForSort: SortTableType = {
             page: this.numberOfActivePage,
             limit: this.WINNERS_ON_PAGE,
