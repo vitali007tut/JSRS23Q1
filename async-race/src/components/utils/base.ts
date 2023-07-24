@@ -15,3 +15,9 @@ export type LineWinnersType = {
     wins: number;
     time: number;
 };
+export type SortTableType = {
+    page: number;
+    limit: number;
+    sort: string;
+    order: string;
+};

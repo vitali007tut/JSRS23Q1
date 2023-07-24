@@ -1,4 +1,4 @@
-import { CarType } from './base';
+import { CarType, SortTableType } from './base';
 
 const url = 'http://127.0.0.1:3000';
 const path = '/garage';
@@ -38,13 +38,13 @@ export async function createCarApi(body: { name: string; color: string }) {
 }
 
 export async function removeCarApi(id: number) {
-    const response = await fetch(`${url}${path}/${id}`, {
+    await fetch(`${url}${path}/${id}`, {
         method: 'DELETE',
     });
 }
 
 export async function updateCarApi(param: CarType) {
-    const response = await fetch(`${url}${path}/${param.id}`, {
+    await fetch(`${url}${path}/${param.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -88,8 +88,6 @@ export async function createWinnerApi(body: { id: number; wins: number; time: nu
         },
         body: JSON.stringify(body),
     });
-    // const carCreated = await response.json();
-    // return carCreated;
 }
 export async function getWinnerApi(id: number) {
     const response = await fetch(`${url}${Path.WINNERS}/${id}`);
@@ -117,4 +115,8 @@ export async function getWinnersApi(page: number, limit: number) {
     const response = await fetch(`${url}${Path.WINNERS}?_page=${page}&_limit=${limit}`);
     const data = await response.json();
     return data;
+}
+export async function sortTable({ page, limit, sort, order }: SortTableType) {
+    const response = await fetch(`${url}${Path.WINNERS}?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`);
+    return response.json();
 }

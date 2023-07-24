@@ -1,5 +1,5 @@
-import { getCarApi, getNumberWinnersApi, getWinnersApi } from '../utils/api';
-import { LineWinnersType, WinnerType } from '../utils/base';
+import { getCarApi, getNumberWinnersApi, getWinnersApi, sortTable } from '../utils/api';
+import { LineWinnersType, SortTableType, WinnerType } from '../utils/base';
 import { createElement, createInputElement } from '../utils/utils';
 import ImageItems from './car-view/image-items';
 
@@ -14,6 +14,10 @@ export default class WinnersView {
     private numberOfActivePage: number;
     public tableBody: HTMLElement;
     private static instance: WinnersView;
+    private buttonWins: HTMLElement;
+    private buttonBestTime: HTMLElement;
+    private numberClicksWins = 0;
+    private numberClicksTime = 0;
 
     private constructor() {
         this.table = createElement('table', ['table']);
@@ -23,6 +27,8 @@ export default class WinnersView {
         this.buttonNext = createInputElement(['next', 'buttonNext'], 'button', 'Next');
         this.tableBody = createElement('tbody', ['tbody']);
         this.numberOfActivePage = this.FIRST_PAGE;
+        this.buttonWins = createElement('th', ['button-wins'], 'Wins ');
+        this.buttonBestTime = createElement('th', ['button-time'], 'Best time (sec) ');
     }
     public static getInstance() {
         if (!WinnersView.instance) {
@@ -44,13 +50,16 @@ export default class WinnersView {
     }
     private createTable(): HTMLElement {
         const container = createElement('div', ['winners-table']);
-        const headArray = ['Number', 'Car', 'Name', 'Wins', 'Best time (sec)'];
+        const headArray = ['Number', 'Car', 'Name'];
         const headInner = document.createElement('tr');
         headArray.forEach((tableHeadCeil) => {
             const ceil = document.createElement('th');
             ceil.innerHTML = tableHeadCeil;
             headInner.append(ceil);
         });
+        this.buttonWins.addEventListener('click', () => this.sortByWins());
+        this.buttonBestTime.addEventListener('click', () => this.sortByTime());
+        headInner.append(this.buttonWins, this.buttonBestTime);
         const tableHead = createElement('thead', ['thead']);
         tableHead.append(headInner);
         this.drawTableBody();
@@ -137,5 +146,50 @@ export default class WinnersView {
         if (this.numberOfActivePage < quantityOfPages) {
             this.buttonNext.classList.remove('disabled');
         }
+    }
+    private sortByWins() {
+        this.numberClicksWins += 1;
+        this.buttonBestTime.innerHTML = `Best time (sec)`;
+        if (this.numberClicksWins % 2 === 1) {
+            this.buttonWins.innerHTML = `Wins &#9660;`;
+            this.drawTableWithSort('wins', 'DESC');
+        } else {
+            this.buttonWins.innerHTML = `Wins &#9650;`;
+            this.drawTableWithSort('wins', 'ASC');
+        }
+    }
+    private sortByTime() {
+        this.numberClicksTime += 1;
+        this.buttonWins.innerHTML = `Wins`;
+        if (this.numberClicksTime % 2 === 1) {
+            this.buttonBestTime.innerHTML = `Best time (sec) &#9660;`;
+            this.drawTableWithSort('time', 'DESC');
+        } else {
+            this.buttonBestTime.innerHTML = `Best time (sec) &#9650;`;
+            this.drawTableWithSort('time', 'ASC');
+        }
+    }
+    private async drawTableWithSort(sort: string, order: string) {
+        const paramForSort: SortTableType = {
+            page: this.numberOfActivePage,
+            limit: this.WINNERS_ON_PAGE,
+            sort,
+            order,
+        };
+        const data = await sortTable(paramForSort);
+        this.tableBody.innerHTML = '';
+        data.forEach(async (element: WinnerType, index: number) => {
+            const id = element.id;
+            const carFromGarage = await getCarApi(id);
+            const param = {
+                index,
+                color: carFromGarage.color,
+                name: carFromGarage.name,
+                wins: element.wins,
+                time: element.time,
+            };
+            const line = this.drawWinnerLine(param);
+            this.tableBody.append(line);
+        });
     }
 }

@@ -2,7 +2,6 @@ import {
     createElement,
     createInputElement,
     createModalText,
-    findClosest,
     findSelector,
     getAttribute,
     getDistance,
@@ -119,7 +118,6 @@ export default class GarageView {
     }
 
     private async updateCar() {
-        console.log('update car', this.updateButton.getAttribute('id'));
         this.inputTextUpdate.setAttribute('disabled', 'true');
         document.querySelectorAll('.line').forEach((line) => line.classList.remove('selected'));
         const id = Number.parseInt(getAttribute(this.updateButton, 'id'));

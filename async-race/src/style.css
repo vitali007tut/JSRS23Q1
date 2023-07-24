@@ -261,3 +261,9 @@ th {
 .winners-controls-page {
   padding-top: 1rem;
 }
+
+.button-wins,
+.button-time {
+  cursor: pointer;
+}
+
