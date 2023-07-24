@@ -27,6 +27,7 @@ import {
 } from '../utils/api';
 import ImageItems from './car-view/image-items';
 import CarList from '../utils/car-list';
+import WinnersView from './winners-view';
 
 export default class GarageView {
     private updateButton: HTMLInputElement;
@@ -168,6 +169,7 @@ export default class GarageView {
                         if (!!dataWinner.wins) {
                             this.updateWinner(id, time, dataWinner);
                         } else await createWinnerApi({ id, wins: this.FIRST_WIN, time });
+                        this.updateWinnersView();
                     }
                 }
             });
@@ -289,5 +291,10 @@ export default class GarageView {
         const wins = dataForUpdate.wins + 1;
         time = Math.min(time, dataForUpdate.time);
         await updateWinnerApi({ id, wins, time });
+    }
+    private updateWinnersView() {
+        WinnersView.getInstance().drawTableBody();
+        WinnersView.getInstance().setWinnersDescription();
+        WinnersView.getInstance().updateControlButtons();
     }
 }

@@ -30,7 +30,7 @@ export default class Header {
         });
         mainComponent.setContent(garageView);
 
-        const winnersView = new WinnersView().create();
+        const winnersView = WinnersView.getInstance().create();
         this.winnersButton.addEventListener('click', () => {
             this.garageButton.classList.remove('active');
             this.winnersButton.classList.remove('active');

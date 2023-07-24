@@ -2,6 +2,7 @@ import { CarType } from '../../utils/base';
 import { createElement, findClosest, findSelector, findSelectorInput } from '../../utils/utils';
 import { getCarApi, getCarsOnPageApi, getNumberCarsApi, removeCarApi, removeCarFromWinnersApi } from '../../utils/api';
 import CarLine from './car-line';
+import WinnersView from '../winners-view';
 
 export default class CarButtons {
     private readonly FIRST_PAGE: number = 1;
@@ -38,6 +39,8 @@ export default class CarButtons {
                 this.updateActivePage();
             }
             this.updatePageQuantity();
+            WinnersView.getInstance().setWinnersDescription();
+            WinnersView.getInstance().updateControlButtons();
         });
         return button;
     }

@@ -1,5 +1,7 @@
-import { getNumberWinnersApi } from '../utils/api';
+import { getCarApi, getNumberWinnersApi, getWinnersApi } from '../utils/api';
+import { LineWinnersType, WinnerType } from '../utils/base';
 import { createElement, createInputElement } from '../utils/utils';
+import ImageItems from './car-view/image-items';
 
 export default class WinnersView {
     public table: HTMLElement;
@@ -9,42 +11,30 @@ export default class WinnersView {
     private buttonNext: HTMLInputElement;
     private winnersQuantity: HTMLElement;
     private activePage: HTMLElement;
-    // private quantityPages: number;
+    private numberOfActivePage: number;
+    public tableBody: HTMLElement;
+    private static instance: WinnersView;
 
-    constructor() {
+    private constructor() {
         this.table = createElement('table', ['table']);
-        this.buttonPrev = createInputElement(['prev', 'buttonPrev', 'disabled'], 'button', 'Prev');
-        this.buttonNext = createInputElement(['next', 'buttonNext', 'disabled'], 'button', 'Next');
         this.winnersQuantity = createElement('div', ['winners-quantity']);
-        // this.quantityPages = this.FIRST_PAGE;
-        // this.getPagesQuantity();
         this.activePage = createElement('div', ['pages-quantity']);
-        this.buttonPrev = createInputElement(['prev', 'buttonPrev', 'disabled'], 'button', 'Prev');
-        this.buttonNext = createInputElement(['next', 'buttonNext', 'disabled'], 'button', 'Next');
+        this.buttonPrev = createInputElement(['prev', 'buttonPrev'], 'button', 'Prev');
+        this.buttonNext = createInputElement(['next', 'buttonNext'], 'button', 'Next');
+        this.tableBody = createElement('tbody', ['tbody']);
+        this.numberOfActivePage = this.FIRST_PAGE;
+    }
+    public static getInstance() {
+        if (!WinnersView.instance) {
+            WinnersView.instance = new WinnersView();
+        }
+        return WinnersView.instance;
     }
 
     public create(): HTMLElement {
-        this.createTable();
         this.setWinnersDescription();
         this.table.append(this.createDescription(), this.createTable(), this.createPagesControls());
-        const tableInner = `<thead><tr><th>Number</th><th>Car</th><th>Name</th><th>Wins</th><th>Best time (seconds)
-        </th></tr></thead>
-
-    <tbody>
-      <tr>
-        <td>John</td><td>Smith</td><td>10</td>
-      </tr>
-      <tr>
-        <td>Pete</td><td>Brown</td><td>15</td>
-      </tr>
-      <tr>
-        <td>Ann</td><td>Lee</td><td>5</td>
-      </tr>
-      <tr>
-        <td>...</td><td>...</td><td>...</td>
-      </tr>
-    </tbody>`;
-        this.table.insertAdjacentHTML('afterbegin', tableInner);
+        this.updateControlButtons();
         return this.table;
     }
     private createDescription(): HTMLElement {
@@ -54,29 +44,47 @@ export default class WinnersView {
     }
     private createTable(): HTMLElement {
         const container = createElement('div', ['winners-table']);
-        const headInner = `<tr><th>Number</th><th>Car</th><th>Name</th><th>Wins</th><th>Best time (seconds)</th></tr>`;
+        const headArray = ['Number', 'Car', 'Name', 'Wins', 'Best time (sec)'];
+        const headInner = document.createElement('tr');
+        headArray.forEach((tableHeadCeil) => {
+            const ceil = document.createElement('th');
+            ceil.innerHTML = tableHeadCeil;
+            headInner.append(ceil);
+        });
         const tableHead = createElement('thead', ['thead']);
-        tableHead.innerHTML = headInner;
-        container.append(tableHead);
+        tableHead.append(headInner);
+        this.drawTableBody();
+        container.append(tableHead, this.tableBody);
         return container;
     }
 
-    private async setWinnersDescription() {
+    public async setWinnersDescription() {
         const quantity = await getNumberWinnersApi();
         this.winnersQuantity.innerHTML = `Winners(${quantity})`;
-        this.activePage.innerHTML = `Page ${this.FIRST_PAGE}/${Math.ceil(Number(quantity) / this.WINNERS_ON_PAGE)}`;
-        // return data.json();
-    }
-    private async getPagesQuantity() {
-        const winnersQuantity = await getNumberWinnersApi();
-        // this.quantityPages = Math.ceil(Number(winnersQuantity) / this.WINNERS_ON_PAGE);
-        return Math.ceil(Number(winnersQuantity) / this.WINNERS_ON_PAGE);
+        const quantityOfPages = Math.ceil(Number(quantity) / this.WINNERS_ON_PAGE);
+        if (this.numberOfActivePage > quantityOfPages) {
+            this.numberOfActivePage -= 1;
+            this.drawTableBody();
+        }
+        this.activePage.innerHTML = `Page ${this.numberOfActivePage}/${quantityOfPages}`;
     }
     private openPrevPage() {
-        console.log('prev in winners');
+        if (this.numberOfActivePage != this.FIRST_PAGE) {
+            this.numberOfActivePage -= 1;
+            this.setWinnersDescription();
+            this.drawTableBody();
+            this.updateControlButtons();
+        }
     }
-    private openNextPage() {
-        console.log('next in winners');
+    private async openNextPage() {
+        const quantity = await getNumberWinnersApi();
+        const quantityOfPages = Math.ceil(Number(quantity) / this.WINNERS_ON_PAGE);
+        if (this.numberOfActivePage != quantityOfPages) {
+            this.numberOfActivePage += 1;
+            this.setWinnersDescription();
+            this.drawTableBody();
+            this.updateControlButtons();
+        }
     }
     private createPagesControls(): HTMLElement {
         const container = createElement('div', ['winners-controls-page']);
@@ -84,5 +92,50 @@ export default class WinnersView {
         this.buttonNext.addEventListener('click', () => this.openNextPage());
         container.append(this.buttonPrev, this.buttonNext);
         return container;
+    }
+    public async drawTableBody() {
+        this.tableBody.innerHTML = '';
+        const data = await getWinnersApi(this.numberOfActivePage, this.WINNERS_ON_PAGE);
+        data.forEach(async (element: WinnerType, index: number) => {
+            const id = element.id;
+            const carFromGarage = await getCarApi(id);
+            const param = {
+                index,
+                color: carFromGarage.color,
+                name: carFromGarage.name,
+                wins: element.wins,
+                time: element.time,
+            };
+            const line = this.drawWinnerLine(param);
+            this.tableBody.append(line);
+        });
+    }
+    private drawWinnerLine(param: LineWinnersType): HTMLElement {
+        const line = document.createElement('tr');
+        const number = createElement('td', ['td-number'], `${param.index + 1}`);
+        const imageHTML = ImageItems.getCar(param.color);
+        const imageCar = createElement('td', ['td-car']);
+        imageCar.innerHTML = imageHTML;
+        const nameCeil = createElement('td', ['td-name'], `${param.name}`);
+        const winsCeil = createElement('td', ['td-wins'], `${param.wins}`);
+        const timeCeil = createElement('td', ['td-time'], `${param.time}`);
+        line.append(number, imageCar, nameCeil, winsCeil, timeCeil);
+        return line;
+    }
+    public async updateControlButtons() {
+        const quantity = await getNumberWinnersApi();
+        const quantityOfPages = Math.ceil(Number(quantity) / this.WINNERS_ON_PAGE);
+        if (this.numberOfActivePage === this.FIRST_PAGE) {
+            this.buttonPrev.classList.add('disabled');
+        }
+        if (this.numberOfActivePage === quantityOfPages) {
+            this.buttonNext.classList.add('disabled');
+        }
+        if (this.numberOfActivePage > this.FIRST_PAGE) {
+            this.buttonPrev.classList.remove('disabled');
+        }
+        if (this.numberOfActivePage < quantityOfPages) {
+            this.buttonNext.classList.remove('disabled');
+        }
     }
 }
