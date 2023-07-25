@@ -168,7 +168,7 @@ export default class WinnersView {
             this.table.setAttribute('order', 'ASC');
         }
     }
-    private async drawTableWithSort(sort = 'id', order = 'ASC') {
+    private async drawTableWithSort(sort: string, order: string) {
         const paramForSort: SortTableType = {
             page: this.numberOfActivePage,
             limit: this.WINNERS_ON_PAGE,

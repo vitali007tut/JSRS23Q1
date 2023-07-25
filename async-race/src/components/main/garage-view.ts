@@ -291,8 +291,8 @@ export default class GarageView {
         await updateWinnerApi({ id, wins, time });
     }
     private updateWinnersView() {
-        WinnersView.getInstance().drawTableBody();
         WinnersView.getInstance().setWinnersDescription();
         WinnersView.getInstance().updateControlButtons();
+        WinnersView.getInstance().drawTableBody();
     }
 }
