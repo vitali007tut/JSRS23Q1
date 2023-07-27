@@ -11,22 +11,12 @@ import {
 } from '../utils/utils';
 import { CarType } from '../utils/base';
 import CarLine from './car-view/car-line';
-import {
-    createCarApi,
-    createWinnerApi,
-    getCarApi,
-    getCarsOnPageApi,
-    getNumberCarsApi,
-    getWinnerApi,
-    startEngineApi,
-    stopEngine,
-    switchEngineToDrive,
-    updateCarApi,
-    updateWinnerApi,
-} from '../utils/api';
 import ImageItems from './car-view/image-items';
 import CarList from '../utils/car-list';
 import WinnersView from './winners-view';
+import EngineService from '../utils/engine-service';
+import GarageService from '../utils/garage-service';
+import WinnersService from '../utils/winners-service';
 
 export default class GarageView {
     private updateButton: HTMLInputElement;
@@ -42,11 +32,16 @@ export default class GarageView {
     private readonly FIRST_PAGE = 1;
     private readonly CARS_ON_PAGE = 7;
     private activePage = 1;
-    private quantityPages: number;
+    private quantityPages = 1;
     private event: Event;
-    private numberForFirstWinner: number;
+    private numberForFirstWinner = 0;
     private readonly NUMBER_FOR_RESET: number = 10;
     private readonly FIRST_WIN: number = 1;
+    private readonly MAX_QUANTITY_CARS_ON_PAGE = 7;
+    private engineService = new EngineService();
+    private garageService = new GarageService();
+    private winnersService = new WinnersService();
+
     constructor() {
         this.updateButton = createInputElement(['buttonUpdate'], 'button', 'Update');
         this.inputTextCreate = createInputElement(['createText'], 'text');
@@ -59,15 +54,15 @@ export default class GarageView {
         this.buttonPrev = createInputElement(['prev', 'buttonPrev', 'disabled'], 'button', 'Prev');
         this.buttonNext = createInputElement(['next', 'buttonNext', 'disabled'], 'button', 'Next');
         this.event = new Event('click');
-        this.quantityPages = 1;
-        this.numberForFirstWinner = 0;
     }
 
     public create(): HTMLElement {
         const container = createElement('div', ['garage-container']);
         container.append(this.createControls(), this.createGarage());
+
         return container;
     }
+
     private createControls(): HTMLElement {
         const controls = createElement('div', ['controls']);
         const createLine = createElement('div', ['create-line']);
@@ -88,8 +83,10 @@ export default class GarageView {
         generateButton.addEventListener('click', () => this.generate());
         commonLine.append(raceButton, resetButton, generateButton);
         controls.append(createLine, updateLine, commonLine);
+
         return controls;
     }
+
     public createGarage(): HTMLElement {
         const garageDescription: HTMLElement = createElement('div', ['garage-description']);
         this.numberPagesInGarage.id = this.activePage.toString();
@@ -101,6 +98,7 @@ export default class GarageView {
         );
         this.setQuantityCars();
         this.carsViewInGarageOnPage(this.FIRST_PAGE);
+
         return garageDescription;
     }
 
@@ -109,6 +107,7 @@ export default class GarageView {
         this.buttonPrev.addEventListener('click', () => this.openPrevPage());
         this.buttonNext.addEventListener('click', () => this.openNextPage());
         container.append(this.buttonPrev, this.buttonNext);
+
         return container;
     }
 
@@ -124,7 +123,7 @@ export default class GarageView {
         const name = this.inputTextUpdate.value;
         const color = this.inputColorUpdate.value;
         const param = { name, color, id };
-        await updateCarApi(param);
+        await this.garageService.updateCar(param);
         const imageUpdateCar = findSelector(`.image-id-${id}`);
         imageUpdateCar.innerHTML = '';
         imageUpdateCar.innerHTML = ImageItems.getCar(color);
@@ -137,41 +136,40 @@ export default class GarageView {
         this.reset();
         this.numberForFirstWinner = 0;
         const distance = getDistance();
-        try {
-            document.querySelectorAll('.car-image').forEach(async (car) => {
-                const id = Number(car.getAttribute('id'));
-                const dataStarted = await startEngineApi(id);
-                const startTime = new Date().getTime();
-                const timeForAnimation = dataStarted.distance / dataStarted.velocity;
-                const growInSec: number = (distance * 1000) / timeForAnimation;
-                let requestID = 0;
-                const animation = () => {
-                    const currentTime = new Date().getTime();
-                    const step: number = ((currentTime - startTime) / 1000) * growInSec;
-                    if (car instanceof HTMLElement && step < distance) {
-                        car.style.transform = `translateX(${step}px)`;
-                        requestID = requestAnimationFrame(animation);
-                        car.setAttribute('requestID', requestID.toString());
-                    }
-                };
-                animation();
-                const dataDrive = await switchEngineToDrive(id);
-                if (dataDrive.status === 500) cancelAnimationFrame(requestID);
-                if (dataDrive.status === 200) {
-                    this.numberForFirstWinner += 1;
-                    if (this.numberForFirstWinner === 1) {
-                        const dataWinner = await getWinnerApi(id);
-                        const time = Number((timeForAnimation / 1000).toFixed(2));
-                        const carWinner = await getCarApi(id);
-                        createModalText(`Winner: ${carWinner.name}, time: ${time}sec`);
-                        if (!!dataWinner.wins) {
-                            this.updateWinner(id, time, dataWinner);
-                        } else await createWinnerApi({ id, wins: this.FIRST_WIN, time });
-                        this.updateWinnersView();
-                    }
+        document.querySelectorAll('.car-image').forEach(async (car) => {
+            const id = Number(car.getAttribute('id'));
+            const dataStarted = await this.engineService.startEngine(id);
+            const startTime = new Date().getTime();
+            const timeForAnimation = dataStarted.distance / dataStarted.velocity;
+            const growInSec: number = (distance * 1000) / timeForAnimation;
+            const animation = () => {
+                const currentTime = new Date().getTime();
+                const step: number = ((currentTime - startTime) / 1000) * growInSec;
+                if (car instanceof HTMLElement && step < distance) {
+                    car.style.transform = `translateX(${step}px)`;
+                    const requestID = requestAnimationFrame(animation);
+                    car.setAttribute('requestID', requestID.toString());
                 }
-            });
-        } catch {}
+            };
+            animation();
+            try {
+                await this.engineService.driveEngine(id);
+                this.numberForFirstWinner += 1;
+                if (this.numberForFirstWinner === 1) {
+                    const dataWinner = await this.winnersService.getWinnerApi(id);
+                    const time = Number((timeForAnimation / 1000).toFixed(2));
+                    const carWinner = await this.garageService.getCar(id);
+                    createModalText(`Winner: ${carWinner.name}, time: ${time}sec`);
+                    if (!!dataWinner.wins) {
+                        this.updateWinner(id, time, dataWinner);
+                    } else await this.winnersService.createWinnerApi({ id, wins: this.FIRST_WIN, time });
+                    this.updateWinnersView();
+                }
+            } catch {
+                const requestID = Number(car.getAttribute('requestID'));
+                cancelAnimationFrame(requestID);
+            }
+        });
     }
 
     private reset(): void {
@@ -183,20 +181,19 @@ export default class GarageView {
             const id = Number(car.getAttribute('id'));
             const requestID = Number(car.getAttribute('requestID'));
             cancelAnimationFrame(requestID);
-            await stopEngine(id);
+            await this.engineService.stopEngine(id);
             if (car instanceof HTMLElement) car.style.transform = `translateX(0px)`;
         });
     }
     private generate(): void {
-        const MAX_QUANTITY_CARS_ON_PAGE = 7;
         this.addCarsToBase(this.generateListCars());
         this.setQuantityCars();
         const carsOnPage = document.querySelectorAll('.line').length;
-        if (carsOnPage < MAX_QUANTITY_CARS_ON_PAGE) this.addCarsOnPage(carsOnPage);
+        if (carsOnPage < this.MAX_QUANTITY_CARS_ON_PAGE) this.addCarsOnPage(carsOnPage);
     }
 
     private async setQuantityCars() {
-        const quantity = await getNumberCarsApi();
+        const quantity = await this.garageService.getNumberCars();
         this.numberCarsInGarage.innerHTML = `Garage(${quantity})`;
         this.numberCarsInGarage.id = `${quantity}`;
         this.quantityPages = Math.ceil(Number(quantity) / this.CARS_ON_PAGE);
@@ -205,7 +202,7 @@ export default class GarageView {
     }
     private async carsViewInGarageOnPage(page: number) {
         this.garage.innerHTML = '';
-        const data = await getCarsOnPageApi(page);
+        const data = await this.garageService.getCarsOnPage(page);
         data.forEach((element: CarType) => {
             const carLine = new CarLine(element.id).create(element.name, element.color, element.id);
             this.garage.append(carLine);
@@ -213,16 +210,19 @@ export default class GarageView {
     }
 
     private async addCreatedCar() {
-        const data = await createCarApi({ name: this.inputTextCreate.value, color: this.inputColorCreate.value });
+        const data = await this.garageService.createCar({
+            name: this.inputTextCreate.value,
+            color: this.inputColorCreate.value,
+        });
         const carsOnPageBeforeAdding = document.querySelectorAll('.line').length;
-        if (carsOnPageBeforeAdding < 7) {
+        if (carsOnPageBeforeAdding < this.MAX_QUANTITY_CARS_ON_PAGE) {
             const carLine = new CarLine(data.id).create(data.name, data.color, data.id);
             this.garage.append(carLine);
         }
     }
 
     private setActivePageButtons(pageActive: number, pagesQuantity: number) {
-        if (pageActive > 1) {
+        if (pageActive > this.FIRST_PAGE) {
             this.buttonPrev.disabled = false;
             this.buttonPrev.classList.remove('disabled');
         }
@@ -274,10 +274,10 @@ export default class GarageView {
             });
     }
     private addCarsToBase(params: { name: string; color: string }[]) {
-        params.forEach((item) => createCarApi(item));
+        params.forEach((item) => this.garageService.createCar(item));
     }
     private async addCarsOnPage(startIndex: number) {
-        const data = await getCarsOnPageApi(this.activePage);
+        const data = await this.garageService.getCarsOnPage(this.activePage);
         data.forEach((element: CarType, index: number) => {
             if (index >= startIndex) {
                 const carLine = new CarLine(element.id).create(element.name, element.color, element.id);
@@ -288,7 +288,7 @@ export default class GarageView {
     private async updateWinner(id: number, time: number, dataForUpdate: { wins: number; time: number }) {
         const wins = dataForUpdate.wins + 1;
         time = Math.min(time, dataForUpdate.time);
-        await updateWinnerApi({ id, wins, time });
+        await this.winnersService.updateWinnerApi({ id, wins, time });
     }
     private updateWinnersView() {
         WinnersView.getInstance().setWinnersDescription();

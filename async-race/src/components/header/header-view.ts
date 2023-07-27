@@ -8,33 +8,42 @@ export default class Header {
         GARAGE: 'To Garage',
         WINNERS: 'To Winners',
     };
+
     private classButton = {
         GARAGE: 'garage-button',
         WINNERS: 'winners-button',
     };
 
-    private garageButton: HTMLElement = createElement('a', [this.classButton.GARAGE], this.NameButtons.GARAGE);
-    private winnersButton: HTMLElement = createElement('a', [this.classButton.WINNERS], this.NameButtons.WINNERS);
+    private garageNavigationButton: HTMLElement = createElement(
+        'a',
+        [this.classButton.GARAGE],
+        this.NameButtons.GARAGE
+    );
+
+    private winnersNavigationButton: HTMLElement = createElement(
+        'a',
+        [this.classButton.WINNERS],
+        this.NameButtons.WINNERS
+    );
+
     private header: HTMLElement = createElement('header', ['header']);
 
     public create(mainComponent: MainView): HTMLElement {
-        this.garageButton.classList.add('active');
-        this.header.append(this.garageButton, this.winnersButton);
-
+        this.garageNavigationButton.classList.add('active');
+        this.header.append(this.garageNavigationButton, this.winnersNavigationButton);
         const garageView = new GarageView().create();
-        this.garageButton.addEventListener('click', () => {
-            this.winnersButton.classList.remove('active');
-            this.garageButton.classList.remove('active');
-            this.garageButton.classList.add('active');
+        this.garageNavigationButton.addEventListener('click', () => {
+            this.winnersNavigationButton.classList.remove('active');
+            this.garageNavigationButton.classList.remove('active');
+            this.garageNavigationButton.classList.add('active');
             mainComponent.setContent(garageView);
         });
         mainComponent.setContent(garageView);
-
         const winnersView = WinnersView.getInstance().create();
-        this.winnersButton.addEventListener('click', () => {
-            this.garageButton.classList.remove('active');
-            this.winnersButton.classList.remove('active');
-            this.winnersButton.classList.add('active');
+        this.winnersNavigationButton.addEventListener('click', () => {
+            this.garageNavigationButton.classList.remove('active');
+            this.winnersNavigationButton.classList.remove('active');
+            this.winnersNavigationButton.classList.add('active');
             mainComponent.setContent(winnersView);
         });
 

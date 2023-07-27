@@ -1,4 +1,4 @@
-import { startEngineApi, stopEngine, switchEngineToDrive } from '../../utils/api';
+import EngineService from '../../utils/engine-service';
 import { createElement, findSelector, getDistance } from '../../utils/utils';
 import CarButtons from './car-buttons';
 import ImageItems from './image-items';
@@ -8,6 +8,8 @@ export default class CarLine {
     private buttons: CarButtons;
     private startButton: HTMLElement;
     private stopButton: HTMLElement;
+    private engineService = new EngineService();
+
     constructor(id: number) {
         this.buttons = new CarButtons();
         this.startButton = this.buttons.getStartButton(id);
@@ -41,7 +43,7 @@ export default class CarLine {
     private async carStarted(id: number) {
         this.startButton.classList.add('disable');
         this.stopButton.classList.remove('disable');
-        const dataStarted = await startEngineApi(id);
+        const dataStarted = await this.engineService.startEngine(id);
         const timeForAnimation = dataStarted.distance / dataStarted.velocity;
         const carForAnimation = findSelector(`.image-id-${id}`);
         const distance = getDistance();
@@ -58,11 +60,10 @@ export default class CarLine {
         };
         this.requestID = animation();
         try {
-            const dataDrive = await switchEngineToDrive(id);
-            if (dataDrive.status === 500) {
-                cancelAnimationFrame(this.requestID);
-            }
-        } catch {}
+            await this.engineService.driveEngine(id);
+        } catch {
+            cancelAnimationFrame(this.requestID);
+        }
     }
     public async carStopped(id: number) {
         this.startButton.classList.remove('disable');
@@ -70,6 +71,6 @@ export default class CarLine {
         const carForAnimation = findSelector(`.image-id-${id}`);
         cancelAnimationFrame(this.requestID);
         carForAnimation.style.transform = `translateX(0px)`;
-        await stopEngine(id);
+        await this.engineService.stopEngine(id);
     }
 }

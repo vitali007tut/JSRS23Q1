@@ -1,6 +1,7 @@
-import { getCarApi, getNumberWinnersApi, sortTable } from '../utils/api';
 import { LineWinnersType, SortTableType, WinnerType } from '../utils/base';
+import GarageService from '../utils/garage-service';
 import { createElement, createInputElement } from '../utils/utils';
+import WinnersService from '../utils/winners-service';
 import ImageItems from './car-view/image-items';
 
 export default class WinnersView {
@@ -18,6 +19,8 @@ export default class WinnersView {
     private buttonBestTime: HTMLElement;
     private numberClicksWins = 0;
     private numberClicksTime = 0;
+    private garageService = new GarageService();
+    private winnersService = new WinnersService();
 
     private constructor() {
         this.table = createElement('table', ['table']);
@@ -70,7 +73,7 @@ export default class WinnersView {
     }
 
     public async setWinnersDescription() {
-        const quantity = await getNumberWinnersApi();
+        const quantity = await this.winnersService.getNumberWinnersApi();
         this.winnersQuantity.innerHTML = `Winners(${quantity})`;
         const quantityOfPages = Math.ceil(Number(quantity) / this.WINNERS_ON_PAGE);
         if (this.numberOfActivePage > quantityOfPages) {
@@ -80,36 +83,49 @@ export default class WinnersView {
         this.activePage.innerHTML = `Page ${this.numberOfActivePage}/${quantityOfPages}`;
     }
     private openPrevPage() {
-        if (this.numberOfActivePage != this.FIRST_PAGE) {
-            this.numberOfActivePage -= 1;
-            this.setWinnersDescription();
-            this.drawTableBody();
-            this.updateControlButtons();
+        if (this.numberOfActivePage === this.FIRST_PAGE) {
+            return;
+        } else {
+            {
+                this.numberOfActivePage -= 1;
+                this.setWinnersDescription();
+                this.drawTableBody();
+                this.updateControlButtons();
+            }
         }
     }
+
     private async openNextPage() {
-        const quantity = await getNumberWinnersApi();
+        const quantity = await this.winnersService.getNumberWinnersApi();
         const quantityOfPages = Math.ceil(Number(quantity) / this.WINNERS_ON_PAGE);
-        if (this.numberOfActivePage != quantityOfPages) {
+
+        if (this.numberOfActivePage === quantityOfPages) {
+            return;
+        } else {
             this.numberOfActivePage += 1;
             this.setWinnersDescription();
             this.drawTableBody();
             this.updateControlButtons();
         }
     }
+
     private createPagesControls(): HTMLElement {
         const container = createElement('div', ['winners-controls-page']);
         this.buttonPrev.addEventListener('click', () => this.openPrevPage());
         this.buttonNext.addEventListener('click', () => this.openNextPage());
         container.append(this.buttonPrev, this.buttonNext);
+
         return container;
     }
+
     public async drawTableBody() {
         this.tableBody.innerHTML = '';
         const sort = this.table.getAttribute('sort');
         const order = this.table.getAttribute('order');
+
         if (sort && order) this.drawTableWithSort(sort, order);
     }
+
     private drawWinnerLine(param: LineWinnersType): HTMLElement {
         const line = document.createElement('tr');
         const number = createElement('td', ['td-number'], `${param.index + 1}`);
@@ -120,27 +136,35 @@ export default class WinnersView {
         const winsCeil = createElement('td', ['td-wins'], `${param.wins}`);
         const timeCeil = createElement('td', ['td-time'], `${param.time}`);
         line.append(number, imageCar, nameCeil, winsCeil, timeCeil);
+
         return line;
     }
+
     public async updateControlButtons() {
-        const quantity = await getNumberWinnersApi();
+        const quantity = await this.winnersService.getNumberWinnersApi();
         const quantityOfPages = Math.ceil(Number(quantity) / this.WINNERS_ON_PAGE);
+
         if (this.numberOfActivePage === this.FIRST_PAGE) {
             this.buttonPrev.classList.add('disabled');
         }
+
         if (this.numberOfActivePage === quantityOfPages) {
             this.buttonNext.classList.add('disabled');
         }
+
         if (this.numberOfActivePage > this.FIRST_PAGE) {
             this.buttonPrev.classList.remove('disabled');
         }
+
         if (this.numberOfActivePage < quantityOfPages) {
             this.buttonNext.classList.remove('disabled');
         }
     }
+
     private sortByWins() {
         this.numberClicksWins += 1;
         this.buttonBestTime.innerHTML = `Best time (sec)`;
+
         if (this.numberClicksWins % 2 === 1) {
             this.buttonWins.innerHTML = `Wins &#9660;`;
             this.drawTableWithSort('wins', 'DESC');
@@ -153,9 +177,11 @@ export default class WinnersView {
             this.table.setAttribute('order', 'ASC');
         }
     }
+
     private sortByTime() {
         this.numberClicksTime += 1;
         this.buttonWins.innerHTML = `Wins`;
+
         if (this.numberClicksTime % 2 === 1) {
             this.buttonBestTime.innerHTML = `Best time (sec) &#9660;`;
             this.drawTableWithSort('time', 'DESC');
@@ -168,6 +194,7 @@ export default class WinnersView {
             this.table.setAttribute('order', 'ASC');
         }
     }
+
     private async drawTableWithSort(sort: string, order: string) {
         const paramForSort: SortTableType = {
             page: this.numberOfActivePage,
@@ -175,11 +202,11 @@ export default class WinnersView {
             sort,
             order,
         };
-        const data = await sortTable(paramForSort);
+        const data = await this.winnersService.sortTable(paramForSort);
         this.tableBody.innerHTML = '';
         data.forEach(async (element: WinnerType, index: number) => {
             const id = element.id;
-            const carFromGarage = await getCarApi(id);
+            const carFromGarage = await this.garageService.getCar(id);
             const param = {
                 index,
                 color: carFromGarage.color,
