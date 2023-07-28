@@ -1,6 +1,5 @@
 import {
     createElement,
-    createInputElement,
     createModalText,
     findSelector,
     getAttribute,
@@ -43,43 +42,59 @@ export default class GarageView {
     private winnersService = new WinnersService();
 
     constructor() {
-        this.updateButton = createInputElement(['buttonUpdate'], 'button', 'Update');
-        this.inputTextCreate = createInputElement(['createText'], 'text');
-        this.inputTextUpdate = createInputElement(['updateText'], 'text');
-        this.garage = createElement('div', ['garage']);
-        this.numberCarsInGarage = createElement('div', ['cars-number']);
-        this.numberPagesInGarage = createElement('div', ['pages-number']);
-        this.inputColorCreate = createInputElement(['createColor'], 'color', '#ffffff');
-        this.inputColorUpdate = createInputElement(['updateColor'], 'color', '#ffffff');
-        this.buttonPrev = createInputElement(['prev', 'buttonPrev', 'disabled'], 'button', 'Prev');
-        this.buttonNext = createInputElement(['next', 'buttonNext', 'disabled'], 'button', 'Next');
+        this.updateButton = createElement({ tag: 'input', classList: ['buttonUpdate'] });
+        this.updateButton.type = 'button';
+        this.updateButton.value = 'Update';
+        this.inputTextCreate = createElement({ tag: 'input', classList: ['createText'] });
+        this.inputTextCreate.type = 'text';
+        this.inputTextUpdate = createElement({ tag: 'input', classList: ['updateText'] });
+        this.inputTextUpdate.type = 'text';
+        this.garage = createElement({ tag: 'div', classList: ['garage'] });
+        this.numberCarsInGarage = createElement({ tag: 'div', classList: ['cars-number'] });
+        this.numberPagesInGarage = createElement({ tag: 'div', classList: ['pages-number'] });
+        this.inputColorCreate = createElement({ tag: 'input', classList: ['createColor'] });
+        this.inputColorCreate.type = 'color';
+        this.inputColorCreate.value = '#ffffff';
+        this.inputColorUpdate = createElement({ tag: 'input', classList: ['updateColor'] });
+        this.inputColorUpdate.type = 'color';
+        this.inputColorUpdate.value = '#ffffff';
+        this.buttonPrev = createElement({ tag: 'input', classList: ['prev', 'buttonPrev', 'disabled'] });
+        this.buttonPrev.type = 'button';
+        this.buttonPrev.value = 'Prev';
+        this.buttonNext = createElement({ tag: 'input', classList: ['next', 'buttonNext', 'disabled'] });
+        this.buttonNext.type = 'button';
+        this.buttonNext.value = 'Next';
         this.event = new Event('click');
     }
 
     public create(): HTMLElement {
-        const container = createElement('div', ['garage-container']);
+        const container = createElement({ tag: 'div', classList: ['garage-container'] });
         container.append(this.createControls(), this.createGarage());
 
         return container;
     }
 
     private createControls(): HTMLElement {
-        const controls = createElement('div', ['controls']);
-        const createLine = createElement('div', ['create-line']);
-        const createButton = createElement('a', ['buttonCreate'], 'Create');
+        const controls = createElement({ tag: 'div', classList: ['controls'] });
+        const createLine = createElement({ tag: 'div', classList: ['create-line'] });
+        const createButton = createElement({ tag: 'a', classList: ['buttonCreate'], textContent: 'Create' });
         createButton.addEventListener('click', () => this.createNewCar());
         createLine.append(this.inputTextCreate, this.inputColorCreate, createButton);
         this.inputTextUpdate.setAttribute('disabled', 'true');
-        const updateLine = createElement('div', ['update-line']);
+        const updateLine = createElement({ tag: 'div', classList: ['update-line'] });
         this.updateButton.disabled = true;
         this.updateButton.addEventListener('click', () => this.updateCar());
         updateLine.append(this.inputTextUpdate, this.inputColorUpdate, this.updateButton);
-        const commonLine = createElement('div', ['common-line']);
-        const raceButton: HTMLElement = createElement('a', ['race-button'], 'Race');
+        const commonLine = createElement({ tag: 'div', classList: ['common-line'] });
+        const raceButton: HTMLElement = createElement({ tag: 'a', classList: ['race-button'], textContent: 'Race' });
         raceButton.addEventListener('click', () => this.race());
-        const resetButton: HTMLElement = createElement('a', ['reset-button'], 'Reset');
+        const resetButton: HTMLElement = createElement({ tag: 'a', classList: ['reset-button'], textContent: 'Reset' });
         resetButton.addEventListener('click', () => this.reset());
-        const generateButton = createElement('a', ['generate-button'], 'Generate Cars');
+        const generateButton = createElement({
+            tag: 'a',
+            classList: ['generate-button'],
+            textContent: 'Generate Cars',
+        });
         generateButton.addEventListener('click', () => this.generate());
         commonLine.append(raceButton, resetButton, generateButton);
         controls.append(createLine, updateLine, commonLine);
@@ -88,7 +103,7 @@ export default class GarageView {
     }
 
     public createGarage(): HTMLElement {
-        const garageDescription: HTMLElement = createElement('div', ['garage-description']);
+        const garageDescription: HTMLElement = createElement({ tag: 'div', classList: ['garage-description'] });
         this.numberPagesInGarage.id = this.activePage.toString();
         garageDescription.append(
             this.numberCarsInGarage,
@@ -103,7 +118,7 @@ export default class GarageView {
     }
 
     private createPagesControls(): HTMLElement {
-        const container: HTMLElement = createElement('div', ['page-controls']);
+        const container: HTMLElement = createElement({ tag: 'div', classList: ['page-controls'] });
         this.buttonPrev.addEventListener('click', () => this.openPrevPage());
         this.buttonNext.addEventListener('click', () => this.openNextPage());
         container.append(this.buttonPrev, this.buttonNext);

@@ -17,20 +17,22 @@ export default class CarLine {
         this.requestID = 0;
     }
     public create(name: string, color: string, id: number): HTMLElement {
-        const carFirstLine = createElement('div', ['car-first-line']);
+        const carFirstLine = createElement({ tag: 'div', classList: ['car-first-line'] });
         carFirstLine.append(this.buttons.getSelectButton(id), this.buttons.getRemoveButton(id));
-        carFirstLine.append(createElement('span', ['car-tittle', `tittle-id-${id}`], name));
-        const carSecondLine = createElement('div', ['car-second-line']);
-        const startPosition = createElement('div', ['start-container']);
-        const imageCar = createElement('div', [`car-image`, `image-id-${id}`]);
+        carFirstLine.append(
+            createElement({ tag: 'span', classList: ['car-tittle', `tittle-id-${id}`], textContent: name })
+        );
+        const carSecondLine = createElement({ tag: 'div', classList: ['car-second-line'] });
+        const startPosition = createElement({ tag: 'div', classList: ['start-container'] });
+        const imageCar = createElement({ tag: 'div', classList: [`car-image`, `image-id-${id}`] });
         imageCar.setAttribute('id', `${id}`);
         imageCar.innerHTML = ImageItems.getCar(color);
         startPosition.append(this.startButton, this.stopButton, imageCar);
         carSecondLine.append(startPosition);
-        const imageFlag = createElement('div', ['flag']);
+        const imageFlag = createElement({ tag: 'div', classList: ['flag'] });
         imageFlag.innerHTML = ImageItems.getFlag();
         carSecondLine.append(imageFlag);
-        const carLine = createElement('div', ['line', id.toString()]);
+        const carLine = createElement({ tag: 'div', classList: ['line', id.toString()] });
         carLine.append(carFirstLine, carSecondLine);
         this.startButton.addEventListener('click', () => {
             this.carStarted(id);

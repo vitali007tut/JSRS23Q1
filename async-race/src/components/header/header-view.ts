@@ -14,19 +14,19 @@ export default class Header {
         WINNERS: 'winners-button',
     };
 
-    private garageNavigationButton: HTMLElement = createElement(
-        'a',
-        [this.classButton.GARAGE],
-        this.NameButtons.GARAGE
-    );
+    private garageNavigationButton: HTMLElement = createElement({
+        tag: 'a',
+        classList: [this.classButton.GARAGE],
+        textContent: this.NameButtons.GARAGE,
+    });
 
-    private winnersNavigationButton: HTMLElement = createElement(
-        'a',
-        [this.classButton.WINNERS],
-        this.NameButtons.WINNERS
-    );
+    private winnersNavigationButton: HTMLElement = createElement({
+        tag: 'a',
+        classList: [this.classButton.WINNERS],
+        textContent: this.NameButtons.WINNERS,
+    });
 
-    private header: HTMLElement = createElement('header', ['header']);
+    private header: HTMLElement = createElement({ tag: 'header', classList: ['header'] });
 
     public create(mainComponent: MainView): HTMLElement {
         this.garageNavigationButton.classList.add('active');

@@ -1,6 +1,6 @@
 import { LineWinnersType, SortTableType, WinnerType } from '../utils/base';
 import GarageService from '../utils/garage-service';
-import { createElement, createInputElement } from '../utils/utils';
+import { createElement } from '../utils/utils';
 import WinnersService from '../utils/winners-service';
 import ImageItems from './car-view/image-items';
 
@@ -23,15 +23,19 @@ export default class WinnersView {
     private winnersService = new WinnersService();
 
     private constructor() {
-        this.table = createElement('table', ['table']);
-        this.winnersQuantity = createElement('div', ['winners-quantity']);
-        this.activePage = createElement('div', ['pages-quantity']);
-        this.buttonPrev = createInputElement(['prev', 'buttonPrev'], 'button', 'Prev');
-        this.buttonNext = createInputElement(['next', 'buttonNext'], 'button', 'Next');
-        this.tableBody = createElement('tbody', ['tbody']);
+        this.table = createElement({ tag: 'table', classList: ['table'] });
+        this.winnersQuantity = createElement({ tag: 'div', classList: ['winners-quantity'] });
+        this.activePage = createElement({ tag: 'div', classList: ['pages-quantity'] });
+        this.buttonPrev = createElement({ tag: 'input', classList: ['prev', 'buttonPrev'] });
+        this.buttonPrev.type = 'button';
+        this.buttonPrev.value = 'Prev';
+        this.buttonNext = createElement({ tag: 'input', classList: ['next', 'buttonNext'] });
+        this.buttonNext.type = 'button';
+        this.buttonNext.value = 'Next';
+        this.tableBody = createElement({ tag: 'tbody', classList: ['tbody'] });
         this.numberOfActivePage = this.FIRST_PAGE;
-        this.buttonWins = createElement('th', ['button-wins'], 'Wins ');
-        this.buttonBestTime = createElement('th', ['button-time'], 'Best time (sec) ');
+        this.buttonWins = createElement({ tag: 'th', classList: ['button-wins'], textContent: 'Wins ' });
+        this.buttonBestTime = createElement({ tag: 'th', classList: ['button-time'], textContent: 'Best time (sec) ' });
     }
     public static getInstance() {
         if (!WinnersView.instance) {
@@ -49,12 +53,12 @@ export default class WinnersView {
         return this.table;
     }
     private createDescription(): HTMLElement {
-        const container = createElement('div', ['description-winners']);
+        const container = createElement({ tag: 'div', classList: ['description-winners'] });
         container.append(this.winnersQuantity, this.activePage);
         return container;
     }
     private createTable(): HTMLElement {
-        const container = createElement('div', ['winners-table']);
+        const container = createElement({ tag: 'div', classList: ['winners-table'] });
         const headArray = ['Number', 'Car', 'Name'];
         const headInner = document.createElement('tr');
         headArray.forEach((tableHeadCeil) => {
@@ -65,7 +69,7 @@ export default class WinnersView {
         this.buttonWins.addEventListener('click', () => this.sortByWins());
         this.buttonBestTime.addEventListener('click', () => this.sortByTime());
         headInner.append(this.buttonWins, this.buttonBestTime);
-        const tableHead = createElement('thead', ['thead']);
+        const tableHead = createElement({ tag: 'thead', classList: ['thead'] });
         tableHead.append(headInner);
         this.drawTableBody();
         container.append(tableHead, this.tableBody);
@@ -110,7 +114,7 @@ export default class WinnersView {
     }
 
     private createPagesControls(): HTMLElement {
-        const container = createElement('div', ['winners-controls-page']);
+        const container = createElement({ tag: 'div', classList: ['winners-controls-page'] });
         this.buttonPrev.addEventListener('click', () => this.openPrevPage());
         this.buttonNext.addEventListener('click', () => this.openNextPage());
         container.append(this.buttonPrev, this.buttonNext);
@@ -128,13 +132,13 @@ export default class WinnersView {
 
     private drawWinnerLine(param: LineWinnersType): HTMLElement {
         const line = document.createElement('tr');
-        const number = createElement('td', ['td-number'], `${param.index + 1}`);
+        const number = createElement({ tag: 'td', classList: ['td-number'], textContent: `${param.index + 1}` });
         const imageHTML = ImageItems.getCar(param.color);
-        const imageCar = createElement('td', ['td-car']);
+        const imageCar = createElement({ tag: 'td', classList: ['td-car'] });
         imageCar.innerHTML = imageHTML;
-        const nameCeil = createElement('td', ['td-name'], `${param.name}`);
-        const winsCeil = createElement('td', ['td-wins'], `${param.wins}`);
-        const timeCeil = createElement('td', ['td-time'], `${param.time}`);
+        const nameCeil = createElement({ tag: 'td', classList: ['td-name'], textContent: `${param.name}` });
+        const winsCeil = createElement({ tag: 'td', classList: ['td-wins'], textContent: `${param.wins}` });
+        const timeCeil = createElement({ tag: 'td', classList: ['td-time'], textContent: `${param.time}` });
         line.append(number, imageCar, nameCeil, winsCeil, timeCeil);
 
         return line;

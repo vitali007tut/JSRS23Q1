@@ -1,17 +1,32 @@
-export function createElement(tag: string, classArray: string[], content = ''): HTMLElement {
-    const element: HTMLElement = document.createElement(tag);
-    classArray.forEach((classItem) => element.classList.add(classItem));
-    element.textContent = content;
+export function createElement<K extends keyof HTMLElementTagNameMap>({
+    tag,
+    classList,
+    textContent,
+    innerHTML,
+}: CreateElementPropsType<K>): HTMLElementTagNameMap[K] {
+    const element: HTMLElementTagNameMap[K] = document.createElement(tag);
+
+    if (classList) {
+        element.classList.add(...classList);
+    }
+
+    if (textContent) {
+        element.textContent = textContent;
+    }
+
+    if (innerHTML) {
+        element.innerHTML = innerHTML;
+    }
+
     return element;
 }
 
-export function createInputElement(classArray: string[], inputType: string, value = ''): HTMLInputElement {
-    const element: HTMLInputElement = document.createElement('input');
-    element.type = inputType;
-    classArray.forEach((classItem) => element.classList.add(classItem));
-    element.value = value;
-    return element;
-}
+type CreateElementPropsType<K> = {
+    tag: K;
+    classList?: string[];
+    textContent?: string;
+    innerHTML?: string;
+};
 
 export function findSelector(selector: string): HTMLElement {
     const element: HTMLElement | null = document.querySelector(selector);
@@ -56,8 +71,8 @@ export function getRandomColor(): string {
     return color;
 }
 
-export function createModalText(text = ''): void {
-    const modal = createElement('div', ['modal'], text);
+export function createModalText(textContent = ''): void {
+    const modal: HTMLElement = createElement({ tag: 'div', classList: ['modal'], textContent });
     document.body.append(modal);
 }
 

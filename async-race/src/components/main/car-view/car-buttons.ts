@@ -12,7 +12,7 @@ export default class CarButtons {
     private winnersService = new WinnersService();
 
     public getSelectButton(id: number): HTMLElement {
-        const button = createElement('a', ['select', 'button', `${id}`], 'Select');
+        const button = createElement({ tag: 'a', classList: ['select', 'button', `${id}`], textContent: 'Select' });
         button.addEventListener('click', async () => {
             const updateText: HTMLInputElement = findSelectorInput('.updateText');
             updateText.removeAttribute('disabled');
@@ -31,7 +31,7 @@ export default class CarButtons {
     }
 
     public getRemoveButton(id: number): HTMLElement {
-        const button = createElement('a', ['remove', 'button', `${id}`], 'Remove');
+        const button = createElement({ tag: 'a', classList: ['remove', 'button', `${id}`], textContent: 'Remove' });
         button.addEventListener('click', () => {
             this.garageService.removeCar(id);
             this.winnersService.removeCarFromWinnersApi(id);
@@ -52,14 +52,18 @@ export default class CarButtons {
     }
 
     public getStartButton(id: number): HTMLElement {
-        const startButton: HTMLElement = createElement('a', ['start', 'button'], 'A');
+        const startButton: HTMLElement = createElement({ tag: 'a', classList: ['start', 'button'], textContent: 'A' });
         startButton.setAttribute('id', id.toString());
 
         return startButton;
     }
 
     public getStopButton(id: number): HTMLElement {
-        const stopButton: HTMLElement = createElement('a', ['stop', 'button', 'disable'], 'B');
+        const stopButton: HTMLElement = createElement({
+            tag: 'a',
+            classList: ['stop', 'button', 'disable'],
+            textContent: 'B',
+        });
         stopButton.setAttribute('id', id.toString());
 
         return stopButton;
